@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>الأرقام | مِداد</title>
+
+  <meta name="description"
+        content="تعلم الأرقام العربية والعد بطريقة تفاعلية وممتعة للأطفال مع مِداد.">
+
+  <meta name="theme-color"
+        content="#6c63ff">
+
+  <link rel="stylesheet"
+        href="style.css">
+
+  <style>
+
+    /* =====================================================
+       صفحة الأرقام
+    ===================================================== */
+
+    .numbers-page {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 35px 20px 70px;
+    }
+
+    .numbers-hero {
+      background:
+        linear-gradient(
+          135deg,
+          #ff9f43,
+          #ffb84d,
+          #ffcf70
+        );
+
+      color: white;
+
+      border-radius: 32px;
+
+      padding: 45px 25px;
+
+      text-align: center;
+
+      margin-bottom: 30px;
+
+      box-shadow:
+        0 15px 40px
+        rgba(220, 140, 30, 0.15);
+    }
+
+    .numbers-hero .big-number {
+      width: 105px;
+      height: 105px;
+
+      margin: 0 auto 15px;
+
+      border-radius: 30px;
+
+      background:
+        rgba(255,255,255,0.20);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 55px;
+      font-weight: bold;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.3);
+    }
+
+    .numbers-hero h2 {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .numbers-hero p {
+      color:
+        rgba(255,255,255,0.92);
+
+      font-size: 15px;
+    }
+
+    /* =====================================================
+       أدوات العد
+    ===================================================== */
+
+    .counting-box {
+      background: white;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 25px;
+
+      padding: 25px;
+
+      margin-bottom: 30px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(43,48,90,0.06);
+
+      text-align: center;
+    }
+
+    .counting-box h2 {
+      font-size: 23px;
+      margin-bottom: 5px;
+    }
+
+    .counting-box p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .count-display {
+      min-height: 150px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 7px;
+
+      margin-bottom: 20px;
+
+      padding: 15px;
+    }
+
+    .count-item {
+      font-size: 38px;
+
+      animation:
+        countAppear 0.25s ease;
+    }
+
+    @keyframes countAppear {
+
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+    }
+
+    .count-number {
+      font-size: 45px;
+
+      font-weight: bold;
+
+      color: var(--primary);
+
+      margin-bottom: 15px;
+    }
+
+    .count-buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+    }
+
+    .count-button {
+      border: 0;
+
+      min-height: 48px;
+
+      padding:
+        10px 20px;
+
+      border-radius: 15px;
+
+      cursor: pointer;
+
+      font-weight: bold;
+
+      transition: 0.2s ease;
+    }
+
+    .count-button:hover {
+      transform:
+        translateY(-2px);
+    }
+
+    .plus-button {
+      background:
+        #e7f8f0;
+
+      color:
+        #159565;
+    }
+
+    .minus-button {
+      background:
+        #ffe8ed;
+
+      color:
+        #df5273;
+    }
+
+    .reset-button {
+      background:
+        #eeedff;
+
+      color:
+        var(--primary);
+    }
+
+    .speak-number-button {
+      background:
+        var(--primary);
+
+      color: white;
+    }
+
+    /* =====================================================
+       تقدم الأرقام
+    ===================================================== */
+
+    .numbers-progress {
+      background: white;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 22px;
+
+      padding: 18px 20px;
+
+      margin-bottom: 25px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(43,48,90,0.06);
+    }
+
+    .numbers-progress-top {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 10px;
+    }
+
+    .numbers-progress-top strong {
+      font-size: 15px;
+    }
+
+    #numbersProgressText {
+      color:
+        var(--primary);
+
+      font-size: 13px;
+
+      font-weight: bold;
+    }
+
+    .numbers-progress-bar {
+      height: 12px;
+
+      background:
+        #eceef5;
+
+      border-radius: 50px;
+
+      overflow: hidden;
+    }
+
+    #numbersProgressFill {
+      height: 100%;
+
+      width: 0%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff9f43,
+          #ffd166
+        );
+
+      border-radius:
+        inherit;
+
+      transition:
+        width 0.5s ease;
+    }
+
+    /* =====================================================
+       شبكة الأرقام
+    ===================================================== */
+
+    .numbers-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      gap: 18px;
+    }
+
+    .number-card {
+      background: white;
+
+      border:
+        2px solid
+        transparent;
+
+      border-radius: 25px;
+
+      padding: 20px;
+
+      min-height: 220px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(43,48,90,0.07);
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      text-align: center;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .number-card:hover {
+      transform:
+        translateY(-6px);
+
+      box-shadow:
+        0 15px 35px
+        rgba(43,48,90,0.12);
+    }
+
+    .number-card.completed {
+      border-color:
+        #36c98f;
+    }
+
+    .number-character {
+      width: 85px;
+      height: 85px;
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff2d9,
+          #fff8ec
+        );
+
+      color:
+        #e58b16;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 48px;
+
+      font-weight: bold;
+    }
+
+    .number-name {
+      font-size: 18px;
+
+      font-weight: bold;
+
+      margin-top: 8px;
+    }
+
+    .number-count {
+      color:
+        var(--muted);
+
+      font-size: 12px;
+
+      margin-top: 2px;
+    }
+
+    .number-actions {
+      display: flex;
+
+      gap: 8px;
+
+      width: 100%;
+
+      margin-top: 10px;
+    }
+
+    .number-button {
+      flex: 1;
+
+      min-height: 40px;
+
+      border: 0;
+
+      border-radius: 12px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+      font-weight: bold;
+    }
+
+    .number-speak {
+      background:
+        #eeedff;
+
+      color:
+        var(--primary);
+    }
+
+    .number-done {
+      background:
+        #e8f8f1;
+
+      color:
+        #1c9a6b;
+    }
+
+    .number-done.done {
+      background:
+        #36c98f;
+
+      color: white;
+    }
+
+    /* =====================================================
+       تمرين سريع
+    ===================================================== */
+
+    .quiz-box {
+      background:
+        linear-gradient(
+          135deg,
+          #eef0ff,
+          #f8f7ff
+        );
+
+      border:
+        1px solid
+        #dfddff;
+
+      border-radius: 28px;
+
+      padding: 30px;
+
+      margin-top: 35px;
+
+      text-align: center;
+    }
+
+    .quiz-box h2 {
+      font-size: 25px;
+
+      margin-bottom: 5px;
+    }
+
+    .quiz-box p {
+      color:
+        var(--muted);
+
+      font-size: 14px;
+
+      margin-bottom: 20px;
+    }
+
+    .quiz-question {
+      background: white;
+
+      border-radius: 22px;
+
+      padding: 25px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(43,48,90,0.06);
+
+      margin-bottom: 15px;
+    }
+
+    #quizObjects {
+      font-size: 42px;
+
+      min-height: 60px;
+
+      margin-bottom: 10px;
+    }
+
+    #quizQuestion {
+      font-size: 20px;
+
+      font-weight: bold;
+    }
+
+    .quiz-options {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 10px;
+
+      margin-top: 15px;
+    }
+
+    .quiz-option {
+      min-height: 52px;
+
+      border: 0;
+
+      border-radius: 15px;
+
+      background: white;
+
+      border:
+        2px solid
+        #e4e4ef;
+
+      color:
+        var(--text);
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color:
+        var(--primary);
+
+      transform:
+        translateY(-2px);
+    }
+
+    .quiz-option.correct {
+      background:
+        #dff7eb;
+
+      border-color:
+        #36c98f;
+
+      color:
+        #16855b;
+    }
+
+    .quiz-option.wrong {
+      background:
+        #ffe5eb;
+
+      border-color:
+        #ef6b87;
+
+      color:
+        #d94365;
+    }
+
+    #quizResult {
+      min-height: 28px;
+
+      margin-top: 15px;
+
+      font-weight: bold;
+    }
+
+    .next-question {
+      display: none;
+
+      border: 0;
+
+      min-height: 45px;
+
+      padding:
+        8px 20px;
+
+      border-radius: 14px;
+
+      background:
+        var(--primary);
+
+      color: white;
+
+      cursor: pointer;
+
+      font-weight: bold;
+
+      margin:
+        12px auto 0;
+    }
+
+    .next-question.show {
+      display: block;
+    }
+
+    /* =====================================================
+       موبايل
+    ===================================================== */
+
+    @media (max-width: 1000px) {
+
+      .numbers-grid {
+        grid-template-columns:
+          repeat(4, 1fr);
+      }
+
+    }
+
+    @media (max-width: 750px) {
+
+      .numbers-page {
+        padding:
+          20px 14px 50px;
+      }
+
+      .numbers-hero {
+        padding: 35px 20px;
+        border-radius: 25px;
+      }
+
+      .numbers-hero h2 {
+        font-size: 30px;
+      }
+
+      .numbers-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        gap: 12px;
+      }
+
+      .number-card {
+        min-height: 210px;
+
+        padding: 15px;
+      }
+
+      .number-character {
+        width: 75px;
+        height: 75px;
+
+        font-size: 42px;
+      }
+
+      .quiz-options {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 380px) {
+
+      .numbers-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="top-header">
+
+    <div class="logo-area">
+
+      <a href="index.html"
+         class="logo-icon">
+        م
+      </a>
+
+      <div>
+
+        <h1>مِداد</h1>
+
+        <p>
+          نتعلّم، نكتشف، ونستمتع
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="فتح القائمة">
+
+      ☰
+
+    </button>
+
+
+    <nav id="mainNav">
+
+      <a href="index.html">
+        الرئيسية
+      </a>
+
+      <a href="letters.html">
+        الحروف
+      </a>
+
+      <a href="numbers.html"
+         class="active">
+        الأرقام
+      </a>
+
+      <a href="animals.html">
+        الحيوانات
+      </a>
+
+      <a href="plants.html">
+        النباتات
+      </a>
+
+      <a href="quran.html">
+        القرآن
+      </a>
+
+      <a href="hadith.html">
+        الأحاديث
+      </a>
+
+      <a href="stories.html">
+        القصص
+      </a>
+
+      <a href="games.html">
+        الألعاب
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =====================================================
+       CONTENT
+  ====================================================== -->
+
+  <main class="numbers-page">
+
+
+    <!-- المقدمة -->
+
+    <section class="numbers-hero">
+
+      <div class="big-number">
+        ١
+      </div>
+
+      <h2>
+        هيا نتعلم الأرقام!
+      </h2>
+
+      <p>
+        تعلّم الأرقام، تدرب على العد،
+        واختبر نفسك.
+      </p>
+
+    </section>
+
+
+    <!-- =================================================
+         عد تفاعلي
+    ================================================== -->
+
+    <section class="counting-box">
+
+      <h2>
+        هيا نعد معًا!
+      </h2>
+
+      <p>
+        اضغط + لإضافة شيء، وابدأ بالعد.
+      </p>
+
+
+      <div
+        class="count-display"
+        id="countDisplay">
+      </div>
+
+
+      <div
+        class="count-number"
+        id="countNumber">
+        ٠
+      </div>
+
+
+      <div class="count-buttons">
+
+        <button
+          class="count-button plus-button"
+          id="plusButton">
+
+          ➕ أضف
+
+        </button>
+
+
+        <button
+          class="count-button minus-button"
+          id="minusButton">
+
+          ➖ احذف
+
+        </button>
+
+
+        <button
+          class="count-button reset-button"
+          id="resetButton">
+
+          🔄 ابدأ من جديد
+
+        </button>
+
+
+        <button
+          class="count-button speak-number-button"
+          id="speakCountButton">
+
+          🔊 اسمع
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         التقدم
+    ================================================== -->
+
+    <section class="numbers-progress">
+
+      <div class="numbers-progress-top">
+
+        <strong>
+          تقدمك في الأرقام
+        </strong>
+
+        <span id="numbersProgressText">
+          0 / 11
+        </span>
+
+      </div>
+
+
+      <div class="numbers-progress-bar">
+
+        <div id="numbersProgressFill"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         الأرقام
+    ================================================== -->
+
+    <section>
+
+      <div
+        class="numbers-grid"
+        id="numbersGrid">
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         الاختبار
+    ================================================== -->
+
+    <section class="quiz-box">
+
+      <h2>
+        🎯 اختبار الأرقام
+      </h2>
+
+      <p>
+        عد الأشياء واختر الرقم الصحيح.
+      </p>
+
+
+      <div class="quiz-question">
+
+        <div id="quizObjects">
+          🍎
+        </div>
+
+        <div id="quizQuestion">
+          كم عدد الأشياء؟
+        </div>
+
+      </div>
+
+
+      <div
+        class="quiz-options"
+        id="quizOptions">
+      </div>
+
+
+      <div id="quizResult"></div>
+
+
+      <button
+        class="next-question"
+        id="nextQuestion">
+
+        سؤال جديد
+
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="footer-main">
+
+      <div class="footer-brand">
+
+        <div class="footer-logo">
+          م
+        </div>
+
+        <div>
+
+          <h2>مِداد</h2>
+
+          <p>
+            نتعلّم، نكتشف، ونستمتع.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <h3>
+          الأقسام
+        </h3>
+
+        <a href="letters.html">
+          الحروف
+        </a>
+
+        <a href="numbers.html">
+          الأرقام
+        </a>
+
+        <a href="animals.html">
+          الحيوانات
+        </a>
+
+        <a href="games.html">
+          الألعاب
+        </a>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <h3>
+          معلومات
+        </h3>
+
+        <a href="about.html">
+          عن مِداد
+        </a>
+
+        <a href="privacy.html">
+          الخصوصية
+        </a>
+
+        <a href="terms.html">
+          الشروط
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <p>
+        © <span id="year"></span>
+        مِداد — جميع الحقوق محفوظة
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT العام
+  ====================================================== -->
+
+  <script src="app.js"></script>
+
+
+  <!-- =====================================================
+       JAVASCRIPT الأرقام
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       بيانات الأرقام
+    ===================================================== */
+
+    const numbers = [
+
+      {
+        number: 0,
+        arabic: "٠",
+        name: "صفر",
+        objects: "⚪"
+      },
+
+      {
+        number: 1,
+        arabic: "١",
+        name: "واحد",
+        objects: "🍎"
+      },
+
+      {
+        number: 2,
+        arabic: "٢",
+        name: "اثنان",
+        objects: "🍎🍎"
+      },
+
+      {
+        number: 3,
+        arabic: "٣",
+        name: "ثلاثة",
+        objects: "🍎🍎🍎"
+      },
+
+      {
+        number: 4,
+        arabic: "٤",
+        name: "أربعة",
+        objects: "🍎🍎🍎🍎"
+      },
+
+      {
+        number: 5,
+        arabic: "٥",
+        name: "خمسة",
+        objects: "🍎🍎🍎🍎🍎"
+      },
+
+      {
+        number: 6,
+        arabic: "٦",
+        name: "ستة",
+        objects: "🍎🍎🍎🍎🍎🍎"
+      },
+
+      {
+        number: 7,
+        arabic: "٧",
+        name: "سبعة",
+        objects: "🍎🍎🍎🍎🍎🍎🍎"
+      },
+
+      {
+        number: 8,
+        arabic: "٨",
+        name: "ثمانية",
+        objects: "🍎🍎🍎🍎🍎🍎🍎🍎"
+      },
+
+      {
+        number: 9,
+        arabic: "٩",
+        name: "تسعة",
+        objects: "🍎🍎🍎🍎🍎🍎🍎🍎🍎"
+      },
+
+      {
+        number: 10,
+        arabic: "١٠",
+        name: "عشرة",
+        objects: "🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎"
+      }
+
+    ];
+
+
+    /* =====================================================
+       عناصر الصفحة
+    ===================================================== */
+
+    const numbersGrid =
+      document.getElementById(
+        "numbersGrid"
+      );
+
+    const numbersProgressText =
+      document.getElementById(
+        "numbersProgressText"
+      );
+
+    const numbersProgressFill =
+      document.getElementById(
+        "numbersProgressFill"
+      );
+
+
+    /* =====================================================
+       التخزين
+    ===================================================== */
+
+    function getCompletedNumbers() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            "midadCompletedNumbers"
+          );
+
+        if (!saved) {
+          return [];
+        }
+
+        const parsed =
+          JSON.parse(saved);
+
+        return Array.isArray(parsed)
+          ? parsed
+          : [];
+
+      } catch (error) {
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveCompletedNumbers(
+      list
+    ) {
+
+      localStorage.setItem(
+        "midadCompletedNumbers",
+        JSON.stringify(list)
+      );
+
+    }
+
+
+    /* =====================================================
+       تحويل الرقم إلى العربية
+    ===================================================== */
+
+    function toArabicNumber(number) {
+
+      const arabicDigits =
+        "٠١٢٣٤٥٦٧٨٩";
+
+      return String(number)
+        .split("")
+        .map(function (digit) {
+
+          return arabicDigits[
+            Number(digit)
+          ];
+
+        })
+        .join("");
+
+    }
+
+
+    /* =====================================================
+       النطق
+    ===================================================== */
+
+    function speakNumber(text) {
+
+      if (
+        !("speechSynthesis" in window)
+      ) {
+
+        alert(
+          "المتصفح لا يدعم خاصية النطق."
+        );
+
+        return;
+
+      }
+
+      speechSynthesis.cancel();
+
+      const speech =
+        new SpeechSynthesisUtterance(
+          text
+        );
+
+      speech.lang = "ar-SA";
+
+      speech.rate = 0.75;
+
+      speech.pitch = 1;
+
+      speech.volume = 1;
+
+      speechSynthesis.speak(
+        speech
+      );
+
+    }
+
+
+    /* =====================================================
+       إنشاء بطاقات الأرقام
+    ===================================================== */
+
+    function renderNumbers() {
+
+      const completed =
+        getCompletedNumbers();
+
+      numbersGrid.innerHTML = "";
+
+
+      numbers.forEach(
+        function (item, index) {
+
+          const isCompleted =
+            completed.includes(index);
+
+
+          const card =
+            document.createElement(
+              "article"
+            );
+
+          card.className =
+            "number-card";
+
+
+          if (isCompleted) {
+
+            card.classList.add(
+              "completed"
+            );
+
+          }
+
+
+          card.innerHTML = `
+
+            <div>
+
+              <div class="number-character">
+
+                ${item.arabic}
+
+              </div>
+
+              <div class="number-name">
+
+                ${item.name}
+
+              </div>
+
+              <div class="number-count">
+
+                ${item.objects}
+
+              </div>
+
+            </div>
+
+
+            <div class="number-actions">
+
+              <button
+                class="number-button number-speak">
+
+                🔊 اسمع
+
+              </button>
+
+
+              <button
+                class="number-button number-done
+                ${isCompleted ? "done" : ""}">
+
+                ${
+                  isCompleted
+                    ? "✓ تعلمت"
+                    : "تعلمت"
+                }
+
+              </button>
+
+            </div>
+
+          `;
+
+
+          const speakButton =
+            card.querySelector(
+              ".number-speak"
+            );
+
+
+          speakButton.addEventListener(
+            "click",
+            function () {
+
+              speakNumber(
+                item.name
+              );
+
+            }
+          );
+
+
+          const doneButton =
+            card.querySelector(
+              ".number-done"
+            );
+
+
+          doneButton.addEventListener(
+            "click",
+            function () {
+
+              toggleNumber(
+                index
+              );
+
+            }
+          );
+
+
+          numbersGrid.appendChild(
+            card
+          );
+
+        }
+      );
+
+
+      updateNumberProgress();
+
+    }
+
+
+    /* =====================================================
+       تحديد الرقم كمكتمل
+    ===================================================== */
+
+    function toggleNumber(index) {
+
+      let completed =
+        getCompletedNumbers();
+
+
+      if (
+        completed.includes(index)
+      ) {
+
+        completed =
+          completed.filter(
+            function (item) {
+
+              return item !== index;
+
+            }
+          );
+
+      } else {
+
+        completed.push(index);
+
+      }
+
+
+      saveCompletedNumbers(
+        completed
+      );
+
+
+      const percentage =
+        Math.round(
+          (
+            completed.length /
+            numbers.length
+          ) * 100
+        );
+
+
+      if (
+        typeof window.midadSetProgress ===
+        "function"
+      ) {
+
+        window.midadSetProgress(
+          percentage
+        );
+
+      }
+
+
+      renderNumbers();
+
+    }
+
+
+    /* =====================================================
+       تحديث التقدم
+    ===================================================== */
+
+    function updateNumberProgress() {
+
+      const completed =
+        getCompletedNumbers();
+
+      const count =
+        completed.length;
+
+
+      const percentage =
+        Math.round(
+          (
+            count /
+            numbers.length
+          ) * 100
+        );
+
+
+      numbersProgressText.textContent =
+        count +
+        " / " +
+        numbers.length;
+
+
+      numbersProgressFill.style.width =
+        percentage + "%";
+
+    }
+
+
+    /* =====================================================
+       العد التفاعلي
+    ===================================================== */
+
+    let count = 0;
+
+    const countDisplay =
+      document.getElementById(
+        "countDisplay"
+      );
+
+    const countNumber =
+      document.getElementById(
+        "countNumber"
+      );
+
+
+    function updateCounter() {
+
+      countNumber.textContent =
+        toArabicNumber(count);
+
+
+      countDisplay.innerHTML = "";
+
+
+      for (
+        let i = 0;
+        i < count;
+        i++
+      ) {
+
+        const item =
+          document.createElement(
+            "span"
+          );
+
+        item.className =
+          "count-item";
+
+        item.textContent =
+          "🍎";
+
+        countDisplay.appendChild(
+          item
+        );
+
+      }
+
+    }
+
+
+    document
+      .getElementById("plusButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          if (count < 20) {
+
+            count++;
+
+            updateCounter();
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById("minusButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          if (count > 0) {
+
+            count--;
+
+            updateCounter();
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById("resetButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          count = 0;
+
+          updateCounter();
+
+        }
+      );
+
+
+    document
+      .getElementById("speakCountButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          const names = [
+            "صفر",
+            "واحد",
+            "اثنان",
+            "ثلاثة",
+            "أربعة",
+            "خمسة",
+            "ستة",
+            "سبعة",
+            "ثمانية",
+            "تسعة",
+            "عشرة",
+            "أحد عشر",
+            "اثنا عشر",
+            "ثلاثة عشر",
+            "أربعة عشر",
+            "خمسة عشر",
+            "ستة عشر",
+            "سبعة عشر",
+            "ثمانية عشر",
+            "تسعة عشر",
+            "عشرون"
+          ];
+
+
+          speakNumber(
+            names[count]
+          );
+
+        }
+      );
+
+
+    /* =====================================================
+       الاختبار
+    ===================================================== */
+
+    const quizObjects =
+      document.getElementById(
+        "quizObjects"
+      );
+
+    const quizQuestion =
+      document.getElementById(
+        "quizQuestion"
+      );
+
+    const quizOptions =
+      document.getElementById(
+        "quizOptions"
+      );
+
+    const quizResult =
+      document.getElementById(
+        "quizResult"
+      );
+
+    const nextQuestion =
+      document.getElementById(
+        "nextQuestion"
+      );
+
+
+    let correctAnswer = 1;
+
+
+    function randomNumber(
+      min,
+      max
+    ) {
+
+      return Math.floor(
+        Math.random() *
+        (max - min + 1)
+      ) + min;
+
+    }
+
+
+    function createQuiz() {
+
+      quizResult.textContent = "";
+
+      nextQuestion.classList.remove(
+        "show"
+      );
+
+
+      const amount =
+        randomNumber(1, 10);
+
+
+      correctAnswer =
+        amount;
+
+
+      const objects = [
+        "🍎",
+        "⭐",
+        "🐟",
+        "🟢",
+        "🌸",
+        "🍓"
+      ];
+
+
+      const object =
+        objects[
+          randomNumber(
+            0,
+            objects.length - 1
+          )
+        ];
+
+
+      quizObjects.textContent =
+        Array(amount)
+          .fill(object)
+          .join("");
+
+
+      quizQuestion.textContent =
+        "كم عدد الأشياء؟";
+
+
+      let options = [
+        amount
+      ];
+
+
+      while (
+        options.length < 3
+      ) {
+
+        const option =
+          randomNumber(1, 10);
+
+
+        if (
+          !options.includes(option)
+        ) {
+
+          options.push(option);
+
+        }
+
+      }
+
+
+      options.sort(
+        function () {
+          return Math.random() - 0.5;
+        }
+      );
+
+
+      quizOptions.innerHTML = "";
+
+
+      options.forEach(
+        function (option) {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+          button.className =
+            "quiz-option";
+
+          button.textContent =
+            toArabicNumber(option);
+
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              checkAnswer(
+                button,
+                option
+              );
+
+            }
+          );
+
+
+          quizOptions.appendChild(
+            button
+          );
+
+        }
+      );
+
+    }
+
+
+    function checkAnswer(
+      button,
+      answer
+    ) {
+
+      const allButtons =
+        document.querySelectorAll(
+          ".quiz-option"
+        );
+
+
+      allButtons.forEach(
+        function (item) {
+
+          item.disabled = true;
+
+        }
+      );
+
+
+      if (
+        answer === correctAnswer
+      ) {
+
+        button.classList.add(
+          "correct"
+        );
+
+        quizResult.textContent =
+          "🎉 أحسنت! إجابة صحيحة.";
+
+        quizResult.style.color =
+          "#159565";
+
+
+        if (
+          typeof window.midadAddStars ===
+          "function"
+        ) {
+
+          window.midadAddStars(1);
+
+        }
+
+
+      } else {
+
+        button.classList.add(
+          "wrong"
+        );
+
+        quizResult.textContent =
+          "حاول مرة أخرى في السؤال القادم.";
+
+        quizResult.style.color =
+          "#d94365";
+
+
+        allButtons.forEach(
+          function (item) {
+
+            if (
+              Number(
+                item.textContent
+                  .replace(/[٠-٩]/g, function (d) {
+                    return "٠١٢٣٤٥٦٧٨٩"
+                      .indexOf(d);
+                  })
+              ) === correctAnswer
+            ) {
+
+              item.classList.add(
+                "correct"
+              );
+
+            }
+
+          }
+        );
+
+      }
+
+
+      nextQuestion.classList.add(
+        "show"
+      );
+
+    }
+
+
+    nextQuestion.addEventListener(
+      "click",
+      createQuiz
+    );
+
+
+    /* =====================================================
+       تشغيل الصفحة
+    ===================================================== */
+
+    updateCounter();
+
+    renderNumbers();
+
+    createQuiz();
+
+  </script>
+
+</body>
+
+</html>
