@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="مِداد - القرآن الكريم للأطفال، قراءة السور والاستماع إليها بطريقة بسيطة ومناسبة للصغار">
+  <meta name="theme-color" content="#1976d2">
+
+  <title>القرآن الكريم | مِداد</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .quran-page {
+      padding: 30px 15px 70px;
+    }
+
+    .quran-hero {
+      max-width: 1100px;
+      margin: 0 auto 30px;
+      padding: 38px 20px;
+      text-align: center;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .quran-hero .quran-icon {
+      font-size: 65px;
+    }
+
+    .quran-hero h1 {
+      margin: 8px 0;
+      color: #1565c0;
+      font-size: 40px;
+    }
+
+    .quran-hero p {
+      margin: 0 auto;
+      max-width: 700px;
+      color: #555;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .quran-source {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .quran-search {
+      max-width: 700px;
+      margin: 25px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .quran-search input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px 17px;
+      border: 2px solid #d6e8f8;
+      border-radius: 15px;
+      outline: none;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    .quran-search input:focus {
+      border-color: #42a5f5;
+    }
+
+    .quran-search button {
+      border: 0;
+      border-radius: 15px;
+      padding: 0 22px;
+      background: #1976d2;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .surahs-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .surah-card {
+      background: white;
+      border: 2px solid #edf4fb;
+      border-radius: 22px;
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: 0 7px 22px rgba(0,0,0,.07);
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .surah-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 13px 28px rgba(0,0,0,.12);
+      border-color: #bbdefb;
+    }
+
+    .surah-number {
+      width: 43px;
+      height: 43px;
+      margin: 0 auto 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #e3f2fd;
+      color: #1565c0;
+      font-weight: bold;
+    }
+
+    .surah-card h2 {
+      margin: 7px 0;
+      color: #1565c0;
+      font-size: 23px;
+    }
+
+    .surah-card p {
+      margin: 5px 0;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .surah-type {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #f1f8ff;
+      color: #1976d2;
+      font-size: 12px;
+    }
+
+    .surah-card.completed {
+      border-color: #81c784;
+      background: #f6fff7;
+    }
+
+    .surah-card.completed .surah-number {
+      background: #43a047;
+      color: white;
+    }
+
+    .quran-progress {
+      max-width: 700px;
+      margin: 25px auto 35px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #1565c0;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 13px;
+      background: #e3f2fd;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #1976d2, #7e57c2);
+      border-radius: 20px;
+      transition: width .4s ease;
+    }
+
+    .quran-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: rgba(0,0,0,.62);
+    }
+
+    .quran-modal.active {
+      display: flex;
+    }
+
+    .quran-modal-box {
+      position: relative;
+      width: min(850px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      animation: quranPop .25s ease;
+    }
+
+    @keyframes quranPop {
+      from {
+        opacity: 0;
+        transform: scale(.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .close-quran {
+      position: sticky;
+      top: 0;
+      float: left;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background: #eee;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    .surah-heading {
+      text-align: center;
+      padding: 10px 45px 20px;
+    }
+
+    .surah-heading h2 {
+      margin: 5px;
+      color: #1565c0;
+      font-size: 32px;
+    }
+
+    .surah-heading p {
+      color: #777;
+    }
+
+    .basmala {
+      text-align: center;
+      margin: 10px 0 25px;
+      font-size: 25px;
+      color: #333;
+      font-family: serif;
+    }
+
+    .ayah {
+      margin: 12px 0;
+      padding: 18px;
+      background: #f8fbff;
+      border-radius: 18px;
+      border: 1px solid #e5eff8;
+      line-height: 2.3;
+      font-family: serif;
+      font-size: 23px;
+      color: #222;
+    }
+
+    .ayah-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      margin-left: 8px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #e3f2fd;
+      color: #1565c0;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .quran-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .quran-control {
+      border: 0;
+      border-radius: 13px;
+      padding: 11px 18px;
+      background: #1976d2;
+      color: white;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+    }
+
+    .quran-control.green {
+      background: #43a047;
+    }
+
+    .quran-control.gray {
+      background: #757575;
+    }
+
+    .loading {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      border-radius: 20px;
+      color: #555;
+      box-shadow: 0 7px 20px rgba(0,0,0,.06);
+    }
+
+    .error-box {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 22px;
+      text-align: center;
+      background: #fff3f3;
+      border: 1px solid #ffcdd2;
+      border-radius: 18px;
+      color: #c62828;
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .surahs-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .quran-hero h1 {
+        font-size: 31px;
+      }
+
+      .quran-hero p {
+        font-size: 16px;
+      }
+
+      .quran-search {
+        flex-direction: column;
+      }
+
+      .quran-search button {
+        height: 48px;
+      }
+
+      .surahs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .surah-card {
+        padding: 15px 9px;
+      }
+
+      .surah-card h2 {
+        font-size: 20px;
+      }
+
+      .quran-modal-box {
+        padding: 20px 13px;
+        border-radius: 22px;
+      }
+
+      .ayah {
+        font-size: 20px;
+        line-height: 2.2;
+        padding: 14px;
+      }
+
+      .basmala {
+        font-size: 21px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .surahs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      <span class="logo-mark">م</span>
+
+      <span>
+        <strong>مِداد</strong>
+        <small>نتعلّم، نكتشف، ونستمتع</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="فتح القائمة">
+      ☰
+    </button>
+
+    <nav class="main-nav">
+
+      <a href="index.html">الرئيسية</a>
+      <a href="letters.html">الحروف</a>
+      <a href="numbers.html">الأرقام</a>
+      <a href="animals.html">الحيوانات</a>
+      <a href="plants.html">النباتات</a>
+      <a href="quran.html" class="active">القرآن</a>
+      <a href="hadith.html">الأحاديث</a>
+      <a href="stories.html">قصص</a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="quran-page">
+
+  <section class="quran-hero">
+
+    <div class="quran-icon">📖</div>
+
+    <h1>القرآن الكريم</h1>
+
+    <p>
+      اقرأ سور القرآن الكريم بطريقة واضحة ومناسبة للتعلّم،
+      واختر السورة التي تريد قراءتها.
+    </p>
+
+    <div class="quran-source">
+      نص القرآن يتم جلبه من خدمة Al Quran Cloud.
+    </div>
+
+    <div class="quran-search">
+
+      <input
+        type="search"
+        id="surahSearch"
+        placeholder="ابحث عن اسم السورة..."
+        autocomplete="off">
+
+      <button onclick="searchSurahs()">
+        بحث
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <div class="quran-progress">
+
+    <div class="progress-label">
+
+      <span>السور التي تعلّمتها</span>
+
+      <span id="quranProgressText">
+        0 / 114
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="quranProgressFill">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="loading"
+    id="loadingBox">
+    جارٍ تحميل أسماء السور...
+  </div>
+
+
+  <div
+    class="error-box"
+    id="errorBox">
+    تعذر تحميل بيانات القرآن الآن.
+    تأكد من اتصال الإنترنت ثم أعد تحميل الصفحة.
+  </div>
+
+
+  <section
+    class="surahs-grid"
+    id="surahsGrid">
+  </section>
+
+</main>
+
+
+<div
+  class="quran-modal"
+  id="quranModal">
+
+  <div class="quran-modal-box">
+
+    <button
+      class="close-quran"
+      onclick="closeQuran()">
+      ×
+    </button>
+
+    <div
+      class="surah-heading"
+      id="surahHeading">
+    </div>
+
+    <div class="quran-controls">
+
+      <button
+        class="quran-control green"
+        onclick="markCurrentSurah()">
+        ✓ تعلّمت السورة
+      </button>
+
+      <button
+        class="quran-control"
+        onclick="readCurrentSurah()">
+        🔊 استماع بالنطق
+      </button>
+
+      <button
+        class="quran-control gray"
+        onclick="stopReading()">
+        ■ إيقاف
+      </button>
+
+    </div>
+
+    <div id="surahContent"></div>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+  const API_BASE =
+    "https://api.alquran.cloud/v1";
+
+  let allSurahs = [];
+
+  let currentSurah = null;
+
+
+  function getCompletedQuran() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("midad_quran_completed") || "[]"
+      );
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function saveCompletedQuran(list) {
+
+    localStorage.setItem(
+      "midad_quran_completed",
+      JSON.stringify(list)
+    );
+
+  }
+
+
+  function updateQuranProgress() {
+
+    const completed =
+      getCompletedQuran();
+
+    const total = 114;
+
+    const percentage =
+      Math.round(
+        (completed.length / total) * 100
+      );
+
+    document.getElementById(
+      "quranProgressText"
+    ).textContent =
+      completed.length + " / " + total;
+
+    document.getElementById(
+      "quranProgressFill"
+    ).style.width =
+      percentage + "%";
+
+    if (window.midadSetProgress) {
+      window.midadSetProgress(percentage);
+    }
+
+  }
+
+
+  async function loadSurahs() {
+
+    const loading =
+      document.getElementById("loadingBox");
+
+    const error =
+      document.getElementById("errorBox");
+
+    try {
+
+      const response =
+        await fetch(
+          API_BASE + "/surah"
+        );
+
+      if (!response.ok) {
+        throw new Error("Network error");
+      }
+
+      const result =
+        await response.json();
+
+      allSurahs =
+        result.data || [];
+
+      loading.style.display =
+        "none";
+
+      renderSurahs(allSurahs);
+
+      updateQuranProgress();
+
+    } catch (error) {
+
+      loading.style.display =
+        "none";
+
+      error.style.display =
+        "block";
+
+    }
+
+  }
+
+
+  function renderSurahs(surahs) {
+
+    const grid =
+      document.getElementById("surahsGrid");
+
+    const completed =
+      getCompletedQuran();
+
+    grid.innerHTML = "";
+
+    if (!surahs.length) {
+
+      grid.innerHTML =
+        '<div class="loading">لا توجد نتائج.</div>';
+
+      return;
+
+    }
+
+    surahs.forEach(function(surah) {
+
+      const card =
+        document.createElement("article");
+
+      card.className =
+        "surah-card";
+
+      if (
+        completed.includes(
+          surah.number
+        )
+      ) {
+
+        card.classList.add(
+          "completed"
+        );
+
+      }
+
+      card.innerHTML = `
+
+        <div class="surah-number">
+          ${surah.number}
+        </div>
+
+        <h2>
+          ${surah.name}
+        </h2>
+
+        <p>
+          ${surah.numberOfAyahs} آية
+        </p>
+
+        <span class="surah-type">
+          ${
+            surah.revelationType === "Meccan"
+              ? "مكية"
+              : "مدنية"
+          }
+        </span>
+
+      `;
+
+      card.addEventListener(
+        "click",
+        function() {
+          openSurah(surah.number);
+        }
+      );
+
+      grid.appendChild(card);
+
+    });
+
+  }
+
+
+  async function openSurah(number) {
+
+    const modal =
+      document.getElementById(
+        "quranModal"
+      );
+
+    const heading =
+      document.getElementById(
+        "surahHeading"
+      );
+
+    const content =
+      document.getElementById(
+        "surahContent"
+      );
+
+    currentSurah = number;
+
+    modal.classList.add(
+      "active"
+    );
+
+    heading.innerHTML =
+      "<h2>جاري التحميل...</h2>";
+
+    content.innerHTML =
+      '<div class="loading">جارٍ تحميل السورة...</div>';
+
+    try {
+
+      const response =
+        await fetch(
+          API_BASE +
+          "/surah/" +
+          number +
+          "/quran-uthmani"
+        );
+
+      if (!response.ok) {
+        throw new Error("Network error");
+      }
+
+      const result =
+        await response.json();
+
+      const surah =
+        result.data;
+
+      heading.innerHTML = `
+
+        <h2>
+          ${surah.name}
+        </h2>
+
+        <p>
+          ${surah.numberOfAyahs} آية
+          ·
+          ${
+            surah.revelationType === "Meccan"
+              ? "مكية"
+              : "مدنية"
+          }
+        </p>
+
+      `;
+
+      let html = "";
+
+      if (number !== 9) {
+
+        html += `
+          <div class="basmala">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+        `;
+
+      }
+
+      surah.ayahs.forEach(
+        function(ayah) {
+
+          html += `
+
+            <div class="ayah">
+
+              <span class="ayah-number">
+                ${ayah.numberInSurah}
+              </span>
+
+              ${ayah.text}
+
+            </div>
+
+          `;
+
+        }
+      );
+
+      content.innerHTML =
+        html;
+
+    } catch (error) {
+
+      content.innerHTML = `
+        <div class="error-box"
+             style="display:block">
+          تعذر تحميل السورة.
+          تأكد من اتصال الإنترنت.
+        </div>
+      `;
+
+    }
+
+  }
+
+
+  function closeQuran() {
+
+    stopReading();
+
+    document
+      .getElementById("quranModal")
+      .classList.remove("active");
+
+  }
+
+
+  function markCurrentSurah() {
+
+    if (!currentSurah) {
+      return;
+    }
+
+    const completed =
+      getCompletedQuran();
+
+    if (
+      !completed.includes(
+        currentSurah
+      )
+    ) {
+
+      completed.push(
+        currentSurah
+      );
+
+      saveCompletedQuran(
+        completed
+      );
+
+      if (window.midadAddStars) {
+        window.midadAddStars(2);
+      }
+
+    }
+
+    updateQuranProgress();
+
+    renderSurahs(
+      getFilteredSurahs()
+    );
+
+  }
+
+
+  function getFilteredSurahs() {
+
+    const input =
+      document.getElementById(
+        "surahSearch"
+      );
+
+    const value =
+      input.value
+        .trim()
+        .toLowerCase();
+
+    if (!value) {
+      return allSurahs;
+    }
+
+    return allSurahs.filter(
+      function(surah) {
+
+        return (
+          surah.name
+            .toLowerCase()
+            .includes(value)
+          ||
+          String(surah.number)
+            .includes(value)
+        );
+
+      }
+    );
+
+  }
+
+
+  function searchSurahs() {
+
+    renderSurahs(
+      getFilteredSurahs()
+    );
+
+  }
+
+
+  document
+    .getElementById("surahSearch")
+    .addEventListener(
+      "input",
+      searchSurahs
+    );
+
+
+  function readCurrentSurah() {
+
+    if (!currentSurah) {
+      return;
+    }
+
+    if (
+      !("speechSynthesis" in window)
+    ) {
+
+      alert(
+        "ميزة النطق غير مدعومة في هذا المتصفح."
+      );
+
+      return;
+
+    }
+
+    const ayahs =
+      document.querySelectorAll(
+        ".ayah"
+      );
+
+    let text = "";
+
+    ayahs.forEach(
+      function(ayah) {
+
+        text +=
+          ayah.innerText +
+          " ";
+
+      }
+    );
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+      new SpeechSynthesisUtterance(
+        text
+      );
+
+    speech.lang =
+      "ar-SA";
+
+    speech.rate =
+      0.75;
+
+    speech.pitch =
+      1;
+
+    window.speechSynthesis.speak(
+      speech
+    );
+
+  }
+
+
+  function stopReading() {
+
+    if (
+      "speechSynthesis" in window
+    ) {
+
+      window.speechSynthesis.cancel();
+
+    }
+
+  }
+
+
+  document
+    .getElementById("quranModal")
+    .addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target === this
+        ) {
+
+          closeQuran();
+
+        }
+
+      }
+    );
+
+
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeQuran();
+
+      }
+
+    }
+  );
+
+
+  loadSurahs();
+
+</script>
+
+</body>
+</html>
