@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>قصص قبل النوم | مِداد</title>
+  <meta name="description" content="قصص قصيرة وجميلة للأطفال قبل النوم مع دروس وقيم مفيدة.">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .stories-hero {
+      text-align: center;
+      padding: 45px 20px 30px;
+    }
+
+    .stories-hero .hero-icon {
+      font-size: 70px;
+      margin-bottom: 10px;
+    }
+
+    .stories-hero h1 {
+      margin: 0 0 12px;
+      font-size: 38px;
+    }
+
+    .stories-hero p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.9;
+      color: #666;
+      font-size: 18px;
+    }
+
+    .stories-tools {
+      max-width: 900px;
+      margin: 20px auto 35px;
+      padding: 0 20px;
+    }
+
+    .stories-search {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #eee;
+      border-radius: 18px;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    .stories-search:focus {
+      border-color: #8b5cf6;
+    }
+
+    .stories-grid {
+      max-width: 1150px;
+      margin: auto;
+      padding: 0 20px 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .story-card {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+      transition: .25s;
+      border: 1px solid #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.11);
+    }
+
+    .story-icon {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f7f3ff;
+      border-radius: 22px;
+      font-size: 45px;
+      margin-bottom: 18px;
+    }
+
+    .story-card h2 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .story-card p {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .story-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .story-tag {
+      background: #f4f4f5;
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .story-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .story-btn {
+      border: none;
+      border-radius: 14px;
+      padding: 11px 15px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .read-btn {
+      background: #8b5cf6;
+      color: white;
+    }
+
+    .listen-btn {
+      background: #eef2ff;
+      color: #4f46e5;
+    }
+
+    .complete-btn {
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .story-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .story-card.completed {
+      border: 2px solid #22c55e;
+    }
+
+    .completed-label {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #22c55e;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      display: none;
+    }
+
+    .story-card.completed .completed-label {
+      display: block;
+    }
+
+    .stories-progress {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      padding: 0 20px;
+    }
+
+    .progress-box {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.06);
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 13px;
+      background: #eee;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg,#8b5cf6,#ec4899);
+      border-radius: 20px;
+      transition: width .4s;
+    }
+
+    .empty-stories {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      grid-column: 1 / -1;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 9999;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 800px;
+      background: white;
+      border-radius: 28px;
+      padding: 30px;
+      position: relative;
+      box-sizing: border-box;
+      animation: storyOpen .25s ease;
+    }
+
+    @keyframes storyOpen {
+      from {
+        transform: scale(.92);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      left: 18px;
+      top: 15px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: #f3f4f6;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .modal-icon {
+      font-size: 60px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .story-text {
+      line-height: 2.2;
+      font-size: 18px;
+      color: #333;
+      white-space: pre-line;
+    }
+
+    .story-moral {
+      margin-top: 25px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f5f3ff;
+      line-height: 1.9;
+    }
+
+    .story-moral strong {
+      color: #6d28d9;
+    }
+
+    .night-message {
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 25px;
+      text-align: center;
+      background: linear-gradient(135deg,#312e81,#581c87);
+      color: white;
+      border-radius: 25px;
+      box-sizing: border-box;
+    }
+
+    .night-message h2 {
+      margin-top: 0;
+    }
+
+    .night-message p {
+      line-height: 1.9;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+      .stories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .stories-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px 40px;
+      }
+
+      .stories-hero h1 {
+        font-size: 30px;
+      }
+
+      .stories-hero p {
+        font-size: 16px;
+      }
+
+      .story-card {
+        padding: 20px;
+      }
+
+      .modal-content {
+        padding: 22px;
+      }
+
+      .story-text {
+        font-size: 17px;
+        line-height: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span>مِداد</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="فتح القائمة">☰</button>
+
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="letters.html">الحروف</a>
+        <a href="numbers.html">الأرقام</a>
+        <a href="animals.html">الحيوانات</a>
+        <a href="plants.html">النباتات</a>
+        <a href="quran.html">القرآن</a>
+        <a href="hadith.html">الأحاديث</a>
+        <a href="stories.html" class="active">القصص</a>
+        <a href="games.html">الألعاب</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- مقدمة -->
+    <section class="stories-hero">
+      <div class="hero-icon">🌙📖</div>
+
+      <h1>قصص قبل النوم</h1>
+
+      <p>
+        حكايات قصيرة ولطيفة تساعد الطفل على الاستمتاع بالقراءة
+        والتعرف على قيم جميلة مثل الصدق والرحمة والتعاون والشجاعة.
+      </p>
+    </section>
+
+    <!-- التقدم -->
+    <section class="stories-progress">
+      <div class="progress-box">
+
+        <div class="progress-info">
+          <span>تقدمك في القصص</span>
+          <span id="progressText">0 / 10</span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- البحث -->
+    <section class="stories-tools">
+      <input
+        type="search"
+        id="storySearch"
+        class="stories-search"
+        placeholder="🔎 ابحث عن قصة..."
+        aria-label="البحث عن قصة"
+      >
+    </section>
+
+    <!-- القصص -->
+    <section class="stories-grid" id="storiesGrid">
+
+      <article class="story-card" data-title="الأرنب والسلحفاة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🐇</div>
+
+        <h2>الأرنب والسلحفاة</h2>
+
+        <p>
+          قصة عن المثابرة وعدم الاستهزاء بالآخرين.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">المثابرة</span>
+          <span class="story-tag">5 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(0)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(0)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(0)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="الأسد والفأر">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🦁</div>
+
+        <h2>الأسد والفأر</h2>
+
+        <p>
+          قصة تعلمنا أن المساعدة قد تأتي من أي شخص مهما كان صغيرًا.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">المساعدة</span>
+          <span class="story-tag">4 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(1)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(1)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(1)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="النملة والحمامة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🐜</div>
+
+        <h2>النملة والحمامة</h2>
+
+        <p>
+          قصة جميلة عن رد الجميل ومساعدة الآخرين.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">الخير</span>
+          <span class="story-tag">4 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(2)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(2)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(2)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="العصفور الصغير">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🐦</div>
+
+        <h2>العصفور الصغير</h2>
+
+        <p>
+          عصفور صغير يتعلم كيف يواجه خوفه خطوة بخطوة.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">الشجاعة</span>
+          <span class="story-tag">5 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(3)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(3)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(3)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="الشجرة الكريمة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🌳</div>
+
+        <h2>الشجرة الكريمة</h2>
+
+        <p>
+          قصة عن العطاء ومشاركة الخير مع الآخرين.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">العطاء</span>
+          <span class="story-tag">5 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(4)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(4)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(4)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="القطة الفضولية">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🐱</div>
+
+        <h2>القطة الفضولية</h2>
+
+        <p>
+          قصة عن الفضول الجميل وأهمية التفكير قبل التصرف.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">التفكير</span>
+          <span class="story-tag">4 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(5)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(5)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(5)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="النحلة النشيطة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🐝</div>
+
+        <h2>النحلة النشيطة</h2>
+
+        <p>
+          قصة عن العمل والتعاون ومساعدة المجموعة.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">العمل</span>
+          <span class="story-tag">5 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(6)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(6)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(6)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="الولد والنجمة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">⭐</div>
+
+        <h2>الولد والنجمة</h2>
+
+        <p>
+          قصة هادئة عن الأمل والأحلام الجميلة.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">الأمل</span>
+          <span class="story-tag">4 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(7)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(7)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(7)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="السمكة الصغيرة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🐟</div>
+
+        <h2>السمكة الصغيرة</h2>
+
+        <p>
+          سمكة صغيرة تتعلم أن لكل شخص قدراته الخاصة.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">الثقة</span>
+          <span class="story-tag">5 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(8)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(8)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(8)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+
+      <article class="story-card" data-title="ليلة القمر الجميلة">
+        <span class="completed-label">✓ قرأتها</span>
+
+        <div class="story-icon">🌙</div>
+
+        <h2>ليلة القمر الجميلة</h2>
+
+        <p>
+          قصة هادئة مناسبة لوقت النوم عن الامتنان والطمأنينة.
+        </p>
+
+        <div class="story-meta">
+          <span class="story-tag">النوم</span>
+          <span class="story-tag">5 دقائق</span>
+        </div>
+
+        <div class="story-actions">
+          <button class="story-btn read-btn" onclick="openStory(9)">
+            اقرأ القصة
+          </button>
+
+          <button class="story-btn listen-btn" onclick="listenStory(9)">
+            🔊 اسمع
+          </button>
+
+          <button class="story-btn complete-btn" onclick="completeStory(9)">
+            ✓ تعلمت
+          </button>
+        </div>
+      </article>
+
+      <div class="empty-stories" id="emptyStories">
+        لا توجد قصة بهذا الاسم.
+      </div>
+
+    </section>
+
+
+    <!-- رسالة النوم -->
+    <section class="night-message">
+      <h2>🌙 تصبحون على خير</h2>
+      <p>
+        انتهت حكايتنا لهذا اليوم. أغلق عينيك، خذ نفسًا هادئًا،
+        وتمنى أحلامًا جميلة.
+      </p>
+    </section>
+
+  </main>
+
+
+  <!-- نافذة القصة -->
+  <div class="modal" id="storyModal">
+
+    <div class="modal-content">
+
+      <button class="close-modal" onclick="closeStory()" aria-label="إغلاق">
+        ×
+      </button>
+
+      <div class="modal-icon" id="modalIcon">📖</div>
+
+      <h2 id="modalTitle"></h2>
+
+      <div class="story-text" id="modalText"></div>
+
+      <div class="story-moral">
+        <strong>🌟 ماذا تعلمنا؟</strong>
+        <div id="modalMoral"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="app.js"></script>
+
+  <script>
+
+    const stories = [
+
+      {
+        title: "الأرنب والسلحفاة",
+        icon: "🐇",
+        text: `كان هناك أرنب سريع يحب أن يتفاخر بسرعته أمام الحيوانات.
+
+وفي يوم من الأيام رأى السلحفاة تمشي ببطء، فضحك وقال لها:
+"لن تستطيعي الوصول إلى المكان قبلي!"
+
+اقترحت السلحفاة أن يتسابقا.
+
+بدأ السباق، وانطلق الأرنب بسرعة كبيرة وابتعد عن السلحفاة.
+
+نظر الأرنب خلفه، فلم يجد السلحفاة قريبة، فقرر أن يستريح قليلًا تحت شجرة.
+
+أما السلحفاة فواصلت السير بهدوء، خطوة بعد خطوة.
+
+نام الأرنب، وعندما استيقظ وجد السلحفاة قد اقتربت من نهاية الطريق.
+
+ركض الأرنب بكل سرعته، لكنه وصل متأخرًا.
+
+فرحت السلحفاة لأنها لم تتوقف عن المحاولة.`,
+
+        moral: "المثابرة والاستمرار قد يساعداننا على الوصول إلى هدفنا."
+      },
+
+      {
+        title: "الأسد والفأر",
+        icon: "🦁",
+        text: `في يوم من الأيام كان أسد نائمًا تحت شجرة.
+
+اقترب فأر صغير من المكان، وأخذ يتحرك بين أوراق الشجر حتى وصل إلى الأسد.
+
+استيقظ الأسد وأمسك بالفأر.
+
+خاف الفأر وقال:
+"أرجوك دعني أذهب، وربما أستطيع مساعدتك يومًا ما."
+
+ضحك الأسد، لكنه قرر أن يتركه.
+
+بعد أيام، وقع الأسد في شبكة صياد.
+
+حاول الخروج منها لكنه لم يستطع.
+
+سمع الفأر صوت الأسد، فجاء بسرعة وبدأ يقضم حبال الشبكة بأسنانه.
+
+وبعد وقت قصير تمكن الأسد من الخروج.
+
+شكر الأسد الفأر وقال:
+"لقد كنت صغيرًا، لكن مساعدتك كانت كبيرة."
+
+ومنذ ذلك اليوم أصبحا صديقين.`,
+
+        moral: "لا تستهين بأحد، فكل شخص يستطيع أن يقدم شيئًا مفيدًا."
+      },
+
+      {
+        title: "النملة والحمامة",
+        icon: "🐜",
+        text: `كانت نملة صغيرة تمشي قرب جدول ماء.
+
+انزلقت قدمها وسقطت في الماء، وبدأت تحاول النجاة.
+
+رأت حمامة النملة، فقطعت ورقة صغيرة وأسقطتها بالقرب منها.
+
+صعدت النملة فوق الورقة ووصلت إلى اليابسة.
+
+بعد أيام، شاهدت النملة رجلًا يحاول الإمساك بالحمامة.
+
+اقتربت النملة وعضت قدم الرجل.
+
+تفاجأ الرجل وابتعد، فطارت الحمامة ونجت.
+
+فرحت النملة والحمامة، وعرفتا أن الخير يعود بالخير.`,
+
+        moral: "ساعد الآخرين عندما تستطيع، فالخير لا يضيع."
+      },
+
+      {
+        title: "العصفور الصغير",
+        icon: "🐦",
+        text: `كان عصفور صغير يعيش في عش فوق شجرة عالية.
+
+كان يخاف من الطيران لأنه لم يجربه من قبل.
+
+قالت له أمه:
+"لا يجب أن تفعل كل شيء دفعة واحدة. ابدأ بخطوة صغيرة."
+
+فتح العصفور جناحيه وقفز إلى غصن قريب.
+
+نجح!
+
+ثم جرب غصنًا أبعد قليلًا.
+
+وفي اليوم التالي طار من شجرة إلى شجرة.
+
+فرح العصفور كثيرًا لأنه اكتشف أن الخوف يمكن أن يصبح أصغر عندما نحاول.`,
+
+        moral: "الشجاعة لا تعني عدم الخوف، بل تعني أن نحاول رغم الخوف."
+      },
+
+      {
+        title: "الشجرة الكريمة",
+        icon: "🌳",
+        text: `كانت هناك شجرة كبيرة في وسط حديقة جميلة.
+
+كان الأطفال يجلسون تحت ظلها في الأيام الحارة.
+
+وكانت الطيور تبني أعشاشها بين أغصانها.
+
+وفي الخريف كانت الشجرة تعطي ثمارها لمن يمر بجانبها.
+
+قال أحد الأطفال:
+"هذه الشجرة تعطينا الكثير."
+
+فقالت أمه:
+"لأن العطاء يجعل المكان أجمل."
+
+ومنذ ذلك اليوم بدأ الأطفال أيضًا يزرعون الأشجار ويساعدون الحيوانات الصغيرة.`,
+
+        moral: "العطاء يجعل الخير ينتشر من شخص إلى آخر."
+      },
+
+      {
+        title: "القطة الفضولية",
+        icon: "🐱",
+        text: `كانت قطة صغيرة تحب اكتشاف كل شيء.
+
+في أحد الأيام رأت صندوقًا صغيرًا في غرفة المنزل.
+
+اقتربت منه، لكنها توقفت قبل أن تفتحه.
+
+فكرت قليلًا وقالت:
+"من الأفضل أن أعرف أولًا ما الذي بداخله."
+
+سألت صاحب المنزل، فعرفت أن الصندوق يحتوي على أدوات لا يجب أن تلمسها.
+
+فرحت القطة لأنها فكرت قبل أن تتصرف.
+
+ومنذ ذلك اليوم أصبحت تسأل عندما لا تعرف شيئًا.`,
+
+        moral: "الفضول جميل، لكن التفكير والسؤال قبل التصرف مهمان."
+      },
+
+      {
+        title: "النحلة النشيطة",
+        icon: "🐝",
+        text: `كانت نحلة صغيرة تعيش مع مجموعة كبيرة من النحل.
+
+كل نحلة كانت تقوم بمهمة تساعد الخلية.
+
+كانت النحلة الصغيرة تجمع الرحيق وتعود به إلى الخلية.
+
+وفي أحد الأيام شعرت بالتعب، فقالت:
+"لن أستطيع القيام بعملي اليوم."
+
+ساعدتها نحلة أخرى، ثم عادت النحلة الصغيرة للعمل عندما شعرت بتحسن.
+
+اكتشفت أن التعاون يجعل العمل أسهل.
+
+ومنذ ذلك اليوم أصبحت النحلات يساعدن بعضهن دائمًا.`,
+
+        moral: "عندما نتعاون يصبح العمل أسهل وتصبح النتيجة أجمل."
+      },
+
+      {
+        title: "الولد والنجمة",
+        icon: "⭐",
+        text: `كان ولد صغير يحب النظر إلى السماء قبل النوم.
+
+في إحدى الليالي رأى نجمة لامعة جدًا.
+
+تمنى أن يحقق حلمًا كان يفكر فيه منذ مدة.
+
+قالت له أمه:
+"الأحلام الجميلة تحتاج إلى عمل وصبر."
+
+في اليوم التالي بدأ يتعلم شيئًا جديدًا كل يوم.
+
+ومع مرور الوقت أصبح أقرب إلى حلمه.
+
+وكان كلما رأى النجمة يتذكر أن عليه أن يستمر.`,
+
+        moral: "الأحلام تحتاج إلى صبر وعمل وخطوات صغيرة مستمرة."
+      },
+
+      {
+        title: "السمكة الصغيرة",
+        icon: "🐟",
+        text: `كانت سمكة صغيرة تعيش في بحر واسع.
+
+كانت ترى الأسماك الكبيرة تسبح بسرعة، فتشعر أنها ضعيفة.
+
+قالت لها أمها:
+"لا تقارني نفسك بالآخرين. لكل واحد منا قدراته."
+
+بدأت السمكة الصغيرة تستكشف الأماكن التي تستطيع الوصول إليها.
+
+واكتشفت أنها تستطيع السباحة بين الصخور الصغيرة بسهولة.
+
+ساعدت الأسماك الأخرى عندما احتاجت إلى المرور من أماكن ضيقة.
+
+فرحت السمكة لأنها اكتشفت أن اختلافها يمكن أن يكون ميزة.`,
+
+        moral: "لكل شخص قدرات خاصة، والمهم أن نعرف كيف نستخدمها."
+      },
+
+      {
+        title: "ليلة القمر الجميلة",
+        icon: "🌙",
+        text: `في ليلة هادئة، كان طفل صغير يستعد للنوم.
+
+نظر من نافذته فرأى القمر مضيئًا في السماء.
+
+قال:
+"كم هو جميل هذا اليوم!"
+
+تذكر الأشياء الجميلة التي حدثت معه.
+
+شكر الله على عائلته وبيته وطعامه وأصدقائه.
+
+ثم أغلق نافذته ورتب سريره.
+
+وضع رأسه على الوسادة وأخذ نفسًا هادئًا.
+
+قال:
+"الحمد لله على هذا اليوم."
+
+ثم أغمض عينيه ونام بهدوء.`,
+
+        moral: "الامتنان يساعدنا على تذكر الأشياء الجميلة في حياتنا."
+      }
+
+    ];
+
+
+    const completedKey = "midad_stories_completed";
+
+    let completedStories =
+      JSON.parse(localStorage.getItem(completedKey) || "[]");
+
+
+    function updateProgress() {
+
+      const total = stories.length;
+
+      const count = completedStories.length;
+
+      const percentage =
+        total === 0 ? 0 : Math.round((count / total) * 100);
+
+      document.getElementById("progressText").textContent =
+        count + " / " + total;
+
+      document.getElementById("progressFill").style.width =
+        percentage + "%";
+
+      stories.forEach(function(story, index) {
+
+        const cards =
+          document.querySelectorAll(".story-card");
+
+        if (!cards[index]) return;
+
+        if (completedStories.includes(index)) {
+          cards[index].classList.add("completed");
+        } else {
+          cards[index].classList.remove("completed");
+        }
+
+      });
+
+      if (typeof window.midadSetProgress === "function") {
+        window.midadSetProgress(percentage);
+      }
+    }
+
+
+    function openStory(index) {
+
+      const story = stories[index];
+
+      if (!story) return;
+
+      document.getElementById("modalIcon").textContent =
+        story.icon;
+
+      document.getElementById("modalTitle").textContent =
+        story.title;
+
+      document.getElementById("modalText").textContent =
+        story.text;
+
+      document.getElementById("modalMoral").textContent =
+        story.moral;
+
+      document.getElementById("storyModal").classList.add("show");
+
+      document.body.style.overflow = "hidden";
+    }
+
+
+    function closeStory() {
+
+      document.getElementById("storyModal").classList.remove("show");
+
+      document.body.style.overflow = "";
+
+      if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+      }
+    }
+
+
+    function listenStory(index) {
+
+      const story = stories[index];
+
+      if (!story) return;
+
+      if (!("speechSynthesis" in window)) {
+        alert("ميزة القراءة الصوتية غير مدعومة في هذا المتصفح.");
+        return;
+      }
+
+      speechSynthesis.cancel();
+
+      const text =
+        story.title + ". " +
+        story.text + ". " +
+        "ماذا تعلمنا؟ " +
+        story.moral;
+
+      const speech =
+        new SpeechSynthesisUtterance(text);
+
+      speech.lang = "ar-SA";
+
+      speech.rate = 0.82;
+
+      speech.pitch = 1.05;
+
+      speech.volume = 1;
+
+      speechSynthesis.speak(speech);
+    }
+
+
+    function completeStory(index) {
+
+      if (!completedStories.includes(index)) {
+
+        completedStories.push(index);
+
+        localStorage.setItem(
+          completedKey,
+          JSON.stringify(completedStories)
+        );
+
+        if (typeof window.midadAddStars === "function") {
+          window.midadAddStars(2);
+        }
+
+        updateProgress();
+      }
+
+      openStory(index);
+    }
+
+
+    // البحث
+    document
+      .getElementById("storySearch")
+      .addEventListener("input", function() {
+
+        const query =
+          this.value.trim().toLowerCase();
+
+        const cards =
+          document.querySelectorAll(".story-card");
+
+        let visible = 0;
+
+        cards.forEach(function(card) {
+
+          const title =
+            card.dataset.title.toLowerCase();
+
+          if (title.includes(query)) {
+
+            card.style.display = "";
+
+            visible++;
+
+          } else {
+
+            card.style.display = "none";
+
+          }
+
+        });
+
+        document.getElementById("emptyStories").style.display =
+          visible === 0 ? "block" : "none";
+
+      });
+
+
+    // إغلاق النافذة عند الضغط خارجها
+    document
+      .getElementById("storyModal")
+      .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+          closeStory();
+        }
+
+      });
+
+
+    // زر ESC
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key === "Escape") {
+        closeStory();
+      }
+
+    });
+
+
+    // تشغيل الصفحة
+    updateProgress();
+
+  </script>
+
+</body>
+</html>
