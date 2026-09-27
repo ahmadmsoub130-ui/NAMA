@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مِداد - تعلّم النباتات للأطفال بطريقة ممتعة وتفاعلية">
+  <meta name="theme-color" content="#4caf50">
+  <title>النباتات | مِداد</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .plants-page {
+      padding: 30px 15px 60px;
+    }
+
+    .plants-hero {
+      max-width: 1100px;
+      margin: 0 auto 30px;
+      text-align: center;
+      padding: 35px 20px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .plants-hero h1 {
+      margin: 0 0 10px;
+      font-size: 42px;
+      color: #2e7d32;
+    }
+
+    .plants-hero p {
+      margin: 0;
+      font-size: 19px;
+      color: #4b604c;
+    }
+
+    .plants-progress {
+      max-width: 700px;
+      margin: 22px auto 0;
+    }
+
+    .plants-progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
+    .plants-progress-bar {
+      height: 14px;
+      background: #dcefdc;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .plants-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #43a047, #8bc34a);
+      border-radius: 20px;
+      transition: width .4s ease;
+    }
+
+    .plants-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .plant-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px 16px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,.08);
+      border: 2px solid #edf5ed;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .plant-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+
+    .plant-icon {
+      font-size: 65px;
+      margin-bottom: 8px;
+    }
+
+    .plant-card h2 {
+      margin: 5px 0;
+      color: #2e7d32;
+      font-size: 25px;
+    }
+
+    .plant-card p {
+      color: #667;
+      line-height: 1.7;
+      min-height: 55px;
+    }
+
+    .plant-button {
+      border: none;
+      background: #43a047;
+      color: white;
+      padding: 11px 18px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .plant-button:hover {
+      background: #2e7d32;
+      transform: scale(1.04);
+    }
+
+    .plant-button.done {
+      background: #ffb300;
+      color: #fff;
+    }
+
+    .plant-facts {
+      max-width: 1100px;
+      margin: 35px auto 0;
+      padding: 28px;
+      background: #fff;
+      border-radius: 26px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+      text-align: center;
+    }
+
+    .plant-facts h2 {
+      color: #2e7d32;
+      margin-top: 0;
+    }
+
+    .fact-box {
+      font-size: 20px;
+      line-height: 1.9;
+      color: #445;
+      min-height: 45px;
+    }
+
+    .fact-button {
+      border: none;
+      background: #8bc34a;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .plant-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .plant-modal.active {
+      display: flex;
+    }
+
+    .plant-modal-box {
+      width: min(500px, 100%);
+      background: white;
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      animation: plantPop .25s ease;
+    }
+
+    @keyframes plantPop {
+      from {
+        transform: scale(.85);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-icon {
+      font-size: 90px;
+    }
+
+    .plant-modal-box h2 {
+      color: #2e7d32;
+      font-size: 30px;
+    }
+
+    .plant-modal-box p {
+      font-size: 18px;
+      line-height: 1.9;
+      color: #555;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      left: 15px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: #eee;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .plants-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .plants-hero h1 {
+        font-size: 32px;
+      }
+
+      .plants-hero p {
+        font-size: 16px;
+      }
+
+      .plants-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .plant-card {
+        padding: 18px 10px;
+      }
+
+      .plant-icon {
+        font-size: 52px;
+      }
+
+      .plant-card h2 {
+        font-size: 21px;
+      }
+
+      .plant-card p {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .plants-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">م</span>
+        <span>
+          <strong>مِداد</strong>
+          <small>نتعلّم، نكتشف، ونستمتع</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" aria-label="فتح القائمة">☰</button>
+
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="letters.html">الحروف</a>
+        <a href="numbers.html">الأرقام</a>
+        <a href="animals.html">الحيوانات</a>
+        <a href="plants.html" class="active">النباتات</a>
+        <a href="quran.html">القرآن</a>
+        <a href="hadith.html">الأحاديث</a>
+        <a href="stories.html">قصص</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="plants-page">
+
+    <section class="plants-hero">
+      <h1>🌱 عالم النباتات</h1>
+      <p>اكتشف النباتات وتعرّف على فوائدها بطريقة ممتعة.</p>
+
+      <div class="plants-progress">
+        <div class="plants-progress-label">
+          <span>تقدّمك</span>
+          <span id="progressText">0%</span>
+        </div>
+
+        <div class="plants-progress-bar">
+          <div class="plants-progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plants-grid">
+
+      <article class="plant-card">
+        <div class="plant-icon">🌳</div>
+        <h2>الشجرة</h2>
+        <p>النباتات الكبيرة التي لها جذع وفروع وأوراق.</p>
+        <button class="plant-button" data-id="tree" onclick="completePlant('tree', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌻</div>
+        <h2>عباد الشمس</h2>
+        <p>زهرة جميلة تحب ضوء الشمس.</p>
+        <button class="plant-button" data-id="sunflower" onclick="completePlant('sunflower', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌹</div>
+        <h2>الورد</h2>
+        <p>زهرة جميلة لها ألوان وروائح مختلفة.</p>
+        <button class="plant-button" data-id="rose" onclick="completePlant('rose', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌴</div>
+        <h2>النخلة</h2>
+        <p>شجرة تنتج التمر وتعيش في المناطق الدافئة.</p>
+        <button class="plant-button" data-id="palm" onclick="completePlant('palm', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌿</div>
+        <h2>النعناع</h2>
+        <p>نبات أخضر ذو رائحة جميلة ويُستخدم في الطعام والمشروبات.</p>
+        <button class="plant-button" data-id="mint" onclick="completePlant('mint', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌾</div>
+        <h2>القمح</h2>
+        <p>نبات مهم نستخدم حبوبه لصنع أنواع كثيرة من الطعام.</p>
+        <button class="plant-button" data-id="wheat" onclick="completePlant('wheat', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🍅</div>
+        <h2>الطماطم</h2>
+        <p>نبات يعطي ثمارًا حمراء تُستخدم في أطعمة كثيرة.</p>
+        <button class="plant-button" data-id="tomato" onclick="completePlant('tomato', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌵</div>
+        <h2>الصبّار</h2>
+        <p>نبات يستطيع تحمّل الجفاف ويخزن الماء في أجزائه.</p>
+        <button class="plant-button" data-id="cactus" onclick="completePlant('cactus', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🍋</div>
+        <h2>الليمون</h2>
+        <p>شجرة تنتج ثمارًا صفراء ذات طعم حامض.</p>
+        <button class="plant-button" data-id="lemon" onclick="completePlant('lemon', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🍎</div>
+        <h2>التفاح</h2>
+        <p>شجرة تنتج ثمارًا يمكن أن تكون حمراء أو خضراء أو صفراء.</p>
+        <button class="plant-button" data-id="apple" onclick="completePlant('apple', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌿</div>
+        <h2>الريحان</h2>
+        <p>نبات عطري أخضر له رائحة مميزة.</p>
+        <button class="plant-button" data-id="basil" onclick="completePlant('basil', this)">
+          تعلمت
+        </button>
+      </article>
+
+      <article class="plant-card">
+        <div class="plant-icon">🌲</div>
+        <h2>الصنوبر</h2>
+        <p>شجرة دائمة الخضرة وتنتج مخاريط تحتوي على بذور.</p>
+        <button class="plant-button" data-id="pine" onclick="completePlant('pine', this)">
+          تعلمت
+        </button>
+      </article>
+
+    </section>
+
+    <section class="plant-facts">
+      <h2>💡 معلومة نباتية</h2>
+
+      <div class="fact-box" id="plantFact">
+        اضغط على الزر لاكتشاف معلومة جديدة.
+      </div>
+
+      <button class="fact-button" onclick="showPlantFact()">
+        معلومة جديدة
+      </button>
+    </section>
+
+  </main>
+
+  <div class="plant-modal" id="plantModal">
+
+    <div class="plant-modal-box">
+
+      <button class="close-modal" onclick="closePlantModal()">×</button>
+
+      <div class="modal-icon" id="modalIcon">🌱</div>
+
+      <h2 id="modalTitle">النبات</h2>
+
+      <p id="modalText"></p>
+
+      <button class="plant-button" onclick="closePlantModal()">
+        فهمت
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+  <script>
+    const plants = {
+      tree: {
+        title: "الشجرة",
+        icon: "🌳",
+        text: "الشجرة نبات كبير له جذع وفروع وأوراق. توفر الظل وتساعد البيئة."
+      },
+      sunflower: {
+        title: "عباد الشمس",
+        icon: "🌻",
+        text: "عباد الشمس نبات جميل، وتشتهر أزهاره بلونها الأصفر."
+      },
+      rose: {
+        title: "الورد",
+        icon: "🌹",
+        text: "الورد من النباتات المزهرة، وله ألوان وروائح جميلة ومتنوعة."
+      },
+      palm: {
+        title: "النخلة",
+        icon: "🌴",
+        text: "النخلة شجرة مهمة في المناطق الدافئة، ومن ثمارها التمر."
+      },
+      mint: {
+        title: "النعناع",
+        icon: "🌿",
+        text: "النعناع نبات عطري أخضر وله رائحة منعشة."
+      },
+      wheat: {
+        title: "القمح",
+        icon: "🌾",
+        text: "القمح من المحاصيل المهمة، وتُستخدم حبوبه في صناعة أنواع مختلفة من الطعام."
+      },
+      tomato: {
+        title: "الطماطم",
+        icon: "🍅",
+        text: "الطماطم نبات ينتج ثمارًا حمراء غالبًا، وتدخل في الكثير من الأطعمة."
+      },
+      cactus: {
+        title: "الصبّار",
+        icon: "🌵",
+        text: "الصبّار يستطيع تحمّل الجفاف، وبعض أنواعه يخزن الماء داخل أنسجته."
+      },
+      lemon: {
+        title: "الليمون",
+        icon: "🍋",
+        text: "شجرة الليمون تنتج ثمارًا صفراء ذات طعم حامض."
+      },
+      apple: {
+        title: "التفاح",
+        icon: "🍎",
+        text: "التفاح ثمرة شائعة ويمكن أن يكون لونها أحمر أو أخضر أو أصفر."
+      },
+      basil: {
+        title: "الريحان",
+        icon: "🌿",
+        text: "الريحان نبات عطري يستخدم في بعض الأطعمة وله رائحة مميزة."
+      },
+      pine: {
+        title: "الصنوبر",
+        icon: "🌲",
+        text: "الصنوبر من الأشجار دائمة الخضرة، وتنتج بعض أنواعه بذور الصنوبر."
+      }
+    };
+
+    const plantIds = Object.keys(plants);
+
+    function getCompletedPlants() {
+      try {
+        return JSON.parse(localStorage.getItem("midad_plants_completed") || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveCompletedPlants(list) {
+      localStorage.setItem(
+        "midad_plants_completed",
+        JSON.stringify(list)
+      );
+    }
+
+    function updatePlantProgress() {
+      const completed = getCompletedPlants();
+      const percentage = Math.round(
+        (completed.length / plantIds.length) * 100
+      );
+
+      document.getElementById("progressFill").style.width =
+        percentage + "%";
+
+      document.getElementById("progressText").textContent =
+        percentage + "%";
+
+      if (window.midadSetProgress) {
+        window.midadSetProgress(percentage);
+      }
+    }
+
+    function completePlant(id, button) {
+      const completed = getCompletedPlants();
+
+      if (!completed.includes(id)) {
+        completed.push(id);
+        saveCompletedPlants(completed);
+
+        button.classList.add("done");
+        button.textContent = "✓ تعلمتها";
+
+        if (window.midadAddStars) {
+          window.midadAddStars(1);
+        }
+
+        updatePlantProgress();
+      } else {
+        openPlantModal(id);
+      }
+    }
+
+    function openPlantModal(id) {
+      const plant = plants[id];
+
+      if (!plant) return;
+
+      document.getElementById("modalIcon").textContent = plant.icon;
+      document.getElementById("modalTitle").textContent = plant.title;
+      document.getElementById("modalText").textContent = plant.text;
+
+      document.getElementById("plantModal").classList.add("active");
+    }
+
+    function closePlantModal() {
+      document.getElementById("plantModal").classList.remove("active");
+    }
+
+    document.querySelectorAll(".plant-card").forEach(function(card) {
+      card.addEventListener("dblclick", function() {
+        const button = card.querySelector(".plant-button");
+
+        if (button) {
+          openPlantModal(button.dataset.id);
+        }
+      });
+    });
+
+    const facts = [
+      "النباتات تحتاج إلى الماء والضوء والهواء لكي تنمو.",
+      "الأشجار تساعد في توفير الأكسجين وتلطيف البيئة.",
+      "بعض النباتات تخزن الماء داخل أوراقها أو سيقانها.",
+      "النخيل يستطيع العيش في المناطق الحارة.",
+      "الزهور تساعد كثيرًا من الحشرات في الحصول على الغذاء.",
+      "البذرة يمكن أن تنمو لتصبح نباتًا جديدًا.",
+      "الجذور تساعد النبات على تثبيت نفسه وامتصاص الماء والأملاح.",
+      "الأوراق تقوم بدور مهم في صنع الغذاء للنبات باستخدام الضوء."
+    ];
+
+    function showPlantFact() {
+      const randomIndex = Math.floor(Math.random() * facts.length);
+
+      document.getElementById("plantFact").textContent =
+        facts[randomIndex];
+    }
+
+    document.getElementById("plantModal").addEventListener(
+      "click",
+      function(event) {
+        if (event.target === this) {
+          closePlantModal();
+        }
+      }
+    );
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closePlantModal();
+      }
+    });
+
+    window.addEventListener("load", function() {
+      const completed = getCompletedPlants();
+
+      document.querySelectorAll(".plant-button").forEach(function(button) {
+        const id = button.dataset.id;
+
+        if (completed.includes(id)) {
+          button.classList.add("done");
+          button.textContent = "✓ تعلمتها";
+        }
+      });
+
+      updatePlantProgress();
+    });
+  </script>
+
+</body>
+</html>
