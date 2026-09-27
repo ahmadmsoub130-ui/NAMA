@@ -4,691 +4,133 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>مِداد | عالم الطفل للتعلم والمتعة</title>
+  <title>مِداد | موقع تعليمي للأطفال</title>
 
   <meta name="description"
-        content="مِداد منصة تعليمية عربية للأطفال لتعلم الحروف والأرقام والحيوانات والنباتات والقرآن والأحاديث والقصص بطريقة ممتعة.">
+        content="مِداد موقع تعليمي ممتع للأطفال لتعلم الحروف والأرقام والحيوانات والنباتات والقرآن والأحاديث والقصص.">
 
   <meta name="theme-color" content="#6c63ff">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f7f9ff;
-      color: #25253a;
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e8eaf5;
-    }
-
-    .navbar {
-      max-width: 1200px;
-      margin: auto;
-      min-height: 74px;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 25px;
-      font-weight: 900;
-      color: #5b50d6;
-      white-space: nowrap;
-    }
-
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #6c63ff, #8e7dff);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 23px;
-      box-shadow: 0 7px 18px rgba(108,99,255,0.25);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      padding: 10px 13px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #56566d;
-      transition: 0.2s;
-    }
-
-    .nav-links a:hover {
-      background: #f0efff;
-      color: #5b50d6;
-    }
-
-    .mobile-menu {
-      display: none;
-      border: none;
-      background: #f0efff;
-      color: #5b50d6;
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 70px 20px 55px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 45px;
-    }
-
-    .hero-text h1 {
-      font-size: clamp(38px, 5vw, 65px);
-      line-height: 1.12;
-      margin-bottom: 20px;
-      color: #25253a;
-    }
-
-    .hero-text h1 span {
-      color: #6c63ff;
-    }
-
-    .hero-text p {
-      color: #67677c;
-      font-size: 18px;
-      line-height: 1.9;
-      max-width: 650px;
-      margin-bottom: 28px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      border: none;
-      border-radius: 16px;
-      padding: 14px 23px;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .primary-btn {
-      background: #6c63ff;
-      color: white;
-      box-shadow: 0 10px 24px rgba(108,99,255,0.25);
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-2px);
-      background: #5b50d6;
-    }
-
-    .secondary-btn {
-      background: white;
-      color: #5b50d6;
-      border: 1px solid #e0defa;
-    }
-
-    .secondary-btn:hover {
-      background: #f3f1ff;
-    }
-
-    .hero-art {
-      min-height: 370px;
-      border-radius: 35px;
-      background:
-        radial-gradient(circle at 20% 20%, #fff 0 8%, transparent 9%),
-        radial-gradient(circle at 80% 25%, #fff 0 7%, transparent 8%),
-        linear-gradient(135deg, #eeeaff, #dff7ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(57, 52, 125, 0.10);
-    }
-
-    .book {
-      width: 220px;
-      height: 160px;
-      background: white;
-      border-radius: 16px;
-      transform: rotate(-5deg);
-      box-shadow: 0 20px 35px rgba(0,0,0,0.13);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 75px;
-      font-weight: 900;
-      color: #6c63ff;
-      border: 6px solid #f3f1ff;
-    }
-
-    .floating {
-      position: absolute;
-      background: white;
-      border-radius: 18px;
-      padding: 13px 17px;
-      font-size: 25px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .f1 {
-      top: 45px;
-      right: 45px;
-    }
-
-    .f2 {
-      bottom: 45px;
-      left: 45px;
-      animation-delay: 0.8s;
-    }
-
-    .f3 {
-      bottom: 70px;
-      right: 55px;
-      animation-delay: 1.4s;
-    }
-
-    @keyframes float {
-      0%,100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-9px);
-      }
-    }
-
-    /* =========================
-       SECTION
-    ========================= */
-
-    .section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 55px 20px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-      font-size: 32px;
-      margin-bottom: 9px;
-    }
-
-    .section-title p {
-      color: #77778b;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       CATEGORIES
-    ========================= */
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .category {
-      background: white;
-      border-radius: 22px;
-      padding: 25px 18px;
-      min-height: 185px;
-      border: 1px solid #ececf5;
-      box-shadow: 0 10px 28px rgba(35, 35, 75, 0.06);
-      transition: 0.25s;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 17px 35px rgba(35, 35, 75, 0.11);
-    }
-
-    .category-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 22px;
-      margin: 0 auto 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 35px;
-      background: #f1efff;
-    }
-
-    .category h3 {
-      font-size: 18px;
-      margin-bottom: 7px;
-    }
-
-    .category p {
-      color: #77778b;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    /* =========================
-       STORY
-    ========================= */
-
-    .story-area {
-      background: linear-gradient(135deg, #fff7df, #fff1f7);
-      border-radius: 30px;
-      padding: 35px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .story-content h2 {
-      font-size: 31px;
-      margin-bottom: 15px;
-    }
-
-    .story-content p {
-      color: #68687b;
-      line-height: 1.9;
-      margin-bottom: 22px;
-    }
-
-    .story-card {
-      background: white;
-      border-radius: 25px;
-      padding: 30px;
-      min-height: 230px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.07);
-      text-align: center;
-    }
-
-    .story-card .story-icon {
-      font-size: 70px;
-      margin-bottom: 12px;
-    }
-
-    .story-card h3 {
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .story-card p {
-      color: #77778b;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       FEATURES
-    ========================= */
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .feature {
-      background: white;
-      border: 1px solid #ececf5;
-      border-radius: 20px;
-      padding: 25px;
-    }
-
-    .feature strong {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 9px;
-    }
-
-    .feature p {
-      color: #77778b;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      margin-top: 35px;
-      background: #24243a;
-      color: white;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 45px 20px 25px;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 35px;
-    }
-
-    .footer-brand h2 {
-      margin-bottom: 12px;
-    }
-
-    .footer-brand p {
-      color: #c5c5d5;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .footer-column h3 {
-      margin-bottom: 13px;
-      font-size: 16px;
-    }
-
-    .footer-column a {
-      display: block;
-      color: #c5c5d5;
-      margin-bottom: 9px;
-      font-size: 14px;
-    }
-
-    .footer-column a:hover {
-      color: white;
-    }
-
-    .copyright {
-      max-width: 1200px;
-      margin: auto;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 18px 20px;
-      text-align: center;
-      color: #a9a9bb;
-      font-size: 13px;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 74px;
-        right: 15px;
-        left: 15px;
-        background: white;
-        padding: 12px;
-        border-radius: 18px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-links a {
-        display: block;
-        text-align: center;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 45px;
-      }
-
-      .hero-text {
-        text-align: center;
-      }
-
-      .hero-text p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .story-area {
-        grid-template-columns: 1fr;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 520px) {
-
-      .navbar {
-        padding: 10px 15px;
-      }
-
-      .logo {
-        font-size: 21px;
-      }
-
-      .logo-icon {
-        width: 39px;
-        height: 39px;
-        border-radius: 12px;
-      }
-
-      .hero {
-        padding: 35px 15px 30px;
-      }
-
-      .hero-text h1 {
-        font-size: 40px;
-      }
-
-      .hero-text p {
-        font-size: 15px;
-      }
-
-      .hero-art {
-        min-height: 280px;
-      }
-
-      .book {
-        width: 170px;
-        height: 125px;
-        font-size: 58px;
-      }
-
-      .floating {
-        font-size: 20px;
-        padding: 10px 13px;
-      }
-
-      .f1 {
-        top: 25px;
-        right: 20px;
-      }
-
-      .f2 {
-        bottom: 25px;
-        left: 20px;
-      }
-
-      .f3 {
-        bottom: 30px;
-        right: 20px;
-      }
-
-      .section {
-        padding: 40px 15px;
-      }
-
-      .section-title h2 {
-        font-size: 27px;
-      }
-
-      .categories {
-        gap: 12px;
-      }
-
-      .category {
-        min-height: 165px;
-        padding: 20px 10px;
-      }
-
-      .category-icon {
-        width: 58px;
-        height: 58px;
-        font-size: 28px;
-      }
-
-      .story-area {
-        padding: 22px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <!-- =========================
        HEADER
-  ========================= -->
+  ========================== -->
 
-  <header>
-    <nav class="navbar">
+  <header class="top-header">
 
-      <a href="#home" class="logo">
-        <span class="logo-icon">م</span>
-        <span>مِداد</span>
+    <div class="logo-area">
+      <div class="logo-icon">م</div>
+
+      <div>
+        <h1>مِداد</h1>
+        <p>نتعلّم، نكتشف، ونستمتع</p>
+      </div>
+    </div>
+
+    <button class="menu-button" id="menuButton" aria-label="فتح القائمة">
+      ☰
+    </button>
+
+    <nav id="mainNav">
+
+      <a href="index.html" class="active">
+        الرئيسية
       </a>
 
-      <button class="mobile-menu" id="mobileMenu" aria-label="فتح القائمة">
-        ☰
-      </button>
+      <a href="letters.html">
+        الحروف
+      </a>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="#categories">التعلم</a></li>
-        <li><a href="#stories">القصص</a></li>
-        <li><a href="#about">عن مِداد</a></li>
-      </ul>
+      <a href="numbers.html">
+        الأرقام
+      </a>
+
+      <a href="animals.html">
+        الحيوانات
+      </a>
+
+      <a href="plants.html">
+        النباتات
+      </a>
+
+      <a href="quran.html">
+        القرآن
+      </a>
+
+      <a href="hadith.html">
+        الأحاديث
+      </a>
+
+      <a href="stories.html">
+        القصص
+      </a>
+
+      <a href="games.html">
+        الألعاب
+      </a>
 
     </nav>
+
   </header>
 
 
-  <main id="home">
+  <!-- =========================
+       HERO
+  ========================== -->
 
-    <!-- =========================
-         HERO
-    ========================= -->
+  <main>
 
     <section class="hero">
 
-      <div class="hero-text">
+      <div class="hero-content">
 
-        <h1>
-          مرحبًا بك في
+        <span class="hero-badge">
+          عالم صغير مليء بالتعلّم
+        </span>
+
+        <h2>
+          أهلاً بك في
           <span>مِداد</span>
-        </h1>
+        </h2>
 
         <p>
-          عالم عربي ممتع يساعد الأطفال على التعلم والاكتشاف
-          من خلال الحروف والأرقام والحيوانات والقصص
-          والمعرفة بطريقة بسيطة وممتعة.
+          مكان ممتع وآمن للأطفال لتعلّم الحروف والأرقام
+          واكتشاف الحيوانات والنباتات والقصص والمزيد.
         </p>
 
         <div class="hero-buttons">
-          <a href="#categories" class="primary-btn">
-            ابدأ التعلم
+
+          <a href="letters.html" class="primary-button">
+            ابدأ التعلّم
           </a>
 
-          <a href="#stories" class="secondary-btn">
-            اكتشف القصص
+          <a href="#sections" class="secondary-button">
+            اكتشف الأقسام
           </a>
+
         </div>
 
       </div>
 
-      <div class="hero-art">
 
-        <div class="book">أ</div>
+      <div class="hero-character">
 
-        <div class="floating f1">🐰</div>
-        <div class="floating f2">🔢</div>
-        <div class="floating f3">📖</div>
+        <div class="sun">☀️</div>
+
+        <div class="cloud cloud-one">☁️</div>
+        <div class="cloud cloud-two">☁️</div>
+
+        <div class="character">
+          🧒
+        </div>
+
+        <div class="book">
+          📖
+        </div>
 
       </div>
 
@@ -696,82 +138,247 @@
 
 
     <!-- =========================
-         CATEGORIES
-    ========================= -->
+         QUICK SEARCH
+    ========================== -->
 
-    <section class="section" id="categories">
+    <section class="search-section">
 
-      <div class="section-title">
-        <h2>ماذا سنتعلم اليوم؟</h2>
-        <p>
-          اختر القسم الذي تريد استكشافه
-        </p>
+      <div class="search-box">
+
+        <span>🔎</span>
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="ابحث في مِداد..."
+          autocomplete="off"
+        >
+
       </div>
 
-      <div class="categories">
+      <div id="searchResults" class="search-results"></div>
 
-        <a class="category" href="#">
-          <div class="category-icon">أ</div>
-          <h3>الحروف العربية</h3>
-          <p>
-            تعلّم الحروف العربية بطريقة ممتعة.
-          </p>
+    </section>
+
+
+    <!-- =========================
+         SECTIONS
+    ========================== -->
+
+    <section id="sections" class="content-section">
+
+      <div class="section-heading">
+
+        <span>📚</span>
+
+        <div>
+          <h2>ماذا سنتعلم اليوم؟</h2>
+          <p>اختر القسم الذي تريد استكشافه</p>
+        </div>
+
+      </div>
+
+
+      <div class="cards-grid">
+
+
+        <!-- LETTERS -->
+
+        <a href="letters.html" class="learning-card letters-card">
+
+          <div class="card-icon">
+            أ
+          </div>
+
+          <div class="card-content">
+
+            <h3>الحروف العربية</h3>
+
+            <p>
+              تعلّم الحروف بطريقة سهلة وممتعة.
+            </p>
+
+            <span class="card-link">
+              ابدأ الآن ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#">
-          <div class="category-icon">123</div>
-          <h3>الأرقام</h3>
-          <p>
-            تعلّم الأرقام والعد بطريقة سهلة.
-          </p>
+
+        <!-- NUMBERS -->
+
+        <a href="numbers.html" class="learning-card numbers-card">
+
+          <div class="card-icon">
+            ١٢٣
+          </div>
+
+          <div class="card-content">
+
+            <h3>الأرقام</h3>
+
+            <p>
+              تعلّم الأرقام والعد بطريقة ممتعة.
+            </p>
+
+            <span class="card-link">
+              ابدأ الآن ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#">
-          <div class="category-icon">🦁</div>
-          <h3>عالم الحيوانات</h3>
-          <p>
-            اكتشف الحيوانات وتعرّف عليها.
-          </p>
+
+        <!-- ANIMALS -->
+
+        <a href="animals.html" class="learning-card animals-card">
+
+          <div class="card-icon">
+            🦁
+          </div>
+
+          <div class="card-content">
+
+            <h3>عالم الحيوانات</h3>
+
+            <p>
+              اكتشف الحيوانات وتعرّف على أسمائها.
+            </p>
+
+            <span class="card-link">
+              اكتشف ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#">
-          <div class="category-icon">🌱</div>
-          <h3>النباتات</h3>
-          <p>
-            اكتشف عالم النباتات والطبيعة.
-          </p>
+
+        <!-- PLANTS -->
+
+        <a href="plants.html" class="learning-card plants-card">
+
+          <div class="card-icon">
+            🌱
+          </div>
+
+          <div class="card-content">
+
+            <h3>النباتات والفواكه</h3>
+
+            <p>
+              تعرّف على النباتات والفواكه من حولنا.
+            </p>
+
+            <span class="card-link">
+              اكتشف ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#">
-          <div class="category-icon">📖</div>
-          <h3>القرآن الكريم</h3>
-          <p>
-            قسم منظم للمحتوى القرآني.
-          </p>
+
+        <!-- QURAN -->
+
+        <a href="quran.html" class="learning-card quran-card">
+
+          <div class="card-icon">
+            📖
+          </div>
+
+          <div class="card-content">
+
+            <h3>القرآن الكريم</h3>
+
+            <p>
+              مساحة مبسطة للتعرّف على القرآن الكريم.
+            </p>
+
+            <span class="card-link">
+              ابدأ ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#">
-          <div class="category-icon">🌙</div>
-          <h3>الأحاديث</h3>
-          <p>
-            تعلّم الأحاديث والقيم الجميلة.
-          </p>
+
+        <!-- HADITH -->
+
+        <a href="hadith.html" class="learning-card hadith-card">
+
+          <div class="card-icon">
+            🌙
+          </div>
+
+          <div class="card-content">
+
+            <h3>الأحاديث</h3>
+
+            <p>
+              تعرّف على أحاديث نبوية مختارة للأطفال.
+            </p>
+
+            <span class="card-link">
+              اقرأ ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#stories">
-          <div class="category-icon">🧸</div>
-          <h3>قصص قبل النوم</h3>
-          <p>
-            قصص قصيرة مناسبة للأطفال.
-          </p>
+
+        <!-- STORIES -->
+
+        <a href="stories.html" class="learning-card stories-card">
+
+          <div class="card-icon">
+            🧸
+          </div>
+
+          <div class="card-content">
+
+            <h3>قصص قبل النوم</h3>
+
+            <p>
+              قصص قصيرة ممتعة وهادفة للأطفال.
+            </p>
+
+            <span class="card-link">
+              اقرأ قصة ←
+            </span>
+
+          </div>
+
         </a>
 
-        <a class="category" href="#">
-          <div class="category-icon">🎮</div>
-          <h3>أنشطة تعليمية</h3>
-          <p>
-            أنشطة وألعاب تساعد على التعلم.
-          </p>
+
+        <!-- GAMES -->
+
+        <a href="games.html" class="learning-card games-card">
+
+          <div class="card-icon">
+            🎮
+          </div>
+
+          <div class="card-content">
+
+            <h3>الألعاب التعليمية</h3>
+
+            <p>
+              تعلّم والعب واكسب النجوم.
+            </p>
+
+            <span class="card-link">
+              العب ←
+            </span>
+
+          </div>
+
         </a>
 
       </div>
@@ -780,38 +387,70 @@
 
 
     <!-- =========================
-         STORIES
-    ========================= -->
+         PROGRESS
+    ========================== -->
 
-    <section class="section" id="stories">
+    <section class="progress-section">
 
-      <div class="story-area">
+      <div class="progress-card">
 
-        <div class="story-content">
+        <div class="progress-icon">
+          ⭐
+        </div>
 
-          <h2>حكاية قبل النوم</h2>
+        <div class="progress-info">
+
+          <h2>تقدمك في مِداد</h2>
 
           <p>
-            اجعل وقت النوم أكثر هدوءًا ومتعة مع قصص
-            قصيرة تحمل أفكارًا وقيمًا بسيطة تناسب الأطفال.
+            استمر في التعلم واجمع المزيد من النجوم!
           </p>
 
-          <button
-            class="primary-btn"
-            onclick="openStory()">
-            اقرأ قصة
-          </button>
+          <div class="progress-bar">
+
+            <div
+              id="progressBar"
+              class="progress-fill">
+            </div>
+
+          </div>
+
+          <span id="progressText">
+            0% مكتمل
+          </span>
 
         </div>
 
-        <div class="story-card">
+      </div>
 
-          <div class="story-icon">🌙</div>
+    </section>
 
-          <h3>قصة الليلة</h3>
 
-          <p>
-            قصة جديدة بانتظارك.
+    <!-- =========================
+         DAILY MESSAGE
+    ========================== -->
+
+    <section class="daily-section">
+
+      <div class="daily-card">
+
+        <div class="daily-icon">
+          💡
+        </div>
+
+        <div>
+
+          <span class="small-title">
+            معلومة اليوم
+          </span>
+
+          <h2 id="dailyTitle">
+            هل تعلم؟
+          </h2>
+
+          <p id="dailyText">
+            النحلة تساعد النباتات على إنتاج الثمار
+            من خلال نقل حبوب اللقاح بين الأزهار.
           </p>
 
         </div>
@@ -823,42 +462,86 @@
 
     <!-- =========================
          FEATURES
-    ========================= -->
+    ========================== -->
 
-    <section class="section" id="about">
+    <section class="features-section">
 
-      <div class="section-title">
-        <h2>لماذا مِداد؟</h2>
-        <p>
-          صُمم الموقع ليكون بسيطًا وواضحًا وممتعًا للطفل.
-        </p>
+      <div class="section-heading">
+
+        <span>✨</span>
+
+        <div>
+          <h2>لماذا مِداد؟</h2>
+          <p>صُمم ليكون التعلم بسيطاً وممتعاً</p>
+        </div>
+
       </div>
 
-      <div class="features">
+
+      <div class="features-grid">
 
         <div class="feature">
-          <strong>تعلم بطريقة ممتعة</strong>
+          <div>🎨</div>
+          <h3>تصميم ممتع</h3>
           <p>
-            المحتوى مقسم إلى أقسام واضحة تساعد الطفل
-            على التعلم خطوة بخطوة.
+            ألوان ورسومات بسيطة تناسب الأطفال.
           </p>
         </div>
 
         <div class="feature">
-          <strong>واجهة سهلة للأطفال</strong>
+          <div>🧠</div>
+          <h3>تعلّم تفاعلي</h3>
           <p>
-            أزرار كبيرة وتصميم واضح يناسب استخدام الهاتف
-            والكمبيوتر.
+            أنشطة تساعد الطفل على التعلم بالممارسة.
           </p>
         </div>
 
         <div class="feature">
-          <strong>محتوى عربي</strong>
+          <div>⭐</div>
+          <h3>نظام النجوم</h3>
           <p>
-            الموقع مصمم من البداية ليقدم تجربة تعليمية
-            عربية للأطفال.
+            يحصل الطفل على نقاط عند إكمال الأنشطة.
           </p>
         </div>
+
+        <div class="feature">
+          <div>📱</div>
+          <h3>مناسب للموبايل</h3>
+          <p>
+            يعمل على الهاتف والكمبيوتر والتابلت.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="cta-section">
+
+      <div class="cta-card">
+
+        <div class="cta-text">
+
+          <span>🚀 هيا نبدأ</span>
+
+          <h2>
+            أول خطوة تبدأ بحرف!
+          </h2>
+
+          <p>
+            ابدأ بتعلم الحروف العربية واستكشف عالم مِداد.
+          </p>
+
+        </div>
+
+        <a href="letters.html" class="cta-button">
+          تعلّم الحروف
+        </a>
 
       </div>
 
@@ -869,41 +552,81 @@
 
   <!-- =========================
        FOOTER
-  ========================= -->
+  ========================== -->
 
   <footer>
 
-    <div class="footer-inner">
+    <div class="footer-main">
 
       <div class="footer-brand">
-        <h2>مِداد</h2>
 
-        <p>
-          عالم تعليمي عربي للأطفال يجمع التعلم
-          والاكتشاف والمتعة في مكان واحد.
-        </p>
+        <div class="footer-logo">
+          م
+        </div>
+
+        <div>
+
+          <h2>مِداد</h2>
+
+          <p>
+            نتعلّم، نكتشف، ونستمتع.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="footer-column">
-        <h3>الأقسام</h3>
-        <a href="#categories">الحروف</a>
-        <a href="#categories">الأرقام</a>
-        <a href="#categories">الحيوانات</a>
-        <a href="#stories">القصص</a>
+
+      <div class="footer-links">
+
+        <h3>روابط</h3>
+
+        <a href="index.html">
+          الرئيسية
+        </a>
+
+        <a href="letters.html">
+          الحروف
+        </a>
+
+        <a href="numbers.html">
+          الأرقام
+        </a>
+
+        <a href="games.html">
+          الألعاب
+        </a>
+
       </div>
 
-      <div class="footer-column">
+
+      <div class="footer-links">
+
         <h3>معلومات</h3>
-        <a href="#about">عن مِداد</a>
-        <a href="#">الخصوصية</a>
-        <a href="#">الشروط</a>
-        <a href="#">تواصل معنا</a>
+
+        <a href="about.html">
+          عن مِداد
+        </a>
+
+        <a href="privacy.html">
+          الخصوصية
+        </a>
+
+        <a href="terms.html">
+          الشروط
+        </a>
+
       </div>
 
     </div>
 
-    <div class="copyright">
-      © 2026 مِداد — جميع الحقوق محفوظة
+
+    <div class="footer-bottom">
+
+      <p>
+        © <span id="year"></span> مِداد — جميع الحقوق محفوظة
+      </p>
+
     </div>
 
   </footer>
@@ -911,40 +634,9 @@
 
   <!-- =========================
        JAVASCRIPT
-  ========================= -->
+  ========================== -->
 
-  <script>
-
-    const mobileMenu =
-      document.getElementById("mobileMenu");
-
-    const navLinks =
-      document.getElementById("navLinks");
-
-    mobileMenu.addEventListener("click", function () {
-      navLinks.classList.toggle("active");
-    });
-
-
-    document.querySelectorAll(".nav-links a")
-      .forEach(function(link) {
-
-        link.addEventListener("click", function() {
-          navLinks.classList.remove("active");
-        });
-
-      });
-
-
-    function openStory() {
-
-      alert(
-        "قسم القصص الحقيقي سيتم فتحه هنا بعد إضافة ملف القصص."
-      );
-
-    }
-
-  </script>
+  <script src="app.js"></script>
 
 </body>
 </html>
