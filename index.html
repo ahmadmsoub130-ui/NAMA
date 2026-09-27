@@ -2,19 +2,31 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>مِداد | موقع تعليمي للأطفال</title>
 
-  <meta name="description"
-        content="مِداد موقع تعليمي ممتع للأطفال لتعلم الحروف والأرقام والحيوانات والنباتات والقرآن والأحاديث والقصص.">
+  <meta
+    name="description"
+    content="مِداد — موقع تعليمي ممتع للأطفال لتعلّم الحروف والأرقام والحيوانات والنباتات والقرآن والأحاديث والقصص والألعاب."
+  >
+
+  <meta
+    name="keywords"
+    content="مِداد, تعليم الأطفال, الحروف العربية, الأرقام, الحيوانات, النباتات, القرآن, الأحاديث, قصص أطفال, ألعاب تعليمية"
+  >
 
   <meta name="theme-color" content="#6c63ff">
 
-  <link rel="stylesheet" href="style.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
+  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
 
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -22,367 +34,380 @@
   <!-- =========================
        HEADER
   ========================== -->
+  <header class="site-header">
 
-  <header class="top-header">
+    <div class="container header-inner">
 
-    <div class="logo-area">
-      <div class="logo-icon">م</div>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">م</span>
+        <span class="logo-text">مِداد</span>
+      </a>
 
-      <div>
-        <h1>مِداد</h1>
-        <p>نتعلّم، نكتشف، ونستمتع</p>
-      </div>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="فتح القائمة"
+        type="button"
+      >
+        ☰
+      </button>
+
+      <nav class="main-nav" id="mainNav">
+
+        <a href="index.html">الرئيسية</a>
+
+        <a href="letters.html">الحروف</a>
+
+        <a href="numbers.html">الأرقام</a>
+
+        <a href="animals.html">الحيوانات</a>
+
+        <a href="plants.html">النباتات</a>
+
+        <a href="quran.html">القرآن</a>
+
+        <a href="hadith.html">الأحاديث</a>
+
+        <a href="stories.html">القصص</a>
+
+        <a href="games.html">الألعاب</a>
+
+      </nav>
+
     </div>
-
-    <button class="menu-button" id="menuButton" aria-label="فتح القائمة">
-      ☰
-    </button>
-
-    <nav id="mainNav">
-
-      <a href="index.html" class="active">
-        الرئيسية
-      </a>
-
-      <a href="letters.html">
-        الحروف
-      </a>
-
-      <a href="numbers.html">
-        الأرقام
-      </a>
-
-      <a href="animals.html">
-        الحيوانات
-      </a>
-
-      <a href="plants.html">
-        النباتات
-      </a>
-
-      <a href="quran.html">
-        القرآن
-      </a>
-
-      <a href="hadith.html">
-        الأحاديث
-      </a>
-
-      <a href="stories.html">
-        القصص
-      </a>
-
-      <a href="games.html">
-        الألعاب
-      </a>
-
-    </nav>
 
   </header>
 
 
-  <!-- =========================
-       HERO
-  ========================== -->
-
   <main>
 
+    <!-- =========================
+         HERO
+    ========================== -->
     <section class="hero">
 
-      <div class="hero-content">
+      <div class="container hero-content">
 
-        <span class="hero-badge">
-          عالم صغير مليء بالتعلّم
-        </span>
+        <div class="hero-text">
 
-        <h2>
-          أهلاً بك في
-          <span>مِداد</span>
-        </h2>
+          <span class="hero-badge">
+            🌟 عالم صغير مليء بالتعلّم
+          </span>
 
-        <p>
-          مكان ممتع وآمن للأطفال لتعلّم الحروف والأرقام
-          واكتشاف الحيوانات والنباتات والقصص والمزيد.
-        </p>
+          <h1>
+            مرحبًا بك في
+            <span>مِداد</span>
+          </h1>
 
-        <div class="hero-buttons">
+          <p>
+            نتعلّم، نكتشف، ونستمتع
+            من خلال عالم مليء بالحروف والأرقام
+            والحيوانات والنباتات والقصص والألعاب.
+          </p>
 
-          <a href="letters.html" class="primary-button">
-            ابدأ التعلّم
-          </a>
+          <div class="hero-buttons">
 
-          <a href="#sections" class="secondary-button">
-            اكتشف الأقسام
-          </a>
+            <a href="letters.html" class="btn btn-primary">
+              ابدأ التعلّم
+            </a>
 
-        </div>
-
-      </div>
-
-
-      <div class="hero-character">
-
-        <div class="sun">☀️</div>
-
-        <div class="cloud cloud-one">☁️</div>
-        <div class="cloud cloud-two">☁️</div>
-
-        <div class="character">
-          🧒
-        </div>
-
-        <div class="book">
-          📖
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         QUICK SEARCH
-    ========================== -->
-
-    <section class="search-section">
-
-      <div class="search-box">
-
-        <span>🔎</span>
-
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="ابحث في مِداد..."
-          autocomplete="off"
-        >
-
-      </div>
-
-      <div id="searchResults" class="search-results"></div>
-
-    </section>
-
-
-    <!-- =========================
-         SECTIONS
-    ========================== -->
-
-    <section id="sections" class="content-section">
-
-      <div class="section-heading">
-
-        <span>📚</span>
-
-        <div>
-          <h2>ماذا سنتعلم اليوم؟</h2>
-          <p>اختر القسم الذي تريد استكشافه</p>
-        </div>
-
-      </div>
-
-
-      <div class="cards-grid">
-
-
-        <!-- LETTERS -->
-
-        <a href="letters.html" class="learning-card letters-card">
-
-          <div class="card-icon">
-            أ
-          </div>
-
-          <div class="card-content">
-
-            <h3>الحروف العربية</h3>
-
-            <p>
-              تعلّم الحروف بطريقة سهلة وممتعة.
-            </p>
-
-            <span class="card-link">
-              ابدأ الآن ←
-            </span>
+            <a href="games.html" class="btn btn-secondary">
+              العب وتعلّم
+            </a>
 
           </div>
 
-        </a>
+        </div>
 
+        <div class="hero-visual">
 
-        <!-- NUMBERS -->
-
-        <a href="numbers.html" class="learning-card numbers-card">
-
-          <div class="card-icon">
-            ١٢٣
+          <div class="hero-card hero-card-one">
+            🔤
           </div>
 
-          <div class="card-content">
-
-            <h3>الأرقام</h3>
-
-            <p>
-              تعلّم الأرقام والعد بطريقة ممتعة.
-            </p>
-
-            <span class="card-link">
-              ابدأ الآن ←
-            </span>
-
+          <div class="hero-card hero-card-two">
+            🔢
           </div>
 
-        </a>
-
-
-        <!-- ANIMALS -->
-
-        <a href="animals.html" class="learning-card animals-card">
-
-          <div class="card-icon">
+          <div class="hero-card hero-card-three">
             🦁
           </div>
 
-          <div class="card-content">
+          <div class="hero-main-card">
 
-            <h3>عالم الحيوانات</h3>
+            <div class="hero-book">
+              📖
+            </div>
 
-            <p>
-              اكتشف الحيوانات وتعرّف على أسمائها.
-            </p>
-
-            <span class="card-link">
-              اكتشف ←
-            </span>
-
-          </div>
-
-        </a>
-
-
-        <!-- PLANTS -->
-
-        <a href="plants.html" class="learning-card plants-card">
-
-          <div class="card-icon">
-            🌱
-          </div>
-
-          <div class="card-content">
-
-            <h3>النباتات والفواكه</h3>
+            <h2>مِداد</h2>
 
             <p>
-              تعرّف على النباتات والفواكه من حولنا.
+              المعرفة تبدأ بخطوة صغيرة
             </p>
 
-            <span class="card-link">
-              اكتشف ←
-            </span>
-
           </div>
 
-        </a>
+        </div>
+
+      </div>
+
+    </section>
 
 
-        <!-- QURAN -->
+    <!-- =========================
+         SEARCH
+    ========================== -->
+    <section class="search-section">
 
-        <a href="quran.html" class="learning-card quran-card">
+      <div class="container">
 
-          <div class="card-icon">
-            📖
-          </div>
+        <div class="search-box">
 
-          <div class="card-content">
+          <span class="search-icon">🔎</span>
 
-            <h3>القرآن الكريم</h3>
+          <input
+            type="search"
+            id="siteSearch"
+            placeholder="ابحث عن درس أو قصة أو لعبة..."
+            aria-label="البحث في الموقع"
+          >
 
-            <p>
-              مساحة مبسطة للتعرّف على القرآن الكريم.
-            </p>
+          <button
+            type="button"
+            id="searchButton"
+            class="search-button"
+          >
+            بحث
+          </button>
 
-            <span class="card-link">
-              ابدأ ←
-            </span>
+        </div>
 
-          </div>
+        <div
+          id="searchResults"
+          class="search-results"
+        ></div>
 
-        </a>
+      </div>
 
-
-        <!-- HADITH -->
-
-        <a href="hadith.html" class="learning-card hadith-card">
-
-          <div class="card-icon">
-            🌙
-          </div>
-
-          <div class="card-content">
-
-            <h3>الأحاديث</h3>
-
-            <p>
-              تعرّف على أحاديث نبوية مختارة للأطفال.
-            </p>
-
-            <span class="card-link">
-              اقرأ ←
-            </span>
-
-          </div>
-
-        </a>
+    </section>
 
 
-        <!-- STORIES -->
+    <!-- =========================
+         MAIN SECTIONS
+    ========================== -->
+    <section class="sections-section">
 
-        <a href="stories.html" class="learning-card stories-card">
+      <div class="container">
 
-          <div class="card-icon">
-            🧸
-          </div>
+        <div class="section-heading">
 
-          <div class="card-content">
+          <span>اكتشف عالم مِداد</span>
 
-            <h3>قصص قبل النوم</h3>
+          <h2>
+            ماذا تريد أن تتعلم اليوم؟
+          </h2>
 
-            <p>
-              قصص قصيرة ممتعة وهادفة للأطفال.
-            </p>
+          <p>
+            اختر القسم الذي يناسبك وابدأ رحلة المعرفة.
+          </p>
 
-            <span class="card-link">
-              اقرأ قصة ←
-            </span>
-
-          </div>
-
-        </a>
+        </div>
 
 
-        <!-- GAMES -->
+        <div class="cards-grid">
 
-        <a href="games.html" class="learning-card games-card">
+          <!-- Letters -->
+          <a href="letters.html" class="feature-card">
 
-          <div class="card-icon">
-            🎮
-          </div>
+            <div class="card-icon">
+              🔤
+            </div>
 
-          <div class="card-content">
+            <div class="card-content">
 
-            <h3>الألعاب التعليمية</h3>
+              <h3>الحروف العربية</h3>
 
-            <p>
-              تعلّم والعب واكسب النجوم.
-            </p>
+              <p>
+                تعلّم الحروف العربية بطريقة سهلة وممتعة.
+              </p>
 
-            <span class="card-link">
-              العب ←
-            </span>
+              <span class="card-link">
+                ابدأ الآن ←
+              </span>
 
-          </div>
+            </div>
 
-        </a>
+          </a>
+
+
+          <!-- Numbers -->
+          <a href="numbers.html" class="feature-card">
+
+            <div class="card-icon">
+              🔢
+            </div>
+
+            <div class="card-content">
+
+              <h3>الأرقام</h3>
+
+              <p>
+                تعلّم الأرقام والعد بطريقة تفاعلية.
+              </p>
+
+              <span class="card-link">
+                ابدأ الآن ←
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Animals -->
+          <a href="animals.html" class="feature-card">
+
+            <div class="card-icon">
+              🦁
+            </div>
+
+            <div class="card-content">
+
+              <h3>عالم الحيوانات</h3>
+
+              <p>
+                اكتشف الحيوانات وتعرّف على معلومات ممتعة عنها.
+              </p>
+
+              <span class="card-link">
+                اكتشف الآن ←
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Plants -->
+          <a href="plants.html" class="feature-card">
+
+            <div class="card-icon">
+              🌱
+            </div>
+
+            <div class="card-content">
+
+              <h3>عالم النباتات</h3>
+
+              <p>
+                تعرّف على الأشجار والزهور والفواكه والنباتات.
+              </p>
+
+              <span class="card-link">
+                اكتشف الآن ←
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Quran -->
+          <a href="quran.html" class="feature-card">
+
+            <div class="card-icon">
+              📖
+            </div>
+
+            <div class="card-content">
+
+              <h3>القرآن الكريم</h3>
+
+              <p>
+                اقرأ وتعلّم سور القرآن الكريم بطريقة بسيطة.
+              </p>
+
+              <span class="card-link">
+                ابدأ القراءة ←
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Hadith -->
+          <a href="hadith.html" class="feature-card">
+
+            <div class="card-icon">
+              🌙
+            </div>
+
+            <div class="card-content">
+
+              <h3>الأحاديث</h3>
+
+              <p>
+                تعلّم أحاديث نبوية وقيمًا جميلة ومفيدة.
+              </p>
+
+              <span class="card-link">
+                تعلّم الآن ←
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Stories -->
+          <a href="stories.html" class="feature-card">
+
+            <div class="card-icon">
+              📚
+            </div>
+
+            <div class="card-content">
+
+              <h3>قصص قبل النوم</h3>
+
+              <p>
+                قصص قصيرة ممتعة تحمل أفكارًا وقيمًا جميلة.
+              </p>
+
+              <span class="card-link">
+                اقرأ قصة ←
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Games -->
+          <a href="games.html" class="feature-card">
+
+            <div class="card-icon">
+              🎮
+            </div>
+
+            <div class="card-content">
+
+              <h3>الألعاب التعليمية</h3>
+
+              <p>
+                ألعاب ممتعة تساعد الطفل على التعلّم بطريقة تفاعلية.
+              </p>
+
+              <span class="card-link">
+                العب الآن ←
+              </span>
+
+            </div>
+
+          </a>
+
+        </div>
 
       </div>
 
@@ -392,35 +417,61 @@
     <!-- =========================
          PROGRESS
     ========================== -->
-
     <section class="progress-section">
 
-      <div class="progress-card">
+      <div class="container">
 
-        <div class="progress-icon">
-          ⭐
-        </div>
+        <div class="progress-card">
 
-        <div class="progress-info">
+          <div class="progress-header">
 
-          <h2>تقدمك في مِداد</h2>
+            <div>
 
-          <p>
-            استمر في التعلم واجمع المزيد من النجوم!
-          </p>
+              <span class="small-label">
+                رحلتك التعليمية
+              </span>
 
-          <div class="progress-bar">
+              <h2>
+                تقدّمك في مِداد
+              </h2>
 
-            <div
-              id="progressBar"
-              class="progress-fill">
+            </div>
+
+            <div class="stars-display">
+              ⭐
+              <span id="starsCount">0</span>
             </div>
 
           </div>
 
-          <span id="progressText">
-            0% مكتمل
-          </span>
+
+          <div class="progress-info">
+
+            <span>
+              تقدّمك الحالي
+            </span>
+
+            <strong id="progressText">
+              0%
+            </strong>
+
+          </div>
+
+
+          <div class="progress-bar">
+
+            <div
+              class="progress-fill"
+              id="globalProgress"
+              style="width: 0%;"
+            ></div>
+
+          </div>
+
+
+          <p>
+            استمر في التعلّم واللعب لتجمع المزيد من النجوم.
+          </p>
 
         </div>
 
@@ -432,29 +483,31 @@
     <!-- =========================
          DAILY MESSAGE
     ========================== -->
-
     <section class="daily-section">
 
-      <div class="daily-card">
+      <div class="container">
 
-        <div class="daily-icon">
-          💡
-        </div>
+        <div class="daily-card">
 
-        <div>
+          <div class="daily-icon">
+            💡
+          </div>
 
-          <span class="small-title">
-            معلومة اليوم
-          </span>
+          <div>
 
-          <h2 id="dailyTitle">
-            هل تعلم؟
-          </h2>
+            <span>
+              معلومة اليوم
+            </span>
 
-          <p id="dailyText">
-            النحلة تساعد النباتات على إنتاج الثمار
-            من خلال نقل حبوب اللقاح بين الأزهار.
-          </p>
+            <h2 id="dailyTitle">
+              هل تعلم؟
+            </h2>
+
+            <p id="dailyText">
+              كل يوم فرصة جديدة لتتعلم شيئًا جديدًا.
+            </p>
+
+          </div>
 
         </div>
 
@@ -466,53 +519,96 @@
     <!-- =========================
          FEATURES
     ========================== -->
-
     <section class="features-section">
 
-      <div class="section-heading">
+      <div class="container">
 
-        <span>✨</span>
+        <div class="section-heading">
 
-        <div>
-          <h2>لماذا مِداد؟</h2>
-          <p>صُمم ليكون التعلم بسيطاً وممتعاً</p>
+          <span>
+            لماذا مِداد؟
+          </span>
+
+          <h2>
+            تعلّم بطريقة مختلفة
+          </h2>
+
+          <p>
+            صُمم مِداد ليجعل رحلة التعلّم أبسط وأكثر متعة.
+          </p>
+
         </div>
 
-      </div>
+
+        <div class="features-grid">
+
+          <div class="simple-feature">
+
+            <div class="simple-feature-icon">
+              🎯
+            </div>
+
+            <h3>
+              تعلّم واضح
+            </h3>
+
+            <p>
+              محتوى مرتب وبسيط يناسب الأطفال.
+            </p>
+
+          </div>
 
 
-      <div class="features-grid">
+          <div class="simple-feature">
 
-        <div class="feature">
-          <div>🎨</div>
-          <h3>تصميم ممتع</h3>
-          <p>
-            ألوان ورسومات بسيطة تناسب الأطفال.
-          </p>
-        </div>
+            <div class="simple-feature-icon">
+              🎮
+            </div>
 
-        <div class="feature">
-          <div>🧠</div>
-          <h3>تعلّم تفاعلي</h3>
-          <p>
-            أنشطة تساعد الطفل على التعلم بالممارسة.
-          </p>
-        </div>
+            <h3>
+              تعلّم باللعب
+            </h3>
 
-        <div class="feature">
-          <div>⭐</div>
-          <h3>نظام النجوم</h3>
-          <p>
-            يحصل الطفل على نقاط عند إكمال الأنشطة.
-          </p>
-        </div>
+            <p>
+              أنشطة وألعاب تساعد الطفل على المشاركة.
+            </p>
 
-        <div class="feature">
-          <div>📱</div>
-          <h3>مناسب للموبايل</h3>
-          <p>
-            يعمل على الهاتف والكمبيوتر والتابلت.
-          </p>
+          </div>
+
+
+          <div class="simple-feature">
+
+            <div class="simple-feature-icon">
+              ⭐
+            </div>
+
+            <h3>
+              نجوم وتقدّم
+            </h3>
+
+            <p>
+              يمكن للطفل متابعة تقدمه وجمع النجوم.
+            </p>
+
+          </div>
+
+
+          <div class="simple-feature">
+
+            <div class="simple-feature-icon">
+              📱
+            </div>
+
+            <h3>
+              مناسب للهاتف
+            </h3>
+
+            <p>
+              تصميم متجاوب يعمل على الهاتف والكمبيوتر.
+            </p>
+
+          </div>
+
         </div>
 
       </div>
@@ -523,28 +619,36 @@
     <!-- =========================
          CTA
     ========================== -->
-
     <section class="cta-section">
 
-      <div class="cta-card">
+      <div class="container">
 
-        <div class="cta-text">
+        <div class="cta-card">
 
-          <span>🚀 هيا نبدأ</span>
+          <div>
 
-          <h2>
-            أول خطوة تبدأ بحرف!
-          </h2>
+            <span>
+              جاهز للانطلاق؟
+            </span>
 
-          <p>
-            ابدأ بتعلم الحروف العربية واستكشف عالم مِداد.
-          </p>
+            <h2>
+              ابدأ رحلة التعلّم مع مِداد
+            </h2>
+
+            <p>
+              اختر أي قسم وابدأ الآن.
+            </p>
+
+          </div>
+
+          <a
+            href="letters.html"
+            class="btn btn-light"
+          >
+            ابدأ الآن
+          </a>
 
         </div>
-
-        <a href="letters.html" class="cta-button">
-          تعلّم الحروف
-        </a>
 
       </div>
 
@@ -556,89 +660,126 @@
   <!-- =========================
        FOOTER
   ========================== -->
+  <footer class="site-footer">
 
-  <footer>
+    <div class="container">
 
-    <div class="footer-main">
+      <div class="footer-grid">
 
-      <div class="footer-brand">
+        <div class="footer-about">
 
-        <div class="footer-logo">
-          م
-        </div>
-
-        <div>
-
-          <h2>مِداد</h2>
+          <a href="index.html" class="footer-logo">
+            <span class="logo-icon">م</span>
+            <span>مِداد</span>
+          </a>
 
           <p>
-            نتعلّم، نكتشف، ونستمتع.
+            مِداد — نتعلّم، نكتشف، ونستمتع.
+          </p>
+
+          <p>
+            موقع تعليمي للأطفال يجمع بين المعرفة
+            والقصص والألعاب بطريقة بسيطة وممتعة.
           </p>
 
         </div>
 
+
+        <div class="footer-links">
+
+          <h3>
+            التعلّم
+          </h3>
+
+          <a href="letters.html">
+            الحروف
+          </a>
+
+          <a href="numbers.html">
+            الأرقام
+          </a>
+
+          <a href="animals.html">
+            الحيوانات
+          </a>
+
+          <a href="plants.html">
+            النباتات
+          </a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <h3>
+            المحتوى
+          </h3>
+
+          <a href="quran.html">
+            القرآن الكريم
+          </a>
+
+          <a href="hadith.html">
+            الأحاديث
+          </a>
+
+          <a href="stories.html">
+            القصص
+          </a>
+
+          <a href="games.html">
+            الألعاب
+          </a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <h3>
+            مِداد
+          </h3>
+
+          <a href="about.html">
+            من نحن
+          </a>
+
+          <a href="privacy.html">
+            سياسة الخصوصية
+          </a>
+
+          <a href="terms.html">
+            الشروط والأحكام
+          </a>
+
+          <a href="mailto:ahmadmsoub130@gmail.com">
+            تواصل معنا
+          </a>
+
+        </div>
+
       </div>
 
 
-      <div class="footer-links">
+      <div class="footer-bottom">
 
-        <h3>روابط</h3>
+        <p>
+          © 2026 مِداد. جميع الحقوق محفوظة.
+        </p>
 
-        <a href="index.html">
-          الرئيسية
-        </a>
-
-        <a href="letters.html">
-          الحروف
-        </a>
-
-        <a href="numbers.html">
-          الأرقام
-        </a>
-
-        <a href="games.html">
-          الألعاب
-        </a>
+        <p>
+          صُنع بحب من أجل التعلّم.
+        </p>
 
       </div>
-
-
-      <div class="footer-links">
-
-        <h3>معلومات</h3>
-
-        <a href="about.html">
-          عن مِداد
-        </a>
-
-        <a href="privacy.html">
-          الخصوصية
-        </a>
-
-        <a href="terms.html">
-          الشروط
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-      <p>
-        © <span id="year"></span> مِداد — جميع الحقوق محفوظة
-      </p>
 
     </div>
 
   </footer>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
+  <!-- Main JavaScript -->
   <script src="app.js"></script>
 
 </body>
