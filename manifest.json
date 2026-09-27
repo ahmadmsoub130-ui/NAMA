@@ -1,0 +1,12 @@
+{
+  "name": "مِداد",
+  "short_name": "مِداد",
+  "description": "مِداد — نتعلّم، نكتشف، ونستمتع.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary"
+}
