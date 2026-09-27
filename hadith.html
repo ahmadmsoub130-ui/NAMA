@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="مِداد - أحاديث نبوية مختارة للأطفال مع شرح مبسط">
+  <meta name="theme-color" content="#6a1b9a">
+
+  <title>الأحاديث | مِداد</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .hadith-page {
+      padding: 30px 15px 70px;
+    }
+
+    .hadith-hero {
+      max-width: 1100px;
+      margin: 0 auto 30px;
+      padding: 38px 20px;
+      text-align: center;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #f3e5f5, #ede7f6);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .hadith-hero-icon {
+      font-size: 65px;
+    }
+
+    .hadith-hero h1 {
+      margin: 8px 0;
+      color: #6a1b9a;
+      font-size: 40px;
+    }
+
+    .hadith-hero p {
+      max-width: 720px;
+      margin: auto;
+      color: #555;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .hadith-note {
+      max-width: 800px;
+      margin: 18px auto 0;
+      padding: 12px 18px;
+      background: rgba(255,255,255,.7);
+      border-radius: 15px;
+      color: #6a1b9a;
+      font-size: 14px;
+    }
+
+    .hadith-search {
+      max-width: 700px;
+      margin: 25px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .hadith-search input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px 17px;
+      border: 2px solid #e1bee7;
+      border-radius: 15px;
+      outline: none;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    .hadith-search input:focus {
+      border-color: #ab47bc;
+    }
+
+    .hadith-search button {
+      border: 0;
+      border-radius: 15px;
+      padding: 0 22px;
+      background: #8e24aa;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .hadith-progress {
+      max-width: 700px;
+      margin: 25px auto 35px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #6a1b9a;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 13px;
+      background: #f0e3f4;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #8e24aa, #ce93d8);
+      border-radius: 20px;
+      transition: width .4s ease;
+    }
+
+    .hadith-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .hadith-card {
+      background: white;
+      border: 2px solid #f0e5f2;
+      border-radius: 25px;
+      padding: 23px 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+      transition: .25s ease;
+    }
+
+    .hadith-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+
+    .hadith-card.completed {
+      border-color: #81c784;
+      background: #f8fff8;
+    }
+
+    .hadith-number {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      background: #f3e5f5;
+      color: #6a1b9a;
+      font-weight: bold;
+    }
+
+    .hadith-card h2 {
+      margin: 5px 0 12px;
+      color: #6a1b9a;
+      font-size: 22px;
+    }
+
+    .hadith-text {
+      color: #333;
+      font-family: serif;
+      font-size: 20px;
+      line-height: 2;
+    }
+
+    .hadith-explanation {
+      margin-top: 15px;
+      padding: 14px;
+      background: #faf5fb;
+      border-radius: 15px;
+      color: #555;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .hadith-source {
+      margin-top: 12px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .hadith-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 17px;
+    }
+
+    .hadith-button {
+      flex: 1;
+      min-width: 100px;
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #8e24aa;
+      color: white;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+    }
+
+    .hadith-button:hover {
+      background: #6a1b9a;
+    }
+
+    .hadith-button.done {
+      background: #43a047;
+    }
+
+    .hadith-button.gray {
+      background: #757575;
+    }
+
+    .hadith-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: rgba(0,0,0,.6);
+    }
+
+    .hadith-modal.active {
+      display: flex;
+    }
+
+    .hadith-modal-box {
+      position: relative;
+      width: min(650px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      background: white;
+      border-radius: 28px;
+      animation: hadithPop .25s ease;
+    }
+
+    @keyframes hadithPop {
+      from {
+        opacity: 0;
+        transform: scale(.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .close-hadith {
+      position: sticky;
+      top: 0;
+      float: left;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background: #eee;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .modal-hadith-icon {
+      text-align: center;
+      font-size: 65px;
+    }
+
+    .hadith-modal-box h2 {
+      text-align: center;
+      color: #6a1b9a;
+      font-size: 30px;
+    }
+
+    .modal-hadith-text {
+      padding: 20px;
+      background: #faf5fb;
+      border-radius: 18px;
+      font-family: serif;
+      font-size: 23px;
+      line-height: 2.1;
+      color: #222;
+    }
+
+    .modal-explanation {
+      margin-top: 18px;
+      color: #555;
+      line-height: 1.9;
+      font-size: 17px;
+    }
+
+    .empty-hadith {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 20px;
+      text-align: center;
+      color: #777;
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    }
+
+    @media (max-width: 900px) {
+      .hadith-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .hadith-hero h1 {
+        font-size: 31px;
+      }
+
+      .hadith-hero p {
+        font-size: 16px;
+      }
+
+      .hadith-search {
+        flex-direction: column;
+      }
+
+      .hadith-search button {
+        height: 48px;
+      }
+
+      .hadith-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hadith-card {
+        padding: 20px 15px;
+      }
+
+      .hadith-text {
+        font-size: 19px;
+      }
+
+      .hadith-modal-box {
+        padding: 22px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      <span class="logo-mark">م</span>
+
+      <span>
+        <strong>مِداد</strong>
+        <small>نتعلّم، نكتشف، ونستمتع</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="فتح القائمة">
+      ☰
+    </button>
+
+    <nav class="main-nav">
+
+      <a href="index.html">الرئيسية</a>
+      <a href="letters.html">الحروف</a>
+      <a href="numbers.html">الأرقام</a>
+      <a href="animals.html">الحيوانات</a>
+      <a href="plants.html">النباتات</a>
+      <a href="quran.html">القرآن</a>
+      <a href="hadith.html" class="active">الأحاديث</a>
+      <a href="stories.html">قصص</a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="hadith-page">
+
+  <section class="hadith-hero">
+
+    <div class="hadith-hero-icon">📚</div>
+
+    <h1>الأحاديث النبوية</h1>
+
+    <p>
+      تعلّم أحاديث نبوية مختارة مع شرح مبسط يساعد الطفل
+      على فهم المعنى وتطبيق الأخلاق الجميلة.
+    </p>
+
+    <div class="hadith-note">
+      النصوص والأحكام الحديثية تحتاج إلى الرجوع إلى مصادرها الأصلية.
+      هذه الصفحة التعليمية لا تستبدل كتب الحديث المعتمدة.
+    </div>
+
+    <div class="hadith-search">
+
+      <input
+        type="search"
+        id="hadithSearch"
+        placeholder="ابحث في الأحاديث..."
+        autocomplete="off">
+
+      <button onclick="searchHadiths()">
+        بحث
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <div class="hadith-progress">
+
+    <div class="progress-label">
+
+      <span>الأحاديث التي تعلّمتها</span>
+
+      <span id="hadithProgressText">
+        0 / 10
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="hadithProgressFill">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section
+    class="hadith-grid"
+    id="hadithGrid">
+  </section>
+
+</main>
+
+
+<div
+  class="hadith-modal"
+  id="hadithModal">
+
+  <div class="hadith-modal-box">
+
+    <button
+      class="close-hadith"
+      onclick="closeHadith()">
+      ×
+    </button>
+
+    <div class="modal-hadith-icon">
+      ﷺ
+    </div>
+
+    <h2 id="modalHadithTitle">
+      الحديث
+    </h2>
+
+    <div
+      class="modal-hadith-text"
+      id="modalHadithText">
+    </div>
+
+    <div
+      class="modal-explanation"
+      id="modalHadithExplanation">
+    </div>
+
+    <p
+      class="hadith-source"
+      id="modalHadithSource">
+    </p>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+  /*
+    الأحاديث المستخدمة هنا مختارة من صحيح البخاري
+    وصحيح مسلم، مع تبسيط الشرح للأطفال.
+  */
+
+  const hadiths = [
+
+    {
+      id: 1,
+      title: "النية",
+      text: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.",
+      explanation:
+        "يعلمنا الحديث أن نية الإنسان مهمة، وأن العمل الصالح يكون بنية صالحة.",
+      source:
+        "متفق عليه: رواه البخاري ومسلم."
+    },
+
+    {
+      id: 2,
+      title: "الكلمة الطيبة",
+      text: "والكلمة الطيبة صدقة.",
+      explanation:
+        "الكلام الجميل الذي يفرح الآخرين ويجبر خاطرهم عمل صالح.",
+      source:
+        "متفق عليه: رواه البخاري ومسلم."
+    },
+
+    {
+      id: 3,
+      title: "الرحمة",
+      text: "من لا يرحم لا يُرحم.",
+      explanation:
+        "علينا أن نرحم الناس والحيوانات وأن نعاملهم بلطف.",
+      source:
+        "متفق عليه: رواه البخاري ومسلم."
+    },
+
+    {
+      id: 4,
+      title: "محبة الخير",
+      text: "لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.",
+      explanation:
+        "المسلم يحب للآخرين الخير الذي يحبه لنفسه.",
+      source:
+        "متفق عليه: رواه البخاري ومسلم."
+    },
+
+    {
+      id: 5,
+      title: "الصدق",
+      text: "عليكم بالصدق، فإن الصدق يهدي إلى البر.",
+      explanation:
+        "الصدق خلق جميل، ويساعد الإنسان على فعل الخير.",
+      source:
+        "متفق عليه: رواه البخاري ومسلم."
+    },
+
+    {
+      id: 6,
+      title: "النظافة",
+      text: "الطهور شطر الإيمان.",
+      explanation:
+        "يهتم الإسلام بالطهارة والنظافة، وهما من الأمور المهمة للمسلم.",
+      source:
+        "رواه مسلم."
+    },
+
+    {
+      id: 7,
+      title: "الابتسامة",
+      text: "تبسمك في وجه أخيك لك صدقة.",
+      explanation:
+        "الابتسامة الطيبة في وجه الآخرين من الأعمال التي يؤجر عليها المسلم.",
+      source:
+        "رواه الترمذي."
+    },
+
+    {
+      id: 8,
+      title: "الرفق",
+      text: "إن الرفق لا يكون في شيء إلا زانه، ولا ينزع من شيء إلا شانه.",
+      explanation:
+        "الرفق واللين يجعلان التعامل مع الآخرين أجمل.",
+      source:
+        "رواه مسلم."
+    },
+
+    {
+      id: 9,
+      title: "مساعدة الآخرين",
+      text: "والله في عون العبد ما كان العبد في عون أخيه.",
+      explanation:
+        "مساعدة الآخرين عمل عظيم، ومن يساعد أخاه في الخير يعينه الله.",
+      source:
+        "رواه مسلم."
+    },
+
+    {
+      id: 10,
+      title: "الأخلاق الحسنة",
+      text: "إن من خياركم أحسنكم أخلاقًا.",
+      explanation:
+        "حسن الخلق من الصفات الجميلة والمهمة في حياة المسلم.",
+      source:
+        "رواه البخاري."
+    }
+
+  ];
+
+
+  function getCompletedHadiths() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem(
+          "midad_hadith_completed"
+        ) || "[]"
+      );
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function saveCompletedHadiths(list) {
+
+    localStorage.setItem(
+      "midad_hadith_completed",
+      JSON.stringify(list)
+    );
+
+  }
+
+
+  function updateHadithProgress() {
+
+    const completed =
+      getCompletedHadiths();
+
+    const total =
+      hadiths.length;
+
+    const percentage =
+      Math.round(
+        (completed.length / total) * 100
+      );
+
+    document.getElementById(
+      "hadithProgressText"
+    ).textContent =
+      completed.length +
+      " / " +
+      total;
+
+    document.getElementById(
+      "hadithProgressFill"
+    ).style.width =
+      percentage + "%";
+
+    if (window.midadSetProgress) {
+
+      window.midadSetProgress(
+        percentage
+      );
+
+    }
+
+  }
+
+
+  function renderHadiths(list) {
+
+    const grid =
+      document.getElementById(
+        "hadithGrid"
+      );
+
+    const completed =
+      getCompletedHadiths();
+
+    grid.innerHTML = "";
+
+    if (!list.length) {
+
+      grid.innerHTML = `
+        <div class="empty-hadith">
+          لا يوجد حديث مطابق للبحث.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    list.forEach(function(hadith) {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+      card.className =
+        "hadith-card";
+
+
+      if (
+        completed.includes(
+          hadith.id
+        )
+      ) {
+
+        card.classList.add(
+          "completed"
+        );
+
+      }
+
+
+      const done =
+        completed.includes(
+          hadith.id
+        );
+
+
+      card.innerHTML = `
+
+        <div class="hadith-number">
+          ${hadith.id}
+        </div>
+
+        <h2>
+          ${hadith.title}
+        </h2>
+
+        <div class="hadith-text">
+          ${hadith.text}
+        </div>
+
+        <div class="hadith-explanation">
+          <strong>المعنى:</strong><br>
+          ${hadith.explanation}
+        </div>
+
+        <div class="hadith-source">
+          ${hadith.source}
+        </div>
+
+        <div class="hadith-actions">
+
+          <button
+            class="hadith-button ${done ? "done" : ""}"
+            onclick="completeHadith(${hadith.id})">
+
+            ${done ? "✓ تعلّمته" : "تعلّمته"}
+
+          </button>
+
+          <button
+            class="hadith-button gray"
+            onclick="openHadith(${hadith.id})">
+
+            اقرأ
+
+          </button>
+
+          <button
+            class="hadith-button"
+            onclick="speakHadith(${hadith.id})">
+
+            🔊 اسمع
+
+          </button>
+
+        </div>
+
+      `;
+
+
+      grid.appendChild(card);
+
+    });
+
+  }
+
+
+  function completeHadith(id) {
+
+    const completed =
+      getCompletedHadiths();
+
+    if (
+      !completed.includes(id)
+    ) {
+
+      completed.push(id);
+
+      saveCompletedHadiths(
+        completed
+      );
+
+      if (window.midadAddStars) {
+
+        window.midadAddStars(2);
+
+      }
+
+    }
+
+    updateHadithProgress();
+
+    renderHadiths(
+      getFilteredHadiths()
+    );
+
+  }
+
+
+  function openHadith(id) {
+
+    const hadith =
+      hadiths.find(
+        function(item) {
+          return item.id === id;
+        }
+      );
+
+    if (!hadith) return;
+
+
+    document.getElementById(
+      "modalHadithTitle"
+    ).textContent =
+      hadith.title;
+
+
+    document.getElementById(
+      "modalHadithText"
+    ).textContent =
+      hadith.text;
+
+
+    document.getElementById(
+      "modalHadithExplanation"
+    ).innerHTML =
+      "<strong>المعنى المبسط:</strong><br>" +
+      hadith.explanation;
+
+
+    document.getElementById(
+      "modalHadithSource"
+    ).textContent =
+      hadith.source;
+
+
+    document.getElementById(
+      "hadithModal"
+    ).classList.add(
+      "active"
+    );
+
+  }
+
+
+  function closeHadith() {
+
+    document.getElementById(
+      "hadithModal"
+    ).classList.remove(
+      "active"
+    );
+
+    stopHadithSpeech();
+
+  }
+
+
+  function speakHadith(id) {
+
+    const hadith =
+      hadiths.find(
+        function(item) {
+          return item.id === id;
+        }
+      );
+
+    if (!hadith) return;
+
+
+    if (
+      !("speechSynthesis" in window)
+    ) {
+
+      alert(
+        "ميزة النطق غير مدعومة في هذا المتصفح."
+      );
+
+      return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+      new SpeechSynthesisUtterance(
+        hadith.text
+      );
+
+
+    speech.lang =
+      "ar-SA";
+
+    speech.rate =
+      0.75;
+
+    speech.pitch =
+      1;
+
+
+    window.speechSynthesis.speak(
+      speech
+    );
+
+  }
+
+
+  function stopHadithSpeech() {
+
+    if (
+      "speechSynthesis" in window
+    ) {
+
+      window.speechSynthesis.cancel();
+
+    }
+
+  }
+
+
+  function getFilteredHadiths() {
+
+    const input =
+      document.getElementById(
+        "hadithSearch"
+      );
+
+
+    const value =
+      input.value
+        .trim()
+        .toLowerCase();
+
+
+    if (!value) {
+
+      return hadiths;
+
+    }
+
+
+    return hadiths.filter(
+      function(hadith) {
+
+        return (
+          hadith.title
+            .toLowerCase()
+            .includes(value)
+
+          ||
+
+          hadith.text
+            .toLowerCase()
+            .includes(value)
+
+          ||
+
+          hadith.explanation
+            .toLowerCase()
+            .includes(value)
+
+        );
+
+      }
+    );
+
+  }
+
+
+  function searchHadiths() {
+
+    renderHadiths(
+      getFilteredHadiths()
+    );
+
+  }
+
+
+  document
+    .getElementById(
+      "hadithSearch"
+    )
+    .addEventListener(
+      "input",
+      searchHadiths
+    );
+
+
+  document
+    .getElementById(
+      "hadithModal"
+    )
+    .addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target === this
+        ) {
+
+          closeHadith();
+
+        }
+
+      }
+    );
+
+
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeHadith();
+
+      }
+
+    }
+  );
+
+
+  window.addEventListener(
+    "load",
+    function() {
+
+      renderHadiths(
+        hadiths
+      );
+
+      updateHadithProgress();
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
