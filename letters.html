@@ -7,13 +7,63 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>الحروف العربية | مِداد</title>
+  <title>الحروف العربية للأطفال | مِداد</title>
 
   <meta name="description"
-        content="تعلم الحروف العربية للأطفال بطريقة تفاعلية وممتعة مع مِداد.">
+        content="تعلم الحروف العربية للأطفال بطريقة تفاعلية وممتعة مع مِداد. استمع إلى الحروف وتعلم الكلمات وسجل تقدمك.">
+
+  <meta name="keywords"
+        content="الحروف العربية, تعليم الأطفال, تعلم الحروف, ألف باء تاء, الحروف للأطفال, مِداد">
+
+  <meta name="author"
+        content="مِداد">
+
+  <meta name="robots"
+        content="index, follow">
 
   <meta name="theme-color"
         content="#6c63ff">
+
+  <link rel="canonical"
+        href="https://ahmadmsoub130-ui.github.io/NAMA/letters.html">
+
+  <!-- Favicon -->
+  <link rel="icon"
+        type="image/svg+xml"
+        href="favicon.svg">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest"
+        href="manifest.json">
+
+  <!-- Open Graph -->
+  <meta property="og:type"
+        content="website">
+
+  <meta property="og:title"
+        content="الحروف العربية للأطفال | مِداد">
+
+  <meta property="og:description"
+        content="تعلم الحروف العربية للأطفال بطريقة تفاعلية وممتعة مع مِداد.">
+
+  <meta property="og:url"
+        content="https://ahmadmsoub130-ui.github.io/NAMA/letters.html">
+
+  <meta property="og:site_name"
+        content="مِداد">
+
+  <meta property="og:locale"
+        content="ar_JO">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"
+        content="summary">
+
+  <meta name="twitter:title"
+        content="الحروف العربية للأطفال | مِداد">
+
+  <meta name="twitter:description"
+        content="تعلم الحروف العربية للأطفال بطريقة تفاعلية وممتعة مع مِداد.">
 
   <link rel="stylesheet"
         href="style.css">
@@ -238,6 +288,8 @@
       font-weight: bold;
 
       margin-bottom: 8px;
+
+      cursor: pointer;
     }
 
     .letter-name {
@@ -583,9 +635,6 @@
 
   <main class="letters-page">
 
-
-    <!-- المقدمة -->
-
     <section class="letters-hero">
 
       <div class="big-letter">
@@ -603,8 +652,6 @@
 
     </section>
 
-
-    <!-- التقدم -->
 
     <section class="letters-progress">
 
@@ -628,8 +675,6 @@
 
     </section>
 
-
-    <!-- الحروف -->
 
     <section>
 
@@ -1223,8 +1268,6 @@
         `;
 
 
-        /* النطق */
-
         const speakButton =
           card.querySelector(
             ".speak-button"
@@ -1243,8 +1286,6 @@
         );
 
 
-        /* زر تعلمت */
-
         const doneButton =
           card.querySelector(
             ".done-button"
@@ -1262,8 +1303,6 @@
           }
         );
 
-
-        /* فتح النافذة */
 
         const letterCharacter =
           card.querySelector(
@@ -1325,8 +1364,6 @@
         completed
       );
 
-
-      /* تحديث التقدم العام */
 
       const percentage =
         Math.round(
@@ -1493,6 +1530,21 @@
 
       }
     );
+
+
+    /* =====================================================
+       السنة الحالية
+    ====================================================== */
+
+    const yearElement =
+      document.getElementById("year");
+
+    if (yearElement) {
+
+      yearElement.textContent =
+        new Date().getFullYear();
+
+    }
 
 
     /* =====================================================
