@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="مِداد - تعلّم أسماء الحيوانات وأصواتها بطريقة ممتعة للأطفال">
+  <meta name="theme-color" content="#ff9800">
+
+  <title>الحيوانات | مِداد</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .animals-page {
+      padding: 30px 15px 60px;
+    }
+
+    .animals-hero {
+      max-width: 1100px;
+      margin: 0 auto 30px;
+      padding: 35px 20px;
+      text-align: center;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #fff3e0, #fff8e8);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .animals-hero h1 {
+      margin: 0 0 10px;
+      color: #ef6c00;
+      font-size: 42px;
+    }
+
+    .animals-hero p {
+      margin: 0;
+      color: #666;
+      font-size: 19px;
+      line-height: 1.8;
+    }
+
+    .animals-progress {
+      max-width: 700px;
+      margin: 22px auto 0;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #ef6c00;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 14px;
+      overflow: hidden;
+      background: #ffe0b2;
+      border-radius: 20px;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff9800, #ffc107);
+      border-radius: 20px;
+      transition: width .4s ease;
+    }
+
+    .animals-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .animal-card {
+      background: #fff;
+      border: 2px solid #fff1df;
+      border-radius: 25px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,.08);
+      transition: .25s ease;
+    }
+
+    .animal-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 30px rgba(0,0,0,.13);
+    }
+
+    .animal-icon {
+      font-size: 70px;
+      margin-bottom: 5px;
+    }
+
+    .animal-card h2 {
+      margin: 5px 0;
+      color: #ef6c00;
+      font-size: 25px;
+    }
+
+    .animal-card p {
+      color: #666;
+      line-height: 1.7;
+      min-height: 55px;
+    }
+
+    .animal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .animal-button {
+      border: 0;
+      border-radius: 13px;
+      padding: 10px 14px;
+      background: #ff9800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .animal-button:hover {
+      background: #ef6c00;
+      transform: scale(1.04);
+    }
+
+    .animal-button.done {
+      background: #43a047;
+    }
+
+    .animal-fact {
+      max-width: 1100px;
+      margin: 35px auto 0;
+      padding: 28px;
+      background: white;
+      border-radius: 26px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+    }
+
+    .animal-fact h2 {
+      margin-top: 0;
+      color: #ef6c00;
+    }
+
+    #factText {
+      min-height: 45px;
+      font-size: 19px;
+      line-height: 1.9;
+      color: #555;
+    }
+
+    .fact-button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 22px;
+      background: #ffb300;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .animal-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.55);
+    }
+
+    .animal-modal.active {
+      display: flex;
+    }
+
+    .animal-modal-box {
+      position: relative;
+      width: min(500px, 100%);
+      padding: 30px;
+      background: white;
+      border-radius: 28px;
+      text-align: center;
+      animation: animalPop .25s ease;
+    }
+
+    @keyframes animalPop {
+      from {
+        opacity: 0;
+        transform: scale(.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-animal-icon {
+      font-size: 95px;
+    }
+
+    .animal-modal-box h2 {
+      color: #ef6c00;
+      font-size: 31px;
+      margin: 8px 0;
+    }
+
+    .animal-modal-box p {
+      color: #555;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .close-modal {
+      position: absolute;
+      left: 15px;
+      top: 12px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: #eee;
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    .sound-message {
+      min-height: 25px;
+      margin-top: 8px;
+      color: #43a047;
+      font-weight: bold;
+    }
+
+    @media (max-width: 900px) {
+      .animals-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .animals-hero h1 {
+        font-size: 32px;
+      }
+
+      .animals-hero p {
+        font-size: 16px;
+      }
+
+      .animals-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .animal-card {
+        padding: 17px 10px;
+      }
+
+      .animal-icon {
+        font-size: 55px;
+      }
+
+      .animal-card h2 {
+        font-size: 21px;
+      }
+
+      .animal-card p {
+        font-size: 14px;
+      }
+
+      .animal-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .animals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      <span class="logo-mark">م</span>
+
+      <span>
+        <strong>مِداد</strong>
+        <small>نتعلّم، نكتشف، ونستمتع</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="فتح القائمة">
+      ☰
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="letters.html">الحروف</a>
+      <a href="numbers.html">الأرقام</a>
+      <a href="animals.html" class="active">الحيوانات</a>
+      <a href="plants.html">النباتات</a>
+      <a href="quran.html">القرآن</a>
+      <a href="hadith.html">الأحاديث</a>
+      <a href="stories.html">قصص</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="animals-page">
+
+  <section class="animals-hero">
+
+    <h1>🐾 عالم الحيوانات</h1>
+
+    <p>
+      تعلّم أسماء الحيوانات واكتشف معلومات جميلة عنها
+      بطريقة ممتعة وتفاعلية.
+    </p>
+
+    <div class="animals-progress">
+
+      <div class="progress-label">
+        <span>تقدمك</span>
+        <span id="progressText">0%</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="animals-grid">
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🦁</div>
+
+      <h2>الأسد</h2>
+
+      <p>
+        حيوان قوي يعيش في مجموعات تسمى الزمر.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="lion"
+          onclick="completeAnimal('lion', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الأسد')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐘</div>
+
+      <h2>الفيل</h2>
+
+      <p>
+        حيوان كبير يتميز بخرطومه وأذنيه الكبيرتين.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="elephant"
+          onclick="completeAnimal('elephant', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الفيل')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐒</div>
+
+      <h2>القرد</h2>
+
+      <p>
+        حيوان ذكي ونشيط، وتعيش بعض أنواعه فوق الأشجار.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="monkey"
+          onclick="completeAnimal('monkey', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('القرد')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🦒</div>
+
+      <h2>الزرافة</h2>
+
+      <p>
+        حيوان طويل الرقبة يستطيع الوصول إلى أوراق الأشجار العالية.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="giraffe"
+          onclick="completeAnimal('giraffe', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الزرافة')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐯</div>
+
+      <h2>النمر</h2>
+
+      <p>
+        حيوان مفترس يتميز بفروه المخطط.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="tiger"
+          onclick="completeAnimal('tiger', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('النمر')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐼</div>
+
+      <h2>الباندا</h2>
+
+      <p>
+        حيوان معروف بلونه الأبيض والأسود ويحب أكل الخيزران.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="panda"
+          onclick="completeAnimal('panda', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الباندا')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐰</div>
+
+      <h2>الأرنب</h2>
+
+      <p>
+        حيوان صغير له أذنان طويلتان ويستطيع القفز بسرعة.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="rabbit"
+          onclick="completeAnimal('rabbit', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الأرنب')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐱</div>
+
+      <h2>القطة</h2>
+
+      <p>
+        حيوان أليف صغير يحب اللعب والراحة.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="cat"
+          onclick="completeAnimal('cat', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('القطة')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐶</div>
+
+      <h2>الكلب</h2>
+
+      <p>
+        حيوان أليف يتميز بالوفاء ويمكن تدريبه على أشياء كثيرة.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="dog"
+          onclick="completeAnimal('dog', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الكلب')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐴</div>
+
+      <h2>الحصان</h2>
+
+      <p>
+        حيوان قوي وسريع ويُستخدم للركوب في أماكن كثيرة.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="horse"
+          onclick="completeAnimal('horse', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الحصان')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐄</div>
+
+      <h2>البقرة</h2>
+
+      <p>
+        حيوان من حيوانات المزرعة ويستفيد الإنسان من منتجاته.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="cow"
+          onclick="completeAnimal('cow', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('البقرة')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="animal-card">
+
+      <div class="animal-icon">🐑</div>
+
+      <h2>الخروف</h2>
+
+      <p>
+        حيوان أليف يعيش في المزارع وله صوف يغطي جسمه.
+      </p>
+
+      <div class="animal-actions">
+
+        <button
+          class="animal-button"
+          data-id="sheep"
+          onclick="completeAnimal('sheep', this)">
+          تعلمت
+        </button>
+
+        <button
+          class="animal-button"
+          onclick="speakAnimal('الخروف')">
+          🔊 اسمع
+        </button>
+
+      </div>
+
+    </article>
+
+
+  </section>
+
+
+  <section class="animal-fact">
+
+    <h2>💡 معلومة عن الحيوانات</h2>
+
+    <div id="factText">
+      اضغط على الزر لاكتشاف معلومة جديدة.
+    </div>
+
+    <button
+      class="fact-button"
+      onclick="showAnimalFact()">
+      معلومة جديدة
+    </button>
+
+  </section>
+
+
+</main>
+
+
+<div class="animal-modal" id="animalModal">
+
+  <div class="animal-modal-box">
+
+    <button
+      class="close-modal"
+      onclick="closeAnimalModal()">
+      ×
+    </button>
+
+    <div
+      class="modal-animal-icon"
+      id="modalAnimalIcon">
+      🐾
+    </div>
+
+    <h2 id="modalAnimalTitle">
+      الحيوان
+    </h2>
+
+    <p id="modalAnimalText"></p>
+
+    <div
+      class="sound-message"
+      id="soundMessage">
+    </div>
+
+    <button
+      class="animal-button"
+      onclick="closeAnimalModal()">
+      فهمت
+    </button>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+
+<script>
+
+  const animals = {
+
+    lion: {
+      title: "الأسد",
+      icon: "🦁",
+      text: "الأسد من الحيوانات المفترسة، ويعيش عادةً في مجموعات."
+    },
+
+    elephant: {
+      title: "الفيل",
+      icon: "🐘",
+      text: "الفيل من أكبر الحيوانات البرية، ويتميز بالخرطوم والأذنين الكبيرتين."
+    },
+
+    monkey: {
+      title: "القرد",
+      icon: "🐒",
+      text: "القرد حيوان ذكي ونشيط، وتعيش بعض أنواعه في الغابات."
+    },
+
+    giraffe: {
+      title: "الزرافة",
+      icon: "🦒",
+      text: "الزرافة من أطول الحيوانات البرية، وتساعدها رقبتها الطويلة على الوصول إلى الأوراق العالية."
+    },
+
+    tiger: {
+      title: "النمر",
+      icon: "🐯",
+      text: "النمر حيوان مفترس يتميز بخطوط جميلة على جسمه."
+    },
+
+    panda: {
+      title: "الباندا",
+      icon: "🐼",
+      text: "الباندا حيوان أبيض وأسود، ويشتهر بأكل الخيزران."
+    },
+
+    rabbit: {
+      title: "الأرنب",
+      icon: "🐰",
+      text: "الأرنب حيوان صغير يتميز بأذنيه الطويلتين وقدرته على القفز."
+    },
+
+    cat: {
+      title: "القطة",
+      icon: "🐱",
+      text: "القطة حيوان أليف يحب اللعب والراحة، ولها حواس قوية."
+    },
+
+    dog: {
+      title: "الكلب",
+      icon: "🐶",
+      text: "الكلب من الحيوانات التي يستطيع الإنسان تدريبها، وتوجد منه سلالات كثيرة."
+    },
+
+    horse: {
+      title: "الحصان",
+      icon: "🐴",
+      text: "الحصان حيوان قوي وسريع، وقد استخدمه الإنسان للركوب والعمل منذ زمن طويل."
+    },
+
+    cow: {
+      title: "البقرة",
+      icon: "🐄",
+      text: "البقرة من حيوانات المزرعة، ويستفيد الإنسان من الحليب الذي تنتجه."
+    },
+
+    sheep: {
+      title: "الخروف",
+      icon: "🐑",
+      text: "الخروف من حيوانات المزرعة، ويغطي جسمه الصوف."
+    }
+
+  };
+
+
+  const animalIds = Object.keys(animals);
+
+
+  function getCompletedAnimals() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("midad_animals_completed") || "[]"
+      );
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function saveCompletedAnimals(list) {
+
+    localStorage.setItem(
+      "midad_animals_completed",
+      JSON.stringify(list)
+    );
+
+  }
+
+
+  function updateAnimalProgress() {
+
+    const completed = getCompletedAnimals();
+
+    const percentage = Math.round(
+      (completed.length / animalIds.length) * 100
+    );
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").textContent =
+      percentage + "%";
+
+    if (window.midadSetProgress) {
+      window.midadSetProgress(percentage);
+    }
+
+  }
+
+
+  function completeAnimal(id, button) {
+
+    const completed = getCompletedAnimals();
+
+    if (!completed.includes(id)) {
+
+      completed.push(id);
+
+      saveCompletedAnimals(completed);
+
+      button.classList.add("done");
+
+      button.textContent = "✓ تعلمتها";
+
+      if (window.midadAddStars) {
+        window.midadAddStars(1);
+      }
+
+      updateAnimalProgress();
+
+      openAnimalModal(id);
+
+    } else {
+
+      openAnimalModal(id);
+
+    }
+
+  }
+
+
+  function openAnimalModal(id) {
+
+    const animal = animals[id];
+
+    if (!animal) return;
+
+    document.getElementById("modalAnimalIcon").textContent =
+      animal.icon;
+
+    document.getElementById("modalAnimalTitle").textContent =
+      animal.title;
+
+    document.getElementById("modalAnimalText").textContent =
+      animal.text;
+
+    document.getElementById("soundMessage").textContent = "";
+
+    document.getElementById("animalModal")
+      .classList.add("active");
+
+  }
+
+
+  function closeAnimalModal() {
+
+    document.getElementById("animalModal")
+      .classList.remove("active");
+
+  }
+
+
+  function speakAnimal(name) {
+
+    if (!("speechSynthesis" in window)) {
+
+      alert("ميزة النطق غير مدعومة في هذا المتصفح.");
+
+      return;
+
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+      new SpeechSynthesisUtterance(name);
+
+    speech.lang = "ar-SA";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1.1;
+
+    window.speechSynthesis.speak(speech);
+
+    document.getElementById("soundMessage").textContent =
+      "🔊 يتم نطق الاسم الآن";
+
+  }
+
+
+  const animalFacts = [
+
+    "الفيل من أكبر الحيوانات البرية الموجودة على الأرض.",
+
+    "الزرافة تستطيع الوصول إلى أوراق الأشجار العالية برقبتها الطويلة.",
+
+    "الأرانب تستخدم أذنيها للمساعدة في سماع الأصوات من حولها.",
+
+    "الخيول تستطيع النوم وهي واقفة لفترات قصيرة.",
+
+    "الباندا تحب أكل الخيزران.",
+
+    "الأسود تعيش عادةً في مجموعات.",
+
+    "القطط تستطيع تحريك أذنيها للمساعدة في تحديد مصدر الصوت.",
+
+    "الأبقار من الحيوانات التي تعيش في المزارع ويستفيد الإنسان من حليبها."
+
+  ];
+
+
+  function showAnimalFact() {
+
+    const index =
+      Math.floor(Math.random() * animalFacts.length);
+
+    document.getElementById("factText").textContent =
+      animalFacts[index];
+
+  }
+
+
+  document.getElementById("animalModal")
+    .addEventListener("click", function(event) {
+
+      if (event.target === this) {
+
+        closeAnimalModal();
+
+      }
+
+    });
+
+
+  document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+      closeAnimalModal();
+
+    }
+
+  });
+
+
+  window.addEventListener("load", function() {
+
+    const completed =
+      getCompletedAnimals();
+
+    document.querySelectorAll(
+      ".animal-button[data-id]"
+    ).forEach(function(button) {
+
+      const id = button.dataset.id;
+
+      if (completed.includes(id)) {
+
+        button.classList.add("done");
+
+        button.textContent = "✓ تعلمتها";
+
+      }
+
+    });
+
+    updateAnimalProgress();
+
+  });
+
+</script>
+
+</body>
+</html>
