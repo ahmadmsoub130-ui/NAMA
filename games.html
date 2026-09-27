@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>الألعاب التعليمية | مِداد</title>
+  <meta name="description" content="ألعاب تعليمية للأطفال في الحروف والأرقام والذاكرة والتركيز والحساب.">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .games-hero {
+      text-align: center;
+      padding: 45px 20px 30px;
+    }
+
+    .games-hero-icon {
+      font-size: 70px;
+      margin-bottom: 10px;
+    }
+
+    .games-hero h1 {
+      margin: 0 0 12px;
+      font-size: 38px;
+    }
+
+    .games-hero p {
+      max-width: 700px;
+      margin: auto;
+      color: #666;
+      line-height: 1.9;
+      font-size: 18px;
+    }
+
+    .games-stats {
+      max-width: 950px;
+      margin: 15px auto 35px;
+      padding: 0 20px;
+    }
+
+    .stats-box {
+      background: white;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      text-align: center;
+    }
+
+    .stat {
+      padding: 15px;
+      background: #fafafa;
+      border-radius: 18px;
+    }
+
+    .stat-icon {
+      font-size: 30px;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .stat-label {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .games-grid {
+      max-width: 1150px;
+      margin: auto;
+      padding: 0 20px 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .game-card {
+      background: white;
+      border-radius: 26px;
+      padding: 25px;
+      border: 1px solid #eee;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+      transition: .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.12);
+    }
+
+    .game-icon {
+      width: 85px;
+      height: 85px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 24px;
+      background: #f5f3ff;
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    .game-card h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .game-card p {
+      color: #666;
+      line-height: 1.8;
+      min-height: 55px;
+    }
+
+    .game-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 15px 0;
+    }
+
+    .game-tag {
+      background: #f4f4f5;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .game-start {
+      width: 100%;
+      border: 0;
+      border-radius: 15px;
+      padding: 13px;
+      background: #7c3aed;
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .game-start:hover {
+      transform: scale(1.02);
+    }
+
+    .game-completed {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #22c55e;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      display: none;
+    }
+
+    .game-card.completed .game-completed {
+      display: block;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.7);
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-window {
+      width: 100%;
+      max-width: 760px;
+      max-height: 95vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 28px;
+      padding: 25px;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .close-game {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: #f3f4f6;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .game-title {
+      text-align: center;
+      margin: 5px 45px 25px;
+    }
+
+    .game-title-icon {
+      font-size: 55px;
+    }
+
+    .game-title h2 {
+      margin: 5px 0;
+    }
+
+    .question-box {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .question-number {
+      color: #7c3aed;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.7;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .answer {
+      border: 2px solid #e5e7eb;
+      background: white;
+      border-radius: 17px;
+      padding: 16px;
+      font-family: inherit;
+      font-size: 18px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .answer:hover {
+      border-color: #8b5cf6;
+      background: #faf5ff;
+    }
+
+    .answer.correct {
+      background: #dcfce7;
+      border-color: #22c55e;
+      color: #166534;
+    }
+
+    .answer.wrong {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+
+    .feedback {
+      text-align: center;
+      min-height: 30px;
+      margin: 18px 0;
+      font-weight: bold;
+    }
+
+    .next-btn,
+    .restart-btn {
+      display: block;
+      margin: 15px auto 0;
+      border: 0;
+      border-radius: 15px;
+      padding: 13px 25px;
+      background: #7c3aed;
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .memory-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 520px;
+      margin: auto;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 15px;
+      background: #7c3aed;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform .25s;
+    }
+
+    .memory-card.flipped {
+      background: #ede9fe;
+      color: #111827;
+    }
+
+    .memory-card.matched {
+      background: #dcfce7;
+      color: #166534;
+      cursor: default;
+    }
+
+    .memory-front {
+      display: none;
+    }
+
+    .memory-card.flipped .memory-front,
+    .memory-card.matched .memory-front {
+      display: block;
+    }
+
+    .memory-back {
+      display: block;
+    }
+
+    .memory-card.flipped .memory-back,
+    .memory-card.matched .memory-back {
+      display: none;
+    }
+
+    .memory-info {
+      text-align: center;
+      margin: 15px 0;
+      color: #666;
+    }
+
+    .letters-game {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 560px;
+      margin: auto;
+    }
+
+    .letter-choice {
+      border: 2px solid #e5e7eb;
+      background: white;
+      border-radius: 18px;
+      padding: 18px 10px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .letter-choice:hover {
+      background: #faf5ff;
+      border-color: #8b5cf6;
+    }
+
+    .shape-game {
+      text-align: center;
+    }
+
+    .shape-question {
+      font-size: 100px;
+      margin: 20px;
+    }
+
+    .shape-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .shape-option {
+      padding: 17px;
+      border: 2px solid #e5e7eb;
+      background: white;
+      border-radius: 16px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    .count-game {
+      text-align: center;
+    }
+
+    .count-objects {
+      font-size: 50px;
+      line-height: 1.7;
+      min-height: 120px;
+      padding: 15px;
+    }
+
+    .number-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .number-option {
+      padding: 17px;
+      border: 2px solid #e5e7eb;
+      background: white;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result-screen {
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .result-icon {
+      font-size: 70px;
+    }
+
+    .result-score {
+      font-size: 35px;
+      font-weight: bold;
+      color: #7c3aed;
+      margin: 15px 0;
+    }
+
+    .game-note {
+      text-align: center;
+      color: #777;
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .games-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px 40px;
+      }
+
+      .stats-box {
+        grid-template-columns: 1fr;
+      }
+
+      .games-hero h1 {
+        font-size: 30px;
+      }
+
+      .answers {
+        grid-template-columns: 1fr;
+      }
+
+      .memory-board {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 7px;
+      }
+
+      .letters-game {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .number-options,
+      .shape-options {
+        grid-template-columns: 1fr;
+      }
+
+      .game-window {
+        padding: 20px 15px;
+      }
+
+      .question {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container">
+
+    <a href="index.html" class="logo">
+      <span>مِداد</span>
+    </a>
+
+    <button class="menu-toggle" aria-label="فتح القائمة">☰</button>
+
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="letters.html">الحروف</a>
+      <a href="numbers.html">الأرقام</a>
+      <a href="animals.html">الحيوانات</a>
+      <a href="plants.html">النباتات</a>
+      <a href="quran.html">القرآن</a>
+      <a href="hadith.html">الأحاديث</a>
+      <a href="stories.html">القصص</a>
+      <a href="games.html" class="active">الألعاب</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="games-hero">
+    <div class="games-hero-icon">🎮🧠</div>
+
+    <h1>الألعاب التعليمية</h1>
+
+    <p>
+      العب وتعلم في نفس الوقت!
+      اختر اللعبة التي تريدها واختبر ذاكرتك وحسابك وحروفك وتركيزك.
+    </p>
+  </section>
+
+
+  <section class="games-stats">
+
+    <div class="stats-box">
+
+      <div class="stat">
+        <div class="stat-icon">🎮</div>
+        <span class="stat-number" id="playedGames">0</span>
+        <span class="stat-label">ألعاب لعبتها</span>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">⭐</div>
+        <span class="stat-number" id="gameStars">0</span>
+        <span class="stat-label">نجوم الألعاب</span>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">🏆</div>
+        <span class="stat-number" id="wonGames">0</span>
+        <span class="stat-label">ألعاب أكملتها</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="games-grid">
+
+    <!-- لعبة الحروف -->
+    <article class="game-card" id="card-letters">
+      <span class="game-completed">✓ مكتملة</span>
+
+      <div class="game-icon">🔤</div>
+
+      <h2>تحدي الحروف</h2>
+
+      <p>
+        اقرأ السؤال واختر الحرف الصحيح.
+      </p>
+
+      <div class="game-tags">
+        <span class="game-tag">الحروف</span>
+        <span class="game-tag">تركيز</span>
+        <span class="game-tag">سهل</span>
+      </div>
+
+      <button class="game-start" onclick="startLettersGame()">
+        ابدأ اللعبة
+      </button>
+    </article>
+
+
+    <!-- لعبة الحساب -->
+    <article class="game-card" id="card-math">
+      <span class="game-completed">✓ مكتملة</span>
+
+      <div class="game-icon">➕</div>
+
+      <h2>تحدي الحساب</h2>
+
+      <p>
+        حل مسائل الجمع واختر الإجابة الصحيحة.
+      </p>
+
+      <div class="game-tags">
+        <span class="game-tag">أرقام</span>
+        <span class="game-tag">حساب</span>
+        <span class="game-tag">سهل</span>
+      </div>
+
+      <button class="game-start" onclick="startMathGame()">
+        ابدأ اللعبة
+      </button>
+    </article>
+
+
+    <!-- لعبة الذاكرة -->
+    <article class="game-card" id="card-memory">
+      <span class="game-completed">✓ مكتملة</span>
+
+      <div class="game-icon">🧠</div>
+
+      <h2>لعبة الذاكرة</h2>
+
+      <p>
+        ابحث عن الأزواج المتشابهة وتذكر أماكن البطاقات.
+      </p>
+
+      <div class="game-tags">
+        <span class="game-tag">ذاكرة</span>
+        <span class="game-tag">تركيز</span>
+      </div>
+
+      <button class="game-start" onclick="startMemoryGame()">
+        ابدأ اللعبة
+      </button>
+    </article>
+
+
+    <!-- لعبة الأشكال -->
+    <article class="game-card" id="card-shapes">
+      <span class="game-completed">✓ مكتملة</span>
+
+      <div class="game-icon">🔺</div>
+
+      <h2>اعرف الشكل</h2>
+
+      <p>
+        شاهد الشكل واختر اسمه الصحيح.
+      </p>
+
+      <div class="game-tags">
+        <span class="game-tag">أشكال</span>
+        <span class="game-tag">ملاحظة</span>
+      </div>
+
+      <button class="game-start" onclick="startShapesGame()">
+        ابدأ اللعبة
+      </button>
+    </article>
+
+
+    <!-- لعبة العد -->
+    <article class="game-card" id="card-count">
+      <span class="game-completed">✓ مكتملة</span>
+
+      <div class="game-icon">🔢</div>
+
+      <h2>عد الأشياء</h2>
+
+      <p>
+        عد الأشياء الظاهرة واختر العدد الصحيح.
+      </p>
+
+      <div class="game-tags">
+        <span class="game-tag">أرقام</span>
+        <span class="game-tag">عد</span>
+      </div>
+
+      <button class="game-start" onclick="startCountGame()">
+        ابدأ اللعبة
+      </button>
+    </article>
+
+
+    <!-- لعبة الحيوانات -->
+    <article class="game-card" id="card-animals">
+      <span class="game-completed">✓ مكتملة</span>
+
+      <div class="game-icon">🐾</div>
+
+      <h2>من هو الحيوان؟</h2>
+
+      <p>
+        شاهد الحيوان واختر اسمه الصحيح.
+      </p>
+
+      <div class="game-tags">
+        <span class="game-tag">حيوانات</span>
+        <span class="game-tag">معلومات</span>
+      </div>
+
+      <button class="game-start" onclick="startAnimalsGame()">
+        ابدأ اللعبة
+      </button>
+    </article>
+
+  </section>
+
+</main>
+
+
+<!-- نافذة الألعاب -->
+
+<div class="modal" id="gameModal">
+
+  <div class="game-window">
+
+    <button class="close-game" onclick="closeGame()">×</button>
+
+    <div id="gameContent"></div>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+  const gameStorageKey = "midad_games_data";
+
+  let gameData = JSON.parse(
+    localStorage.getItem(gameStorageKey) ||
+    '{"played":0,"won":0,"stars":0,"completed":[]}'
+  );
+
+
+  function saveGameData() {
+
+    localStorage.setItem(
+      gameStorageKey,
+      JSON.stringify(gameData)
+    );
+
+    updateStats();
+  }
+
+
+  function updateStats() {
+
+    document.getElementById("playedGames").textContent =
+      gameData.played;
+
+    document.getElementById("wonGames").textContent =
+      gameData.won;
+
+    document.getElementById("gameStars").textContent =
+      gameData.stars;
+
+    gameData.completed.forEach(function(game) {
+
+      const card = document.getElementById("card-" + game);
+
+      if (card) {
+        card.classList.add("completed");
+      }
+
+    });
+
+  }
+
+
+  function addGamePlayed() {
+    gameData.played++;
+    saveGameData();
+  }
+
+
+  function finishGame(gameName, earnedStars) {
+
+    if (!gameData.completed.includes(gameName)) {
+
+      gameData.completed.push(gameName);
+
+      gameData.won++;
+
+      gameData.stars += earnedStars;
+
+      if (typeof window.midadAddStars === "function") {
+        window.midadAddStars(earnedStars);
+      }
+
+    }
+
+    saveGameData();
+
+  }
+
+
+  function openGame(content) {
+
+    document.getElementById("gameContent").innerHTML =
+      content;
+
+    document.getElementById("gameModal").classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+  }
+
+
+  function closeGame() {
+
+    document.getElementById("gameModal").classList.remove("show");
+
+    document.body.style.overflow = "";
+
+    if ("speechSynthesis" in window) {
+      speechSynthesis.cancel();
+    }
+
+  }
+
+
+  document.getElementById("gameModal")
+    .addEventListener("click", function(e) {
+
+      if (e.target === this) {
+        closeGame();
+      }
+
+    });
+
+
+  document.addEventListener("keydown", function(e) {
+
+    if (e.key === "Escape") {
+      closeGame();
+    }
+
+  });
+
+
+  /*
+   * لعبة الحروف
+   */
+
+  const lettersQuestions = [
+
+    {
+      question: "ما الحرف الذي تبدأ به كلمة أسد؟ 🦁",
+      answer: "أ",
+      options: ["أ", "ب", "ت", "م"]
+    },
+
+    {
+      question: "ما الحرف الذي تبدأ به كلمة بيت؟ 🏠",
+      answer: "ب",
+      options: ["ج", "ب", "س", "ك"]
+    },
+
+    {
+      question: "ما الحرف الذي تبدأ به كلمة تفاحة؟ 🍎",
+      answer: "ت",
+      options: ["ث", "ت", "د", "ر"]
+    },
+
+    {
+      question: "ما الحرف الذي تبدأ به كلمة حصان؟ 🐴",
+      answer: "ح",
+      options: ["ح", "خ", "ج", "ع"]
+    },
+
+    {
+      question: "ما الحرف الذي تبدأ به كلمة قمر؟ 🌙",
+      answer: "ق",
+      options: ["ف", "ق", "ك", "م"]
+    }
+
+  ];
+
+
+  let lettersIndex = 0;
+  let lettersScore = 0;
+  let lettersAnswered = false;
+
+
+  function startLettersGame() {
+
+    addGamePlayed();
+
+    lettersIndex = 0;
+    lettersScore = 0;
+
+    renderLettersQuestion();
+
+  }
+
+
+  function renderLettersQuestion() {
+
+    const q = lettersQuestions[lettersIndex];
+
+    let html = `
+
+      <div class="game-title">
+
+        <div class="game-title-icon">🔤</div>
+
+        <h2>تحدي الحروف</h2>
+
+      </div>
+
+      <div class="question-box">
+
+        <div class="question-number">
+          السؤال ${lettersIndex + 1} من ${lettersQuestions.length}
+        </div>
+
+        <div class="question">
+          ${q.question}
+        </div>
+
+      </div>
+
+      <div class="letters-game">
+
+    `;
+
+    q.options.forEach(function(option) {
+
+      html += `
+        <button
+          class="letter-choice"
+          onclick="answerLetter('${option}')">
+          ${option}
+        </button>
+      `;
+
+    });
+
+    html += `
+
+      </div>
+
+      <div class="feedback" id="gameFeedback"></div>
+
+      <div class="game-note">
+        اختر الإجابة الصحيحة.
+      </div>
+
+    `;
+
+    openGame(html);
+
+    lettersAnswered = false;
+
+  }
+
+
+  function answerLetter(answer) {
+
+    if (lettersAnswered) return;
+
+    lettersAnswered = true;
+
+    const q = lettersQuestions[lettersIndex];
+
+    const feedback =
+      document.getElementById("gameFeedback");
+
+    if (answer === q.answer) {
+
+      lettersScore++;
+
+      feedback.textContent =
+        "أحسنت! إجابة صحيحة 🎉";
+
+      feedback.style.color = "#16a34a";
+
+    } else {
+
+      feedback.textContent =
+        "حاول مرة أخرى. الإجابة الصحيحة هي: " +
+        q.answer;
+
+      feedback.style.color = "#dc2626";
+
+    }
+
+    setTimeout(function() {
+
+      lettersIndex++;
+
+      if (lettersIndex < lettersQuestions.length) {
+
+        renderLettersQuestion();
+
+      } else {
+
+        showGameResult(
+          "letters",
+          lettersScore,
+          lettersQuestions.length
+        );
+
+      }
+
+    }, 900);
+
+  }
+
+
+  /*
+   * لعبة الحساب
+   */
+
+  const mathQuestions = [
+
+    {
+      question: "٢ + ٣ = ؟",
+      answer: "٥",
+      options: ["٤", "٥", "٦"]
+    },
+
+    {
+      question: "١ + ٤ = ؟",
+      answer: "٥",
+      options: ["٣", "٥", "٧"]
+    },
+
+    {
+      question: "٣ + ٣ = ؟",
+      answer: "٦",
+      options: ["٥", "٦", "٧"]
+    },
+
+    {
+      question: "٢ + ٥ = ؟",
+      answer: "٧",
+      options: ["٦", "٧", "٨"]
+    },
+
+    {
+      question: "٤ + ٤ = ؟",
+      answer: "٨",
+      options: ["٧", "٨", "٩"]
+    }
+
+  ];
+
+
+  let mathIndex = 0;
+  let mathScore = 0;
+  let mathAnswered = false;
+
+
+  function startMathGame() {
+
+    addGamePlayed();
+
+    mathIndex = 0;
+    mathScore = 0;
+
+    renderMathQuestion();
+
+  }
+
+
+  function renderMathQuestion() {
+
+    const q = mathQuestions[mathIndex];
+
+    let html = `
+
+      <div class="game-title">
+
+        <div class="game-title-icon">➕</div>
+
+        <h2>تحدي الحساب</h2>
+
+      </div>
+
+      <div class="question-box">
+
+        <div class="question-number">
+          السؤال ${mathIndex + 1} من ${mathQuestions.length}
+        </div>
+
+        <div class="question">
+          ${q.question}
+        </div>
+
+      </div>
+
+      <div class="number-options">
+
+    `;
+
+    q.options.forEach(function(option) {
+
+      html += `
+        <button
+          class="number-option"
+          onclick="answerMath('${option}')">
+          ${option}
+        </button>
+      `;
+
+    });
+
+    html += `
+
+      </div>
+
+      <div class="feedback" id="gameFeedback"></div>
+
+    `;
+
+    openGame(html);
+
+    mathAnswered = false;
+
+  }
+
+
+  function answerMath(answer) {
+
+    if (mathAnswered) return;
+
+    mathAnswered = true;
+
+    const q = mathQuestions[mathIndex];
+
+    const feedback =
+      document.getElementById("gameFeedback");
+
+    if (answer === q.answer) {
+
+      mathScore++;
+
+      feedback.textContent =
+        "ممتاز! إجابة صحيحة 🎉";
+
+      feedback.style.color = "#16a34a";
+
+    } else {
+
+      feedback.textContent =
+        "الإجابة الصحيحة هي: " + q.answer;
+
+      feedback.style.color = "#dc2626";
+
+    }
+
+    setTimeout(function() {
+
+      mathIndex++;
+
+      if (mathIndex < mathQuestions.length) {
+
+        renderMathQuestion();
+
+      } else {
+
+        showGameResult(
+          "math",
+          mathScore,
+          mathQuestions.length
+        );
+
+      }
+
+    }, 900);
+
+  }
+
+
+  /*
+   * لعبة الذاكرة
+   */
+
+  let memoryCards = [];
+  let memoryFlipped = [];
+  let memoryLock = false;
+  let memoryMatches = 0;
+
+
+  function startMemoryGame() {
+
+    addGamePlayed();
+
+    const icons = [
+      "🍎",
+      "🐱",
+      "⭐",
+      "🌳",
+      "🐶",
+      "🌙",
+      "🍎",
+      "🐱",
+      "⭐",
+      "🌳",
+      "🐶",
+      "🌙"
+    ];
+
+    memoryCards =
+      icons.sort(function() {
+        return Math.random() - .5;
+      });
+
+    memoryFlipped = [];
+    memoryLock = false;
+    memoryMatches = 0;
+
+    renderMemoryGame();
+
+  }
+
+
+  function renderMemoryGame() {
+
+    let html = `
+
+      <div class="game-title">
+
+        <div class="game-title-icon">🧠</div>
+
+        <h2>لعبة الذاكرة</h2>
+
+      </div>
+
+      <div class="memory-info">
+        ابحث عن البطاقات المتشابهة.
+        الأزواج: ${memoryMatches} / 6
+      </div>
+
+      <div class="memory-board">
+
+    `;
+
+    memoryCards.forEach(function(icon, index) {
+
+      const isFlipped =
+        memoryFlipped.includes(index);
+
+      html += `
+
+        <button
+          class="memory-card ${isFlipped ? "flipped" : ""}"
+          id="memory-${index}"
+          onclick="flipMemory(${index})">
+
+          <span class="memory-back">?</span>
+
+          <span class="memory-front">${icon}</span>
+
+        </button>
+
+      `;
+
+    });
+
+    html += `
+
+      </div>
+
+      <div class="game-note">
+        تذكر مكان كل صورة.
+      </div>
+
+    `;
+
+    openGame(html);
+
+  }
+
+
+  function flipMemory(index) {
+
+    if (memoryLock) return;
+
+    if (memoryFlipped.includes(index)) return;
+
+    memoryFlipped.push(index);
+
+    renderMemoryGame();
+
+    if (memoryFlipped.length === 2) {
+
+      memoryLock = true;
+
+      const first = memoryFlipped[0];
+      const second = memoryFlipped[1];
+
+      if (memoryCards[first] === memoryCards[second]) {
+
+        setTimeout(function() {
+
+          memoryMatches++;
+
+          memoryFlipped = [];
+
+          memoryLock = false;
+
+          if (memoryMatches === 6) {
+
+            finishGame("memory", 5);
+
+            showGameResult(
+              "memory",
+              6,
+              6
+            );
+
+          } else {
+
+            renderMemoryGame();
+
+          }
+
+        }, 500);
+
+      } else {
+
+        setTimeout(function() {
+
+          memoryFlipped = [];
+
+          memoryLock = false;
+
+          renderMemoryGame();
+
+        }, 800);
+
+      }
+
+    }
+
+  }
+
+
+  /*
+   * لعبة الأشكال
+   */
+
+  const shapeQuestions = [
+
+    {
+      icon: "🔴",
+      answer: "دائرة",
+      options: ["دائرة", "مربع", "مثلث", "مستطيل"]
+    },
+
+    {
+      icon: "🔺",
+      answer: "مثلث",
+      options: ["دائرة", "مثلث", "مربع", "نجمة"]
+    },
+
+    {
+      icon: "⭐",
+      answer: "نجمة",
+      options: ["مربع", "نجمة", "دائرة", "مثلث"]
+    },
+
+    {
+      icon: "⬛",
+      answer: "مربع",
+      options: ["مستطيل", "دائرة", "مربع", "نجمة"]
+    }
+
+  ];
+
+
+  let shapeIndex = 0;
+  let shapeScore = 0;
+  let shapeAnswered = false;
+
+
+  function startShapesGame() {
+
+    addGamePlayed();
+
+    shapeIndex = 0;
+    shapeScore = 0;
+
+    renderShapeQuestion();
+
+  }
+
+
+  function renderShapeQuestion() {
+
+    const q = shapeQuestions[shapeIndex];
+
+    let html = `
+
+      <div class="game-title">
+
+        <div class="game-title-icon">🔺</div>
+
+        <h2>اعرف الشكل</h2>
+
+      </div>
+
+      <div class="shape-game">
+
+        <div class="question-number">
+          السؤال ${shapeIndex + 1} من ${shapeQuestions.length}
+        </div>
+
+        <div class="shape-question">
+          ${q.icon}
+        </div>
+
+        <div class="shape-options">
+
+    `;
+
+    q.options.forEach(function(option) {
+
+      html += `
+        <button
+          class="shape-option"
+          onclick="answerShape('${option}')">
+          ${option}
+        </button>
+      `;
+
+    });
+
+    html += `
+
+        </div>
+
+        <div class="feedback" id="gameFeedback"></div>
+
+      </div>
+
+    `;
+
+    openGame(html);
+
+    shapeAnswered = false;
+
+  }
+
+
+  function answerShape(answer) {
+
+    if (shapeAnswered) return;
+
+    shapeAnswered = true;
+
+    const q = shapeQuestions[shapeIndex];
+
+    const feedback =
+      document.getElementById("gameFeedback");
+
+    if (answer === q.answer) {
+
+      shapeScore++;
+
+      feedback.textContent =
+        "أحسنت! 🎉";
+
+      feedback.style.color = "#16a34a";
+
+    } else {
+
+      feedback.textContent =
+        "الإجابة الصحيحة هي: " + q.answer;
+
+      feedback.style.color = "#dc2626";
+
+    }
+
+    setTimeout(function() {
+
+      shapeIndex++;
+
+      if (shapeIndex < shapeQuestions.length) {
+
+        renderShapeQuestion();
+
+      } else {
+
+        showGameResult(
+          "shapes",
+          shapeScore,
+          shapeQuestions.length
+        );
+
+      }
+
+    }, 900);
+
+  }
+
+
+  /*
+   * لعبة العد
+   */
+
+  let countAnswer = 0;
+  let countOptions = [];
+
+
+  function startCountGame() {
+
+    addGamePlayed();
+
+    countAnswer =
+      Math.floor(Math.random() * 9) + 2;
+
+    countOptions = [
+      countAnswer,
+      countAnswer + 1,
+      countAnswer - 1
+    ];
+
+    countOptions =
+      countOptions.filter(function(value) {
+        return value > 0;
+      });
+
+    countOptions =
+      countOptions.sort(function() {
+        return Math.random() - .5;
+      });
+
+    renderCountGame();
+
+  }
+
+
+  function renderCountGame() {
+
+    const objects =
+      "🍎".repeat(countAnswer);
+
+    let html = `
+
+      <div class="game-title">
+
+        <div class="game-title-icon">🔢</div>
+
+        <h2>عد الأشياء</h2>
+
+      </div>
+
+      <div class="count-game">
+
+        <div class="question">
+          كم تفاحة ترى؟
+        </div>
+
+        <div class="count-objects">
+          ${objects}
+        </div>
+
+        <div class="number-options">
+
+    `;
+
+    countOptions.forEach(function(number) {
+
+      html += `
+        <button
+          class="number-option"
+          onclick="answerCount(${number})">
+          ${number}
+        </button>
+      `;
+
+    });
+
+    html += `
+
+        </div>
+
+        <div class="feedback" id="gameFeedback"></div>
+
+      </div>
+
+    `;
+
+    openGame(html);
+
+  }
+
+
+  function answerCount(answer) {
+
+    const feedback =
+      document.getElementById("gameFeedback");
+
+    if (answer === countAnswer) {
+
+      feedback.textContent =
+        "رائع! عدد صحيح 🎉";
+
+      feedback.style.color = "#16a34a";
+
+      finishGame("count", 3);
+
+      setTimeout(function() {
+        showGameResult("count", 1, 1);
+      }, 700);
+
+    } else {
+
+      feedback.textContent =
+        "حاول مرة أخرى.";
+
+      feedback.style.color = "#dc2626";
+
+    }
+
+  }
+
+
+  /*
+   * لعبة الحيوانات
+   */
+
+  const animalQuestions = [
+
+    {
+      icon: "🦁",
+      answer: "أسد",
+      options: ["أسد", "قطة", "حصان", "أرنب"]
+    },
+
+    {
+      icon: "🐘",
+      answer: "فيل",
+      options: ["فيل", "كلب", "بقرة", "نمر"]
+    },
+
+    {
+      icon: "🐰",
+      answer: "أرنب",
+      options: ["أسد", "أرنب", "حصان", "فيل"]
+    },
+
+    {
+      icon: "🐴",
+      answer: "حصان",
+      options: ["قرد", "نمر", "حصان", "كلب"]
+    },
+
+    {
+      icon: "🐼",
+      answer: "باندا",
+      options: ["باندا", "أسد", "بقرة", "قط"]
+    }
+
+  ];
+
+
+  let animalIndex = 0;
+  let animalScore = 0;
+  let animalAnswered = false;
+
+
+  function startAnimalsGame() {
+
+    addGamePlayed();
+
+    animalIndex = 0;
+    animalScore = 0;
+
+    renderAnimalQuestion();
+
+  }
+
+
+  function renderAnimalQuestion() {
+
+    const q =
+      animalQuestions[animalIndex];
+
+    let html = `
+
+      <div class="game-title">
+
+        <div class="game-title-icon">🐾</div>
+
+        <h2>من هو الحيوان؟</h2>
+
+      </div>
+
+      <div class="shape-game">
+
+        <div class="question-number">
+          السؤال ${animalIndex + 1} من ${animalQuestions.length}
+        </div>
+
+        <div class="shape-question">
+          ${q.icon}
+        </div>
+
+        <div class="shape-options">
+
+    `;
+
+    q.options.forEach(function(option) {
+
+      html += `
+        <button
+          class="shape-option"
+          onclick="answerAnimal('${option}')">
+          ${option}
+        </button>
+      `;
+
+    });
+
+    html += `
+
+        </div>
+
+        <div class="feedback" id="gameFeedback"></div>
+
+      </div>
+
+    `;
+
+    openGame(html);
+
+    animalAnswered = false;
+
+  }
+
+
+  function answerAnimal(answer) {
+
+    if (animalAnswered) return;
+
+    animalAnswered = true;
+
+    const q =
+      animalQuestions[animalIndex];
+
+    const feedback =
+      document.getElementById("gameFeedback");
+
+    if (answer === q.answer) {
+
+      animalScore++;
+
+      feedback.textContent =
+        "أحسنت! إجابة صحيحة 🎉";
+
+      feedback.style.color = "#16a34a";
+
+    } else {
+
+      feedback.textContent =
+        "الإجابة الصحيحة هي: " + q.answer;
+
+      feedback.style.color = "#dc2626";
+
+    }
+
+    setTimeout(function() {
+
+      animalIndex++;
+
+      if (animalIndex < animalQuestions.length) {
+
+        renderAnimalQuestion();
+
+      } else {
+
+        showGameResult(
+          "animals",
+          animalScore,
+          animalQuestions.length
+        );
+
+      }
+
+    }, 900);
+
+  }
+
+
+  /*
+   * نتيجة اللعبة
+   */
+
+  function showGameResult(
+    gameName,
+    score,
+    total
+  ) {
+
+    let stars = 1;
+
+    if (score === total) {
+      stars = 5;
+    } else if (score >= Math.ceil(total * .7)) {
+      stars = 3;
+    }
+
+    finishGame(gameName, stars);
+
+    let message;
+
+    if (score === total) {
+
+      message = "ممتاز جدًا! أكملت اللعبة بنجاح.";
+
+    } else if (score >= Math.ceil(total * .7)) {
+
+      message = "رائع! أداء جميل، استمر في التعلم.";
+
+    } else {
+
+      message = "محاولة جميلة! جرب مرة أخرى لتحسن نتيجتك.";
+
+    }
+
+    openGame(`
+
+      <div class="result-screen">
+
+        <div class="result-icon">🏆</div>
+
+        <h2>انتهت اللعبة!</h2>
+
+        <div class="result-score">
+          ${score} / ${total}
+        </div>
+
+        <p>${message}</p>
+
+        <p>
+          حصلت على ⭐ ${stars} نجوم
+        </p>
+
+        <button
+          class="restart-btn"
+          onclick="closeGame()">
+          العودة للألعاب
+        </button>
+
+      </div>
+
+    `);
+
+  }
+
+
+  updateStats();
+
+</script>
+
+</body>
+</html>
