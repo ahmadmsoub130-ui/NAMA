@@ -1,1046 +1,582 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>الحروف العربية | مِداد</title>
-
-  <meta name="description"
-        content="تعلم الحروف العربية للأطفال بطريقة تفاعلية وممتعة مع مِداد.">
-
-  <meta name="theme-color" content="#6c63ff">
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f7f9ff;
-      color: #25253a;
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      background: rgba(255,255,255,0.97);
-      border-bottom: 1px solid #e8eaf5;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(12px);
-    }
-
-    .navbar {
-      max-width: 1200px;
-      min-height: 74px;
-      margin: auto;
-      padding: 12px 20px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      color: #5b50d6;
-      font-size: 25px;
-      font-weight: 900;
-    }
-
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-
-      border-radius: 14px;
-
-      background: linear-gradient(
-        135deg,
-        #6c63ff,
-        #8e7dff
-      );
-
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      box-shadow:
-        0 7px 18px rgba(108,99,255,0.25);
-    }
-
-    .back-btn {
-      background: #f0efff;
-      color: #5b50d6;
-
-      border: none;
-
-      padding: 11px 18px;
-
-      border-radius: 13px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      transition: 0.2s;
-    }
-
-    .back-btn:hover {
-      background: #e6e3ff;
-    }
-
-    /* =========================
-       PAGE
-    ========================= */
-
-    .page {
-      max-width: 1200px;
-      margin: auto;
-      padding: 45px 20px 70px;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .page-title h1 {
-      font-size: clamp(32px, 5vw, 50px);
-      margin-bottom: 12px;
-    }
-
-    .page-title h1 span {
-      color: #6c63ff;
-    }
-
-    .page-title p {
-      color: #707086;
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    /* =========================
-       LETTER DISPLAY
-    ========================= */
-
-    .letter-display {
-      background: white;
-
-      border-radius: 30px;
-
-      min-height: 350px;
-
-      padding: 35px;
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      box-shadow:
-        0 15px 40px rgba(35,35,75,0.08);
-
-      border: 1px solid #ececf5;
-
-      margin-bottom: 30px;
-    }
-
-    .big-letter {
-      width: 170px;
-      height: 170px;
-
-      border-radius: 45px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #eeeaff,
-          #e7f8ff
-        );
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 105px;
-
-      font-weight: 900;
-
-      color: #6c63ff;
-
-      margin-bottom: 20px;
-
-      box-shadow:
-        inset 0 0 0 8px rgba(108,99,255,0.04);
-    }
-
-    .word {
-      font-size: 32px;
-      font-weight: 900;
-
-      margin-bottom: 8px;
-    }
-
-    .meaning {
-      color: #77778b;
-      font-size: 16px;
-
-      margin-bottom: 20px;
-    }
-
-    .speak-btn {
-      border: none;
-
-      background: #6c63ff;
-
-      color: white;
-
-      padding: 13px 23px;
-
-      border-radius: 15px;
-
-      font-size: 16px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      box-shadow:
-        0 8px 20px rgba(108,99,255,0.22);
-
-      transition: 0.2s;
-    }
-
-    .speak-btn:hover {
-      transform: translateY(-2px);
-      background: #5b50d6;
-    }
-
-    /* =========================
-       LETTER GRID
-    ========================= */
-
-    .letters-title {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .letters-title h2 {
-      font-size: 28px;
-    }
-
-    .letters-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(7, 1fr);
-
-      gap: 13px;
-    }
-
-    .letter-btn {
-      min-height: 100px;
-
-      background: white;
-
-      border: 2px solid transparent;
-
-      border-radius: 20px;
-
-      cursor: pointer;
-
-      font-size: 42px;
-
-      font-weight: 900;
-
-      color: #35354c;
-
-      box-shadow:
-        0 7px 20px rgba(35,35,75,0.06);
-
-      transition: 0.2s;
-
-      position: relative;
-    }
-
-    .letter-btn small {
-      display: block;
-
-      font-size: 11px;
-
-      color: #8a8a9d;
-
-      margin-top: 5px;
-
-      font-weight: 700;
-    }
-
-    .letter-btn:hover {
-      transform: translateY(-4px);
-
-      border-color: #cfcaff;
-
-      color: #6c63ff;
-
-      box-shadow:
-        0 13px 28px rgba(35,35,75,0.10);
-    }
-
-    .letter-btn.active {
-      border-color: #6c63ff;
-
-      background: #f0efff;
-
-      color: #5b50d6;
-    }
-
-    /* =========================
-       PROGRESS
-    ========================= */
-
-    .progress-area {
-      background: white;
-
-      margin-top: 35px;
-
-      border-radius: 22px;
-
-      padding: 25px;
-
-      border: 1px solid #ececf5;
-
-      text-align: center;
-    }
-
-    .progress-area h3 {
-      margin-bottom: 12px;
-    }
-
-    .progress-bar {
-      height: 14px;
-
-      width: 100%;
-
-      background: #eeeeF7;
-
-      border-radius: 20px;
-
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-
-      width: 0%;
-
-      background:
-        linear-gradient(
-          90deg,
-          #6c63ff,
-          #8e7dff
-        );
-
-      border-radius: 20px;
-
-      transition: width 0.3s;
-    }
-
-    .progress-text {
-      margin-top: 10px;
-
-      color: #77778b;
-
-      font-size: 14px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      background: #24243a;
-
-      color: white;
-
-      text-align: center;
-
-      padding: 30px 20px;
-    }
-
-    footer p {
-      color: #bcbccd;
-
-      font-size: 13px;
-
-      line-height: 1.7;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-      .letters-grid {
-        grid-template-columns:
-          repeat(5, 1fr);
-      }
-
-    }
-
-    @media (max-width: 600px) {
-
-      .navbar {
-        padding: 10px 15px;
-      }
-
-      .logo {
-        font-size: 21px;
-      }
-
-      .logo-icon {
-        width: 39px;
-        height: 39px;
-      }
-
-      .page {
-        padding:
-          35px 15px 55px;
-      }
-
-      .letter-display {
-        min-height: 320px;
-        padding: 25px;
-      }
-
-      .big-letter {
-        width: 145px;
-        height: 145px;
-
-        font-size: 88px;
-      }
-
-      .word {
-        font-size: 27px;
-      }
-
-      .letters-grid {
-        grid-template-columns:
-          repeat(4, 1fr);
-
-        gap: 10px;
-      }
-
-      .letter-btn {
-        min-height: 85px;
-        font-size: 34px;
-      }
-
-      .letter-btn small {
-        font-size: 9px;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الحروف العربية | مِداد</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f7f9ff;
+  color:#25253a;
+}
+
+header{
+  background:#fff;
+  border-bottom:1px solid #e7e7f0;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.navbar{
+  max-width:1150px;
+  margin:auto;
+  min-height:72px;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#5b50d6;
+  font-size:24px;
+  font-weight:900;
+  text-decoration:none;
+}
+
+.logo-icon{
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#6c63ff,#8e7dff);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.back{
+  text-decoration:none;
+  background:#f0efff;
+  color:#5b50d6;
+  padding:11px 17px;
+  border-radius:13px;
+  font-weight:800;
+}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:40px 18px 70px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.title h1{
+  font-size:44px;
+  margin-bottom:10px;
+}
+
+.title h1 span{
+  color:#6c63ff;
+}
+
+.title p{
+  color:#707086;
+  font-size:17px;
+  line-height:1.8;
+}
+
+.display{
+  background:#fff;
+  border-radius:30px;
+  padding:35px 20px;
+  min-height:340px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(35,35,75,.08);
+  border:1px solid #ececf5;
+  margin-bottom:35px;
+}
+
+.big-letter{
+  width:160px;
+  height:160px;
+  border-radius:40px;
+  background:linear-gradient(135deg,#eeeaff,#e7f8ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#5b50d6;
+  font-size:100px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.word{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.description{
+  color:#77778b;
+  margin-bottom:18px;
+}
+
+.listen{
+  border:none;
+  background:#6c63ff;
+  color:#fff;
+  padding:13px 22px;
+  border-radius:15px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.listen:hover{
+  background:#554bd0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.section-title h2{
+  font-size:28px;
+}
+
+.letters{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:14px;
+}
+
+.letter{
+  min-height:105px;
+  border:2px solid transparent;
+  border-radius:20px;
+  background:#fff;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 22px rgba(35,35,75,.07);
+  transition:.2s;
+}
+
+.letter:hover{
+  transform:translateY(-4px);
+  border-color:#c9c4ff;
+}
+
+.letter.selected{
+  background:#f0efff;
+  border-color:#6c63ff;
+}
+
+.letter-symbol{
+  font-size:43px;
+  line-height:1;
+  font-weight:900;
+  color:#303047;
+  direction:rtl;
+}
+
+.letter.selected .letter-symbol{
+  color:#5b50d6;
+}
+
+.letter-word{
+  margin-top:8px;
+  font-size:12px;
+  color:#858599;
+  font-weight:700;
+}
+
+.progress{
+  background:#fff;
+  border:1px solid #ececf5;
+  border-radius:22px;
+  margin-top:35px;
+  padding:25px;
+  text-align:center;
+}
+
+.progress h3{
+  margin-bottom:12px;
+}
+
+.bar{
+  height:14px;
+  background:#eeeef6;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#6c63ff,#8e7dff);
+  transition:.3s;
+}
+
+.progress-text{
+  margin-top:10px;
+  color:#77778b;
+  font-size:14px;
+}
+
+footer{
+  background:#24243a;
+  color:#fff;
+  text-align:center;
+  padding:28px 15px;
+}
+
+footer p{
+  color:#bdbdce;
+  font-size:13px;
+}
+
+@media(max-width:900px){
+
+  .letters{
+    grid-template-columns:repeat(5,1fr);
+  }
+
+}
+
+@media(max-width:600px){
+
+  .title h1{
+    font-size:35px;
+  }
+
+  .container{
+    padding:30px 12px 55px;
+  }
+
+  .display{
+    min-height:310px;
+  }
+
+  .big-letter{
+    width:140px;
+    height:140px;
+    font-size:88px;
+  }
+
+  .letters{
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+
+  .letter{
+    min-height:90px;
+  }
+
+  .letter-symbol{
+    font-size:35px;
+  }
+
+  .letter-word{
+    font-size:10px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
+<header>
+  <nav class="navbar">
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+    <a href="index.html" class="logo">
+      <span class="logo-icon">م</span>
+      <span>مِداد</span>
+    </a>
 
-  <header>
+    <a href="index.html" class="back">
+      ← الرئيسية
+    </a>
 
-    <nav class="navbar">
-
-      <a href="index.html" class="logo">
-
-        <span class="logo-icon">
-          م
-        </span>
-
-        <span>
-          مِداد
-        </span>
-
-      </a>
-
-      <a
-        href="index.html"
-        class="back-btn">
-
-        ← الرئيسية
-
-      </a>
-
-    </nav>
-
-  </header>
+  </nav>
+</header>
 
 
-  <!-- =========================
-       CONTENT
-  ========================= -->
+<main class="container">
 
-  <main class="page">
-
-    <div class="page-title">
-
-      <h1>
-        الحروف <span>العربية</span>
-      </h1>
-
-      <p>
-        اضغط على أي حرف لتتعلم شكله وكلمة تبدأ به.
-      </p>
-
-    </div>
-
-
-    <!-- =========================
-         SELECTED LETTER
-    ========================= -->
-
-    <section class="letter-display">
-
-      <div
-        class="big-letter"
-        id="bigLetter">
-
-        أ
-
-      </div>
-
-      <div
-        class="word"
-        id="word">
-
-        أسد
-
-      </div>
-
-      <div
-        class="meaning"
-        id="meaning">
-
-        أ مثل أسد
-
-      </div>
-
-      <button
-        class="speak-btn"
-        onclick="speakLetter()">
-
-        🔊 استمع للحرف
-
-      </button>
-
-    </section>
-
-
-    <!-- =========================
-         LETTERS
-    ========================= -->
-
-    <section>
-
-      <div class="letters-title">
-
-        <h2>
-          اختر حرفًا
-        </h2>
-
-      </div>
-
-
-      <div
-        class="letters-grid"
-        id="lettersGrid">
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         PROGRESS
-    ========================= -->
-
-    <section class="progress-area">
-
-      <h3>
-        تقدمك في الحروف
-      </h3>
-
-      <div class="progress-bar">
-
-        <div
-          class="progress-fill"
-          id="progressFill">
-        </div>
-
-      </div>
-
-      <div
-        class="progress-text"
-        id="progressText">
-
-        تعلمت 0 من 28 حرفًا
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
+  <div class="title">
+    <h1>
+      الحروف <span>العربية</span>
+    </h1>
 
     <p>
-      © 2026 مِداد — نتعلم، نكتشف، ونستمتع
+      اختر حرفًا لتتعلم الحرف والكلمة المرتبطة به.
     </p>
-
-  </footer>
-
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
-
-  <script>
-
-    const letters = [
-
-      {
-        letter: "ا",
-        word: "أسد",
-        meaning: "ا مثل أسد"
-      },
-
-      {
-        letter: "ب",
-        word: "بطة",
-        meaning: "ب مثل بطة"
-      },
-
-      {
-        letter: "ت",
-        word: "تفاحة",
-        meaning: "ت مثل تفاحة"
-      },
-
-      {
-        letter: "ث",
-        word: "ثعلب",
-        meaning: "ث مثل ثعلب"
-      },
-
-      {
-        letter: "ج",
-        word: "جمل",
-        meaning: "ج مثل جمل"
-      },
-
-      {
-        letter: "ح",
-        word: "حصان",
-        meaning: "ح مثل حصان"
-      },
-
-      {
-        letter: "خ",
-        word: "خروف",
-        meaning: "خ مثل خروف"
-      },
-
-      {
-        letter: "د",
-        word: "دب",
-        meaning: "د مثل دب"
-      },
-
-      {
-        letter: "ذ",
-        word: "ذئب",
-        meaning: "ذ مثل ذئب"
-      },
-
-      {
-        letter: "ر",
-        word: "رمان",
-        meaning: "ر مثل رمان"
-      },
-
-      {
-        letter: "ز",
-        word: "زهرة",
-        meaning: "ز مثل زهرة"
-      },
-
-      {
-        letter: "س",
-        word: "سمكة",
-        meaning: "س مثل سمكة"
-      },
-
-      {
-        letter: "ش",
-        word: "شمس",
-        meaning: "ش مثل شمس"
-      },
-
-      {
-        letter: "ص",
-        word: "صقر",
-        meaning: "ص مثل صقر"
-      },
-
-      {
-        letter: "ض",
-        word: "ضفدع",
-        meaning: "ض مثل ضفدع"
-      },
-
-      {
-        letter: "ط",
-        word: "طائرة",
-        meaning: "ط مثل طائرة"
-      },
-
-      {
-        letter: "ظ",
-        word: "ظرف",
-        meaning: "ظ مثل ظرف"
-      },
-
-      {
-        letter: "ع",
-        word: "عنب",
-        meaning: "ع مثل عنب"
-      },
-
-      {
-        letter: "غ",
-        word: "غزال",
-        meaning: "غ مثل غزال"
-      },
-
-      {
-        letter: "ف",
-        word: "فراشة",
-        meaning: "ف مثل فراشة"
-      },
-
-      {
-        letter: "ق",
-        word: "قمر",
-        meaning: "ق مثل قمر"
-      },
-
-      {
-        letter: "ك",
-        word: "كتاب",
-        meaning: "ك مثل كتاب"
-      },
-
-      {
-        letter: "ل",
-        word: "ليمون",
-        meaning: "ل مثل ليمون"
-      },
-
-      {
-        letter: "م",
-        word: "موز",
-        meaning: "م مثل موز"
-      },
-
-      {
-        letter: "ن",
-        word: "نحلة",
-        meaning: "ن مثل نحلة"
-      },
-
-      {
-        letter: "هـ",
-        word: "هلال",
-        meaning: "هـ مثل هلال"
-      },
-
-      {
-        letter: "و",
-        word: "وردة",
-        meaning: "و مثل وردة"
-      },
-
-      {
-        letter: "ي",
-        word: "يد",
-        meaning: "ي مثل يد"
-      }
-
-    ];
+  </div>
 
 
-    const lettersGrid =
-      document.getElementById(
-        "lettersGrid"
-      );
+  <section class="display">
 
-    const bigLetter =
-      document.getElementById(
-        "bigLetter"
-      );
+    <div class="big-letter" id="bigLetter">أ</div>
 
-    const word =
-      document.getElementById(
-        "word"
-      );
+    <div class="word" id="word">أسد</div>
 
-    const meaning =
-      document.getElementById(
-        "meaning"
-      );
+    <div class="description" id="description">
+      أ مثل أسد
+    </div>
 
-    const progressFill =
-      document.getElementById(
-        "progressFill"
-      );
+    <button class="listen" onclick="listen()">
+      🔊 استمع
+    </button>
 
-    const progressText =
-      document.getElementById(
-        "progressText"
-      );
+  </section>
 
 
-    let learned =
-      JSON.parse(
-        localStorage.getItem(
-          "midadLearnedLetters"
-        )
-      ) || [];
+  <div class="section-title">
+    <h2>اختر حرفًا</h2>
+  </div>
 
 
-    function renderLetters() {
+  <section class="letters" id="letters"></section>
 
-      lettersGrid.innerHTML = "";
 
-      letters.forEach(
-        function(item, index) {
+  <section class="progress">
 
-          const button =
-            document.createElement(
-              "button"
-            );
+    <h3>تقدمك في الحروف</h3>
 
-          button.className =
-            "letter-btn";
+    <div class="bar">
+      <div class="fill" id="fill"></div>
+    </div>
 
-          button.innerHTML =
-            item.letter +
-            "<small>" +
-            item.word +
-            "</small>";
+    <div class="progress-text" id="progressText">
+      تعلمت 0 من 28 حرفًا
+    </div>
 
-          if (
-            learned.includes(index)
-          ) {
+  </section>
 
-            button.classList.add(
-              "active"
-            );
+</main>
 
-          }
 
-          button.addEventListener(
-            "click",
-            function() {
+<footer>
+  <p>
+    © 2026 مِداد — نتعلم، نكتشف، ونستمتع
+  </p>
+</footer>
 
-              selectLetter(
-                index,
-                button
-              );
 
-            }
-          );
+<script>
 
-          lettersGrid.appendChild(
-            button
-          );
+const data = [
 
-        }
-      );
+  ["أ","أسد","أ مثل أسد"],
+  ["ب","بطة","ب مثل بطة"],
+  ["ت","تفاحة","ت مثل تفاحة"],
+  ["ث","ثعلب","ث مثل ثعلب"],
+  ["ج","جمل","ج مثل جمل"],
+  ["ح","حصان","ح مثل حصان"],
+  ["خ","خروف","خ مثل خروف"],
+  ["د","دب","د مثل دب"],
+  ["ذ","ذئب","ذ مثل ذئب"],
+  ["ر","رمان","ر مثل رمان"],
+  ["ز","زهرة","ز مثل زهرة"],
+  ["س","سمكة","س مثل سمكة"],
+  ["ش","شمس","ش مثل شمس"],
+  ["ص","صقر","ص مثل صقر"],
+  ["ض","ضفدع","ض مثل ضفدع"],
+  ["ط","طائرة","ط مثل طائرة"],
+  ["ظ","ظرف","ظ مثل ظرف"],
+  ["ع","عنب","ع مثل عنب"],
+  ["غ","غزال","غ مثل غزال"],
+  ["ف","فراشة","ف مثل فراشة"],
+  ["ق","قمر","ق مثل قمر"],
+  ["ك","كتاب","ك مثل كتاب"],
+  ["ل","ليمون","ل مثل ليمون"],
+  ["م","موز","م مثل موز"],
+  ["ن","نحلة","ن مثل نحلة"],
+  ["هـ","هلال","هـ مثل هلال"],
+  ["و","وردة","و مثل وردة"],
+  ["ي","يد","ي مثل يد"]
 
-      updateProgress();
+];
 
+
+const lettersContainer =
+  document.getElementById("letters");
+
+const bigLetter =
+  document.getElementById("bigLetter");
+
+const word =
+  document.getElementById("word");
+
+const description =
+  document.getElementById("description");
+
+const fill =
+  document.getElementById("fill");
+
+const progressText =
+  document.getElementById("progressText");
+
+
+let learned =
+  JSON.parse(
+    localStorage.getItem("midadLetters")
+  ) || [];
+
+
+function createLetters(){
+
+  lettersContainer.innerHTML = "";
+
+  data.forEach((item,index)=>{
+
+    const button =
+      document.createElement("button");
+
+    button.type = "button";
+
+    button.className = "letter";
+
+    button.innerHTML = `
+      <span class="letter-symbol">
+        ${item[0]}
+      </span>
+
+      <span class="letter-word">
+        ${item[1]}
+      </span>
+    `;
+
+    if(learned.includes(index)){
+      button.classList.add("selected");
     }
 
+    button.onclick = () =>
+      chooseLetter(index,button);
 
-    function selectLetter(
-      index,
-      button
-    ) {
+    lettersContainer.appendChild(button);
 
-      const item =
-        letters[index];
+  });
 
-      bigLetter.textContent =
-        item.letter;
+  updateProgress();
 
-      word.textContent =
-        item.word;
-
-      meaning.textContent =
-        item.meaning;
-
-      document
-        .querySelectorAll(
-          ".letter-btn"
-        )
-        .forEach(
-          function(btn) {
-
-            btn.classList.remove(
-              "active"
-            );
-
-          }
-        );
-
-      button.classList.add(
-        "active"
-      );
+}
 
 
-      if (
-        !learned.includes(index)
-      ) {
+function chooseLetter(index,button){
 
-        learned.push(index);
+  const item = data[index];
 
-        localStorage.setItem(
-          "midadLearnedLetters",
-          JSON.stringify(
-            learned
-          )
-        );
+  bigLetter.textContent = item[0];
 
-      }
+  word.textContent = item[1];
 
-      updateProgress();
-
-      speakText(
-        item.letter +
-        "، " +
-        item.word
-      );
-
-    }
+  description.textContent = item[2];
 
 
-    function updateProgress() {
-
-      const percentage =
-        (
-          learned.length /
-          letters.length
-        ) * 100;
-
-      progressFill.style.width =
-        percentage + "%";
-
-      progressText.textContent =
-        "تعلمت " +
-        learned.length +
-        " من " +
-        letters.length +
-        " حرفًا";
-
-    }
+  document
+    .querySelectorAll(".letter")
+    .forEach(btn =>
+      btn.classList.remove("selected")
+    );
 
 
-    function speakText(text) {
-
-      if (
-        !("speechSynthesis" in window)
-      ) {
-
-        return;
-
-      }
-
-      window.speechSynthesis.cancel();
-
-      const speech =
-        new SpeechSynthesisUtterance(
-          text
-        );
-
-      speech.lang = "ar-SA";
-
-      speech.rate = 0.75;
-
-      speech.pitch = 1.05;
-
-      window.speechSynthesis.speak(
-        speech
-      );
-
-    }
+  button.classList.add("selected");
 
 
-    function speakLetter() {
+  if(!learned.includes(index)){
 
-      speakText(
-        bigLetter.textContent +
-        "، " +
-        word.textContent
-      );
+    learned.push(index);
 
-    }
+    localStorage.setItem(
+      "midadLetters",
+      JSON.stringify(learned)
+    );
+
+  }
 
 
-    renderLetters();
+  updateProgress();
 
-  </script>
+  speak(
+    item[0] + "، " + item[1]
+  );
+
+}
+
+
+function updateProgress(){
+
+  const percentage =
+    (learned.length / data.length) * 100;
+
+  fill.style.width =
+    percentage + "%";
+
+  progressText.textContent =
+    "تعلمت " +
+    learned.length +
+    " من " +
+    data.length +
+    " حرفًا";
+
+}
+
+
+function speak(text){
+
+  if(!("speechSynthesis" in window)){
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const voice =
+    new SpeechSynthesisUtterance(text);
+
+  voice.lang = "ar-SA";
+
+  voice.rate = 0.75;
+
+  voice.pitch = 1;
+
+  speechSynthesis.speak(voice);
+
+}
+
+
+function listen(){
+
+  speak(
+    bigLetter.textContent +
+    "، " +
+    word.textContent
+  );
+
+}
+
+
+createLetters();
+
+</script>
 
 </body>
 </html>
